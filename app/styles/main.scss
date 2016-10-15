@@ -1,7 +1,7 @@
 // $fa-font-path: '../fonts/';
 
 // bower:scss
-@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
 
 $white: rgba(255, 255, 255, .7);
@@ -16,7 +16,6 @@ $resizeable-header-height-small: 75px;
 html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  height: auto;
 }
 
 html, body {
@@ -26,40 +25,47 @@ html, body {
 
 body {
   font-family: Calibre, Helvetica, Arial, sans-serif;
+  font-size: 16px;
 }
 
 a {
-  font-size: 20px;
   color: $base-fg-color;
   text-decoration: none;
   font-weight: 700;
+  transition: all 0.3s;
   &:hover {
     color: white;
   }
+
+  i {
+    padding-right: 10px;
+  }
 }
 
-a.underline {
-  position: relative;
-  padding: 4px 0;
-}
+header, footer {
+  a {
+    position: relative;
+    padding: 4px 0;
+  }
 
-a.underline:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: white;
-  visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.3s ease-in-out 0s;
-}
-a.underline:hover:before {
-  visibility: visible;
-  transform: scaleX(1);
-}
+  a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+  }
 
+  a:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+}
 
 h2 {
   font-size: 30px;
@@ -79,6 +85,14 @@ p {
   line-height: 1.3;
 }
 
+
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -93,7 +107,7 @@ header {
   #logo {
     float: left;
     margin-left: 75px;
-    background-image: url('/images/logo.png');
+    background-image: url(/images/logo.png);
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -106,6 +120,32 @@ header {
       margin: 0 20px;
       font-size: 25px;
     }
+  }
+}
+
+
+main {
+  a {
+    color: $base-text-color;
+    &:hover {
+      color: #db4437;
+    }
+  }
+}
+
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+
+  &.columns .column {
+    width: 48%;
+  }
+
+  &.content {
+    justify-content: space-between;
+    margin: 75px auto 20px auto;
   }
 }
 
@@ -144,75 +184,24 @@ header.resizable {
   }
 }
 
-
 .jumbotron {
-  position: relative;
-  background: url(/images/home.jpg) no-repeat center center fixed;
-  background-size: cover;
-
-  min-height: 500px;
-  width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  background: url(/images/home.jpg) no-repeat center center fixed;
+  background-size: cover;
 
   h1 {
     color: white;
     font-size: 70px;
     font-family: "A2 60 Display Regular", 'Arial Black', Arial, Helvetica, Verdana, sans-serif;
-    line-height: 1.1;
-    margin-bottom: 35px;
-  }
-  .content {
     transform: translateY(-50px);
     text-align: center;
-  }
-
-  a {
-    font-size: 25px;
-    border-radius: 5px;
-    padding: 8px 20px;
-    transition: all 0.3s;
-    border: 2px solid $base-fg-color;
-    &:hover {
-      border-color: white;
-    }
-  }
-}
-
-
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  display: flex;
-
-  &.columns .column {
-    width: 45%;
-  }
-
-  &.content {
-    justify-content: space-between;
-    margin: 75px auto 20px auto;
-  }
-}
-
-
-ul {
-  padding: 0;
-  li {
-    list-style: none;
   }
 }
 
 ul a {
-  color: $base-text-color;
-  transition: all 0.3s;
   line-height: 1.5;
-  font-size: 16px;
-  &:hover {
-    color: #db4437;
-  }
 }
 
 ul.subfooter li{
@@ -220,21 +209,6 @@ ul.subfooter li{
   font-size: 14px;
   display: inline-block;
   margin-right: 20px;
-}
-
-.contact a {
-  font-size: 16px;
-  font-family: Helvetica, Arial, sans-serif;
-  text-shadow: 0 1px 1px #123;
-  i {
-    padding-right: 10px;
-  }
-}
-
-
-footer {
-  background-color: black;
-  height: 250px;
 }
 
 .wrapper {
@@ -247,5 +221,6 @@ footer {
   }
   footer {
     flex-grow: 0;
+    background-color: black;
   }
 }
