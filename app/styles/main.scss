@@ -1,0 +1,251 @@
+// $fa-font-path: '../fonts/';
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+$white: rgba(255, 255, 255, .7);
+$black: rgba(0, 0, 0, .7);
+$base-bg-color: #0683c9;
+$base-fg-color: $white;
+$base-text-color: #656b6f;
+
+$resizeable-header-height: 160px;
+$resizeable-header-height-small: 75px;
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  height: auto;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+}
+
+a {
+  font-size: 20px;
+  color: $base-fg-color;
+  text-decoration: none;
+  font-weight: 700;
+  &:hover {
+    color: white;
+  }
+}
+
+a.underline {
+  position: relative;
+  padding: 4px 0;
+}
+
+a.underline:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+a.underline:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+
+h2 {
+  font-size: 30px;
+  color: $black;
+}
+
+h3 {
+  font-size: 25px;
+  color: $white;
+  margin-bottom: 5px;
+}
+
+p {
+  color: $base-text-color;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  height: $resizeable-header-height;
+  z-index: 999;
+
+  #logo, nav {
+    margin: 0;
+    display: inline-block;
+  }
+
+  #logo {
+    float: left;
+    margin-left: 75px;
+    background-image: url('/images/logo.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  nav {
+    float: right;
+    margin-right: 75px;
+    white-space: nowrap;
+    a {
+      margin: 0 20px;
+      font-size: 25px;
+    }
+  }
+}
+
+header.resizable {
+  transition: all 0.3s;
+  background-color: transparent;
+
+  #logo, nav a {
+    transition: all 0.3s;
+  }
+
+  #logo {
+    height: $resizeable-header-height;
+    line-height: $resizeable-header-height;
+    width: 250px;
+    background-size: 250px auto;
+  }
+
+  nav a {
+    line-height: $resizeable-header-height;
+  }
+
+  &.smaller {
+    height: $resizeable-header-height-small;
+    background-color: rgba(0, 0, 0, .65);
+
+    #logo {
+      height: $resizeable-header-height-small;
+      line-height: $resizeable-header-height-small;
+      width: 150px;
+      background-size: 150px auto;
+    }
+    nav a {
+      line-height: $resizeable-header-height-small;
+    }
+  }
+}
+
+
+.jumbotron {
+  position: relative;
+  background: url(/images/home.jpg) no-repeat center center fixed;
+  background-size: cover;
+
+  min-height: 500px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    color: white;
+    font-size: 70px;
+    font-family: "A2 60 Display Regular", 'Arial Black', Arial, Helvetica, Verdana, sans-serif;
+    line-height: 1.1;
+    margin-bottom: 35px;
+  }
+  .content {
+    transform: translateY(-50px);
+    text-align: center;
+  }
+
+  a {
+    font-size: 25px;
+    border-radius: 5px;
+    padding: 8px 20px;
+    transition: all 0.3s;
+    border: 2px solid $base-fg-color;
+    &:hover {
+      border-color: white;
+    }
+  }
+}
+
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+
+  &.columns .column {
+    width: 45%;
+  }
+
+  &.content {
+    justify-content: space-between;
+    margin: 75px auto 20px auto;
+  }
+}
+
+
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
+ul a {
+  color: $base-text-color;
+  transition: all 0.3s;
+  line-height: 1.5;
+  font-size: 16px;
+  &:hover {
+    color: #db4437;
+  }
+}
+
+ul.subfooter li{
+  color: #4d4d4d;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.contact a {
+  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  text-shadow: 0 1px 1px #123;
+  i {
+    padding-right: 10px;
+  }
+}
+
+
+footer {
+  background-color: black;
+  height: 250px;
+}
+
+.wrapper {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .content {
+    flex-grow: 9;
+  }
+  footer {
+    flex-grow: 0;
+  }
+}
