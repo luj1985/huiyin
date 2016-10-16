@@ -7,7 +7,7 @@ $(function() {
   $jumbotron.height($window.height());
 
   $window.on('scroll', () => {
-    $navigator.toggleClass('smaller', $window.scrollTop() > 300);
+    $navigator.toggleClass('smaller', $window.scrollTop() > 200);
   });
 
   $window.on('resize', () => {

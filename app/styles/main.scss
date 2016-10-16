@@ -110,14 +110,12 @@ header {
   }
 
   #logo {
-    float: left;
     background-image: url(/images/logo.png);
     background-repeat: no-repeat;
     background-position: center center;
   }
 
   nav {
-    float: right;
     white-space: nowrap;
     a {
       margin: 0 20px;
@@ -128,6 +126,9 @@ header {
 
 
 main {
+  margin-top: 60px;
+  margin-bottom: 20px;
+
   a {
     color: $base-text-color;
     &:hover {
@@ -138,15 +139,12 @@ main {
 
 
 .container {
+  position: relative;
   padding-left: 16px;
   padding-right: 16px;
   max-width: 1170px;
-  margin: 0 auto;
-  display: flex;
-
-  &.content {
-    margin: 60px auto 20px auto;
-  }
+  margin-left: auto;
+  margin-right: auto;
 
   .column {
     width: 48%;
@@ -194,7 +192,7 @@ header.resizable {
   justify-content: center;
   background: url(/images/home.jpg) no-repeat center center fixed;
   background-size: cover;
-  height: 800px;
+  max-height: 800px;
 
   h1 {
     color: white;
@@ -216,18 +214,10 @@ ul.subfooter li{
   margin-right: 20px;
 }
 
-.wrapper {
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  .content {
-    flex-grow: 9;
-  }
-  footer {
-    flex-grow: 0;
-    background-color: black;
-  }
+footer {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: black;
 }
 
 .info {
