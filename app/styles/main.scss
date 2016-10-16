@@ -102,7 +102,7 @@ header {
   position: fixed;
   width: 100%;
   height: $resizeable-header-height;
-  z-index: 999;
+  z-index: 1;
 
   #logo, nav {
     margin: 0;
