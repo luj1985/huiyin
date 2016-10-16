@@ -92,6 +92,12 @@ ul {
   }
 }
 
+.container.space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -105,7 +111,6 @@ header {
 
   #logo {
     float: left;
-    margin-left: 75px;
     background-image: url(/images/logo.png);
     background-repeat: no-repeat;
     background-position: center center;
@@ -113,7 +118,6 @@ header {
 
   nav {
     float: right;
-    margin-right: 75px;
     white-space: nowrap;
     a {
       margin: 0 20px;
@@ -140,13 +144,12 @@ main {
   margin: 0 auto;
   display: flex;
 
-  &.columns .column {
-    width: 48%;
+  &.content {
+    margin: 60px auto 20px auto;
   }
 
-  &.content {
-    justify-content: space-between;
-    margin: 60px auto 20px auto;
+  .column {
+    width: 48%;
   }
 }
 
@@ -171,7 +174,7 @@ header.resizable {
 
   &.smaller {
     height: $resizeable-header-height-small;
-    background-color: rgba(0, 0, 0, .65);
+    background-color: rgba(0, 0, 0, .9);
 
     #logo {
       height: $resizeable-header-height-small;
