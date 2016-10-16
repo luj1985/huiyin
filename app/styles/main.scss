@@ -10,8 +10,8 @@ $base-bg-color: #0683c9;
 $base-fg-color: $white;
 $base-text-color: #656b6f;
 
-$resizeable-header-height: 160px;
-$resizeable-header-height-small: 75px;
+$resizeable-header-height: 140px;
+$resizeable-header-height-small: 60px;
 
 html {
   -moz-osx-font-smoothing: grayscale;
@@ -70,6 +70,8 @@ header, footer {
 h2 {
   font-size: 30px;
   color: $black;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 h3 {
@@ -84,7 +86,6 @@ p {
   font-weight: normal;
   line-height: 1.3;
 }
-
 
 ul {
   padding: 0;
@@ -118,7 +119,7 @@ header {
     white-space: nowrap;
     a {
       margin: 0 20px;
-      font-size: 25px;
+      font-size: 22px;
     }
   }
 }
@@ -135,7 +136,7 @@ main {
 
 
 .container {
-  max-width: 1024px;
+  max-width: 1170px;
   margin: 0 auto;
   display: flex;
 
@@ -145,7 +146,7 @@ main {
 
   &.content {
     justify-content: space-between;
-    margin: 75px auto 20px auto;
+    margin: 60px auto 20px auto;
   }
 }
 
@@ -222,5 +223,23 @@ ul.subfooter li{
   footer {
     flex-grow: 0;
     background-color: black;
+  }
+}
+
+.info {
+  margin-top: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  .avatar {
+    width: 120px;
+    height: 160px;
+  }
+
+  ul {
+    padding-top: 60px;
+    margin: 0 0 0 30px;
+
   }
 }
