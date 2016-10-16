@@ -3,12 +3,7 @@ $(function() {
   const $window = $(window);
   const $jumbotron = $('.jumbotron');
 
-  // $('#fullpage').fullpage({
-  //   scrollBar: true,
-  //   onLeave : (index, nextIndex, direction) => {
-  //     $navigator.toggleClass('smaller', index === 1);
-  //   }
-  // });
+
   $jumbotron.height($window.height());
 
   $window.on('scroll', () => {
@@ -19,13 +14,17 @@ $(function() {
     $jumbotron.height($(window).height());
   })
 
-  $('#home').on('click', (e) => {
-    e.preventDefault();
-    $.fn.fullpage.moveSectionUp();
-  });
-
-  $('#about').on('click', (e) => {
-    e.preventDefault();
-    $.fn.fullpage.moveSectionDown();
+  // smooth anchor scroll
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 500);
+        return false;
+      }
+    }
   });
 })
