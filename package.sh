@@ -9,6 +9,7 @@ mkdir -p $TARGET_DIR/dist
 
 gulp
 git clone . $TARGET_DIR/source-code
+rm -rf $TARGET_DIR/source-code/.git
 cp -r dist/* $TARGET_DIR/dist
 
 (cd $TARGET_DIR && zip -r ../$TARGET_FILE *)
