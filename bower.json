@@ -2,7 +2,6 @@
   "name": "lion",
   "private": true,
   "dependencies": {
-    "fullpage.js": "fullpage#^2.8.7",
     "jquery": "^3.1.1",
     "font-awesome": "fontawesome#^4.6.3"
   },
