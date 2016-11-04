@@ -1,17 +1,21 @@
 (ns huiyin.app
+  (:import goog.History)
   (:require
+   [reagent.core :as reagent :refer [atom]]
    [goog.events :as events]
    [goog.events.EventType :as EventType]
-   [goog.dom :as dom]
-   [reagent.core :as reagent :refer [atom]]))
+   [goog.dom :as dom]))
+
+(def app-state (atom {}))
 
 (defn header []
-  [:div.container.space-between
-   [:h1#logo]
-   [:nav
-    [:a {:href "#home"} "Home"]
-    [:a {:href "#about"} "About"]
-    [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]])
+  [:header
+   [:div.container.space-between
+    [:h1#logo]
+    [:nav
+     [:a {:href "#home"} "Home"]
+     [:a {:href "#about"} "About"]
+     [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]]])
 
 
 (defn main []
@@ -79,22 +83,37 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
      [:li "沪ICP备15051469号"]
      [:li "沪公网安备 31010602000185号"]]]])
 
+(defn member []
+  [:div.member "display member information here"])
 
 (defn- get-scroll []
   (-> (dom/getDocumentScroll)
       (.-y)))
 
+(defn display [token]
+  (js/console.log token))
+
+(defn hook-browser-navigation! []
+  (doto (History.)
+    (events/listen
+     EventType/NAVIGATE
+     (fn [event]
+       (display (.-token event))))
+    (.setEnabled true)))
 
 (defn init []
+  #_(hook-browser-navigation!)
+
   ;;; TODO: update header style when exceed threshold
-  (events/listen js/window EventType/SCROLL
-                 (fn []
-                   (let [offset (get-scroll)]
-                     (js/console.log offset))))
+  (events/listen js/window EventType/SCROLL #(swap! app-state assoc :offset (get-scroll)))
 
   (reagent/render-component [header]
                             (.querySelector js/document "header"))
-  (reagent/render-component [main]
+  #_(reagent/render-component [main]
                             (.querySelector js/document "#main"))
-  (reagent/render-component [footer]
+  #_(reagent/render-component [footer]
                             (.querySelector js/document "footer")))
+
+(comment
+  (enable-console-print!)
+  )

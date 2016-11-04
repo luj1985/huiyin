@@ -1,23 +1,23 @@
 (set-env!
- :source-paths    #{"src/cljs" "src/clj"}
- :resource-paths  #{"resources"}
- :dependencies '[[org.clojure/clojurescript     "RELEASE"]
-                 [reagent                       "RELEASE"]
-                 [weasel                        "RELEASE" :scope "test"]
-                 [adzerk/boot-cljs              "RELEASE" :scope "test"]
-                 [adzerk/boot-cljs-repl         "RELEASE" :scope "test"]
-                 [adzerk/boot-reload            "RELEASE" :scope "test"]
-                 [pandeiro/boot-http            "RELEASE" :scope "test"]
-                 [com.cemerick/piggieback       "RELEASE" :scope "test"]
-                 [org.clojure/tools.nrepl       "RELEASE" :scope "test"]
-                 [org.martinklepsch/boot-garden "RELEASE" :scope "test"]
-                 [danielsz/boot-autoprefixer    "RELEASE" :scope "test"]])
+ :source-paths #{"src/cljs" "src/clj"}
+ :resource-paths #{"resources"}
+ :dependencies '[[org.clojure/clojurescript "1.7.228"]
+                 [reagent "0.5.0"]
+                 [weasel "0.7.0"]
+                 [adzerk/boot-cljs "1.7.228-1"]
+                 [adzerk/boot-cljs-repl "0.3.0"]
+                 [adzerk/boot-reload "0.4.8"]
+                 [pandeiro/boot-http "0.7.2"]
+                 [com.cemerick/piggieback "0.2.1"]
+                 [org.clojure/tools.nrepl "0.2.12"]
+                 [org.martinklepsch/boot-garden "1.2.5-3"]
+                 [danielsz/boot-autoprefixer "0.0.8"]])
 
 (require
- '[adzerk.boot-cljs      :refer [cljs]]
+ '[adzerk.boot-cljs :refer [cljs]]
  '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
- '[adzerk.boot-reload    :refer [reload]]
- '[pandeiro.boot-http    :refer [serve]]
+ '[adzerk.boot-reload :refer [reload]]
+ '[pandeiro.boot-http :refer [serve]]
  '[org.martinklepsch.boot-garden :refer [garden]]
  '[danielsz.autoprefixer :refer [autoprefixer]])
 
@@ -66,7 +66,7 @@
 (deftask dist []
   (comp (production)
      (build)
-     (target :dir #{"target"})))
+     (target)))
 
 (deftask dev []
   (comp (development)
