@@ -3,6 +3,7 @@
  :resource-paths #{"resources"}
  :dependencies '[[org.clojure/clojurescript "1.7.228"]
                  [reagent "0.5.0"]
+                 [secretary "1.2.3"]
                  [weasel "0.7.0"]
                  [adzerk/boot-cljs "1.7.228-1"]
                  [adzerk/boot-cljs-repl "0.3.0"]

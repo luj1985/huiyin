@@ -1,30 +1,31 @@
 (ns huiyin.app
-  (:import goog.History)
   (:require
+   [clojure.string :refer [blank?]]
+   [secretary.core :as secretary :refer-macros [defroute]]
    [reagent.core :as reagent :refer [atom]]
    [goog.events :as events]
-   [goog.events.EventType :as EventType]
-   [goog.dom :as dom]))
+   [goog.history.EventType :refer [NAVIGATE]]
+   [goog.events.EventType :refer [SCROLL]]
+   [goog.dom :as dom])
+  (:import goog.history.Html5History))
 
-(def app-state (atom {}))
+(def app-state (atom {:offset-y 0}))
 
 (defn header []
-  [:header
-   [:div.container.space-between
-    [:h1#logo]
-    [:nav
-     [:a {:href "#home"} "Home"]
-     [:a {:href "#about"} "About"]
-     [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]]])
-
+  [:div.container.space-between
+   [:h1#logo]
+   [:nav
+    [:a {:href "#/home"} "Home"]
+    [:a {:href "#/about"} "About"]
+    [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]])
 
 (defn main []
   [:div
-   [:a {:name "home"}]
+   #_[:a {:name "home"}]
    [:section.jumbotron
     [:h1 "Huiyin Blockchain Venture"]]
 
-   [:a {:name "about"}]
+   #_[:a {:name "about"}]
    [:main.container.space-between
     [:article.column
      [:h2 "Introduction"]
@@ -86,34 +87,37 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 (defn member []
   [:div.member "display member information here"])
 
-(defn- get-scroll []
-  (-> (dom/getDocumentScroll)
-      (.-y)))
 
-(defn display [token]
-  (js/console.log token))
+(secretary/set-config! :prefix "#")
 
-(defn hook-browser-navigation! []
-  (doto (History.)
-    (events/listen
-     EventType/NAVIGATE
-     (fn [event]
-       (display (.-token event))))
-    (.setEnabled true)))
-
-(defn init []
-  #_(hook-browser-navigation!)
-
-  ;;; TODO: update header style when exceed threshold
-  (events/listen js/window EventType/SCROLL #(swap! app-state assoc :offset (get-scroll)))
-
-  (reagent/render-component [header]
-                            (.querySelector js/document "header"))
-  #_(reagent/render-component [main]
+(defroute index "/" []
+  (reagent/render-component [main]
                             (.querySelector js/document "#main"))
-  #_(reagent/render-component [footer]
-                            (.querySelector js/document "footer")))
+  (reagent/render-component [footer]
+                            (.querySelector js/document "footer"))
+  (reagent/render-component [header]
+                            (.querySelector js/document "header")))
+
+(defroute home "/home" []
+  (js/console.log "home"))
+
+(defroute about "/about" []
+  (js/console.log "scroll to speicifc position"))
+
+(defn- update-scroll-state []
+  (let [offset (dom/getDocumentScroll)]
+    (swap! app-state assoc :offset-y (.-y offset))))
+
+(defonce initialize
+  (do
+    (events/listen js/window SCROLL update-scroll-state)
+    (doto (Html5History.)
+      (events/listen NAVIGATE #(secretary/dispatch! (.-token %)))
+      (.setEnabled true))))
+
+(defn init [])
 
 (comment
   (enable-console-print!)
   )
+
