@@ -1,5 +1,9 @@
 (ns huiyin.app
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require
+   [goog.events :as events]
+   [goog.events.EventType :as EventType]
+   [goog.dom :as dom]
+   [reagent.core :as reagent :refer [atom]]))
 
 (defn header []
   [:div.container.space-between
@@ -76,7 +80,18 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
      [:li "沪公网安备 31010602000185号"]]]])
 
 
+(defn- get-scroll []
+  (-> (dom/getDocumentScroll)
+      (.-y)))
+
+
 (defn init []
+  ;;; TODO: update header style when exceed threshold
+  (events/listen js/window EventType/SCROLL
+                 (fn []
+                   (let [offset (get-scroll)]
+                     (js/console.log offset))))
+
   (reagent/render-component [header]
                             (.querySelector js/document "header"))
   (reagent/render-component [main]
