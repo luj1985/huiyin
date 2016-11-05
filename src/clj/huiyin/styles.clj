@@ -15,11 +15,13 @@
 (def base-text-color text-color)
 
 (def default-transition-time (ms 300))
+(def dimmer-color (rgba 0 0 0 0.9))
 
 (defselector app "#app")
 (defselector logo "#logo")
 (defselector compact ".compact")
 (defselector container ".container")
+(defselector resizable ".resizable")
 
 (defstyles container-style
   [container {:position :relative
@@ -50,42 +52,12 @@
   [a {:color white
       :text-decoration :none
       :font-weight 700
-      :transition "all 0.3s"}
-   [(& hover) {:color "white"}]
-   [i {:padding-right (px 10)}]])
+      :transition [[:all default-transition-time]]}
+   [i {:padding-right (px 10)}]]
 
-
-(defstyles resizable-header-style
-  (let [header-height (px 140)
-        header-height' (px 77)
-        logo-width (px 300)
-        logo-width' (px 250)]
-    [:.resizable {:position :fixed
-                  :width (percent 100)
-                  :height header-height
-                  :z-index 1
-                  :transition (map #(vector % default-transition-time)
-                                   [:height :background-color])
-                  :background-color :transparent}
-     [logo {:transition [[:width default-transition-time]]
-            :width logo-width}]
-
-     [(> container) {:display :flex
-                     :align-items :center
-                     :height (percent 100)}]
-     [nav {:display :flex
-           :flex-direction :row}
-
-      [a {:margin [[0 (px 24)]]
-          :font-size (px 22)}]]
-
-     [(& compact) {:height header-height'
-                   :background-color (rgba 0 0 0 0.9)}
-      [logo {:width logo-width'}]]]))
-
-(defstyles underline-link
   [:a.underline {:position :relative
                  :padding [[(px 4) 0]]}
+   [(& hover) {:color "white"}]
    [(& before) {:content "\"\""
                 :position :absolute
                 :width (percent 100)
@@ -95,9 +67,36 @@
                 :background-color :white
                 :visibility :hidden
                 :transform "scaleX(0)"
-                :transition "all 0.3s ease-in-out 0s"}]
+                :transition [[:all default-transition-time :ease-in-out (ms 0)]]}]
    [(& hover before) {:visibility :visible
                       :transform "scaleX(1)"}]])
+
+(defstyles resizable-header-style
+  [resizable {:position :fixed
+              :width (percent 100)
+              :height (px 140)
+              :z-index 1
+              :transition (for [attr [:height :background-color]]
+                            [attr default-transition-time])
+              :background-color :transparent}
+
+   [(> container) {:display :flex
+                   :align-items :center
+                   :justify-content :space-between
+                   :height (percent 100)}]
+
+   [logo {:transition [[:width default-transition-time]]
+          :width (px 300)}]
+
+   [nav {:display
+         :flex :flex-direction :row}]
+
+   [a {:margin [[0 (px 24)]]
+       :font-size (px 22)}]]
+
+  [(& resizable compact) {:height (px 77)
+                          :background-color dimmer-color}
+   [logo {:width (px 250)}]])
 
 (defstyles jumbotron-style
   [:.jumbotron {:display :flex
@@ -113,33 +112,39 @@
         :transform "translateY(-50px)"
         :text-align :center}]])
 
+(defstyles footer-style
+  [:footer {:position :relative
+            :background-color :black
+            :color white}
+   [:ul {:margin 0}]
+   [:li {:display :inline-block
+         :padding [[(px 16) (px 16) (px 16) 0]]}]])
+
 (defstyles screen
   reset-style
   container-style
   hyper-link-style
-  underline-link
 
   resizable-header-style
   jumbotron-style
+  footer-style
 
-  [:h2 {:font-size (px 30)
-        :color black}]
-  [:h3 {:font-size (px 25)
-        :color white
-        :margin "20px 0"}]
+  [h2 {:font-size (px 30)
+       :color black}]
+  [h3 {:font-size (px 25)
+       :color white
+       :margin "20px 0"}]
 
-  [:p {:color base-text-color
-       :font-size (px 16)
-       :font-weight :normal
-       :line-height 1.3}]
+  [p {:color base-text-color
+      :font-size (px 16)
+      :font-weight :normal
+      :line-height 1.3}]
 
-  [:ul {:padding 0}
-   [:li {:list-style :none}]] [:.container.space-between {:display :flex
-                                                          :flex-direction :row
-                                                          :justify-content :space-between}]
-
-  
+  [ul {:padding 0}
+   [li {:list-style :none}]] [:.container.space-between {:display :flex
+                                                         :flex-direction :row
+                                                         :justify-content :space-between}]
 
   [:main {:margin-bottom (px 40)}
-   [:a {:color base-text-color}
-    ["&:hover" {:color "#db4437"}]]])
+   [a {:color base-text-color}
+    [(& hover) {:color "#db4437"}]]])

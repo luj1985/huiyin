@@ -5,7 +5,7 @@
   (let [offset-y (get-in @state [:offset :y])
         style (if (> offset-y 140) :compact)]
     [:header.resizable {:class-name style}
-     [:div.container.space-between
+     [:div.container
       [:img#logo {:src "/images/logo.png"}]
       [:nav
        #_offset-y
@@ -13,14 +13,15 @@
          ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
 (defn- hy-footer [state]
-  [:footer.container
-   [:ul
-    (doall
-     (map-indexed
-      (fn [i m]
-        ^{:key i}
-        [:li {:dangerouslySetInnerHTML {:__html m}}])
-      infos))]])
+  [:footer
+   [:div.container
+    [:ul
+     (doall
+      (map-indexed
+       (fn [i m]
+         ^{:key i}
+         [:li {:dangerouslySetInnerHTML {:__html m}}])
+       infos))]]])
 
 (defn- jumbotron [state]
   (let [height (get-in @state [:viewport :height])]
