@@ -13,10 +13,6 @@
 (def base-bg-color "#0683c9")
 (def base-fg-color white)
 (def base-text-color text-color)
-(def resizable-header-height (px 140))
-(def resizable-header-height-small (px 75))
-(def logo-width (px 300))
-(def logo-width-small (px 250))
 
 (defstyles container-style
   [:.container {:position :relative
@@ -67,16 +63,31 @@
                                 :transform "scaleX(1)"}]])
 
 (defstyles resizable-header-style
-  [:.resizable {:transition "all 0.3s"
-                :background-color :transparent}
-   [:#logo {:transition "all 0.3s"}]
-   [:nav [:a {:transition "all 0.3s"}]] [:#logo {:height resizable-header-height
-                                                 :line-height resizable-header-height
-                                                 :width logo-width
-                                                 :background-size (str logo-width " auto")}]
+  (let [header-height (px 140)
+        header-height' (px 77)
+        logo-width (px 300)
+        logo-width' (px 250)]
+    [:.resizable {:position :fixed
+                  :width (percent 100)
+                  :height header-height
+                  :z-index 1
+                  :transition "all 0.3s"
+                  :background-color :transparent}
+     [:#logo {:transition "all 0.3s"
+              :width logo-width}]
 
-   [:nav [:a {:line-height resizable-header-height}]] [:&.compact {:height resizable-header-height-small
-                                                                   :background-color (rgba 0 0 0 0.9)}]])
+     [(> :.container) {:display :flex
+                       :align-items :center
+                       :height (percent 100)}]
+     [nav {:display :flex
+           :flex-direction :row}
+      [a {:margin [[0 (px 16)]]
+          :padding (px 16)
+          :font-size (px 22)}]]
+
+     [:&.compact {:height header-height'
+                  :background-color (rgba 0 0 0 0.9)}
+      [:#logo {:width logo-width'}]]]))
 
 (defstyles jumbotron-style
   [:.jumbotron {:display :flex
@@ -118,21 +129,7 @@
                                                           :flex-direction :row
                                                           :justify-content :space-between}]
 
-  [:header {:position :fixed
-            :width (percent 100)
-            :height resizable-header-height
-            :z-index 1}
-   [:nav {:margin 0
-          :display :inline-block}]
-   [:#logo {:margin 0
-            :display :inline-block}]
-
-   [:#logo {:background-image "url(/images/logo.png)"
-            :background-repeat :no-repeat
-            :background-position "center center"}]
-   [:nav {:white-space :nowrap}
-    [:a {:margin "0 20px"
-         :font-size (px 22)}]]]
+  
 
   [:main {:margin-bottom (px 40)}
    [:a {:color base-text-color}

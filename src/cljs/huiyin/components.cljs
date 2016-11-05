@@ -3,11 +3,12 @@
 
 (defn- hy-header [state]
   (let [offset-y (get-in @state [:offset :y])
-        style (if (> offset-y 300) :compact)]
+        style (if (> offset-y 140) :compact)]
     [:header.resizable {:class-name style}
      [:div.container.space-between
-      [:h1#logo]
+      [:img#logo {:src "/images/logo.png"}]
       [:nav
+       #_offset-y
        (for [{:keys [href text target]} links]
          ^{:key href} [:a {:href href :target target} text])]]]))
 
