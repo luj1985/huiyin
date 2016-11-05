@@ -12,15 +12,16 @@
 (def app-state (atom {:offset-y 0}))
 
 (defn header []
-  [:div.container.space-between
-   [:h1#logo]
-   [:nav
-    [:a {:href "#/home"} "Home"]
-    [:a {:href "#/about"} "About"]
-    [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]])
+  [:header
+   [:div.container.space-between
+    [:h1#logo]
+    [:nav
+     [:a {:href "#/home"} "Home"]
+     [:a {:href "#/about"} "About"]
+     [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]]])
 
 (defn main []
-  [:div
+  [:main
    #_[:a {:name "home"}]
    [:section.jumbotron
     [:h1 "Huiyin Blockchain Venture"]]
@@ -47,7 +48,7 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
        [:a {:href "https://www.unocoin.com"} "Unocoin"]]]]]])
 
 (defn footer []
-  [:div
+  [:footer
    [:div.container
     [:h3 "Leadership"]
     [:div.wrapper
@@ -87,22 +88,24 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 (defn member []
   [:div.member "display member information here"])
 
-
 (secretary/set-config! :prefix "#")
-
-(defroute index "/" []
-  (reagent/render-component [main]
-                            (.querySelector js/document "#main"))
-  (reagent/render-component [footer]
-                            (.querySelector js/document "footer"))
-  (reagent/render-component [header]
-                            (.querySelector js/document "header")))
 
 (defroute home "/home" []
   (js/console.log "home"))
 
 (defroute about "/about" []
   (js/console.log "scroll to speicifc position"))
+
+;;; XXX: React fragment API is still under development, container is required
+;;; https://github.com/facebook/react/issues/2127
+(defn home-page []
+  [:div
+   [header]
+   [main]
+   [footer]])
+
+(defroute index "/" []
+  (reagent/render-component [home-page] (.getElementById js/document "app")))
 
 (defn- update-scroll-state []
   (let [offset (dom/getDocumentScroll)]

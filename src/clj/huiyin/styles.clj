@@ -34,6 +34,10 @@
           :margin 0
           :padding 0}]
 
+  [:#app {:position :relative
+          :margin 0
+          :padding 0}]
+
   [:body {:font-family "Calibre, Helvetica, Arial, sans-serif"
           :font-size (px 16)
           :line-height 1

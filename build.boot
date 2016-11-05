@@ -1,18 +1,18 @@
 (set-env!
  :source-paths #{"src/cljs" "src/clj"}
  :resource-paths #{"resources"}
- :dependencies '[[org.clojure/clojurescript "1.7.228"]
-                 [reagent "0.5.0"]
+ :dependencies '[[org.clojure/clojurescript "1.8.51"]
+                 [reagent "0.6.0"]
                  [secretary "1.2.3"]
                  [weasel "0.7.0"]
-                 [adzerk/boot-cljs "1.7.228-1"]
-                 [adzerk/boot-cljs-repl "0.3.0"]
-                 [adzerk/boot-reload "0.4.8"]
-                 [pandeiro/boot-http "0.7.2"]
-                 [com.cemerick/piggieback "0.2.1"]
-                 [org.clojure/tools.nrepl "0.2.12"]
-                 [org.martinklepsch/boot-garden "1.2.5-3"]
-                 [danielsz/boot-autoprefixer "0.0.8"]])
+                 [adzerk/boot-cljs "1.7.228-2" :scope "dev"]
+                 [adzerk/boot-cljs-repl "0.3.0" :scope "dev"]
+                 [adzerk/boot-reload "0.4.8" :scope "dev"]
+                 [pandeiro/boot-http "0.7.2" :scope "dev"]
+                 [com.cemerick/piggieback "0.2.1" :scope "dev"]
+                 [org.clojure/tools.nrepl "0.2.12" :scope "dev"]
+                 [org.martinklepsch/boot-garden "1.2.5-3" :scope "dev"]
+                 [danielsz/boot-autoprefixer "0.0.8" :scope "dev"]])
 
 (require
  '[adzerk.boot-cljs :refer [cljs]]
