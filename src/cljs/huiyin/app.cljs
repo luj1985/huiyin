@@ -45,7 +45,8 @@
 (defonce events-setup
   (do
     (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
-    (events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))))
+    ;;; XXX: for iOS, the screen size can change when scroll up
+    #_(events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))))
 
 (defn init []
   ;;; Always render the full page

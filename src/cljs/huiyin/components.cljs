@@ -52,15 +52,7 @@
     [:h4
      [:a {:href (str "#/member/" index)}
       name]]
-    [:h5 title]
-    [:dl
-     (doall
-      (map-indexed
-       (fn [i attr]
-         ^{:key i}
-         [display-attribute attr])
-       attrs))]]
-   ])
+    [:h5 title]]])
 
 (defn- display-members []
   [:section

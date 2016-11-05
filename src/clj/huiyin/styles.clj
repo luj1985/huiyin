@@ -90,7 +90,7 @@
               :z-index 1
               :transition (for [attr [:height :background-color]]
                             [attr default-transition-time])
-              :background-color :transparent}
+              :background-color (rgba 0 0 0 0)}
 
    [(> container) {:display :flex
                    :align-items :center
@@ -112,11 +112,12 @@
 
 (defstyles jumbotron-style
   [jumbotron {:display :flex
-                :align-items :center
-                :justify-content :center
-                :background "url(/images/home.jpg) no-repeat center bottom fixed"
-                :background-size :center
-                :max-height (px 1024)}
+              :align-items :center
+              :justify-content :center
+              :background "url(/images/home.jpg) no-repeat center bottom fixed"
+              :background-size :center
+              :max-height (px 1024)
+              :transition "all 0.2s"}
 
    [h1 {:color white
         :font-size (px 70)
@@ -175,11 +176,12 @@
 
   [:.member {:display :flex
              :flex-direction :row
-             :margin [[(px 16) 0]]}
+             :margin [[(px 8) 0]]}
+
    [:.avatar {:display :inline-block
               :flex-shrink 0
-              :width (px 90)
-              :height (px 90)
+              :width (px 60)
+              :height (px 60)
               :margin-right (px 16)
               :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
               :background-repeat :no-repeat
@@ -187,8 +189,8 @@
               :background-size "100% auto"
               :border-radius (percent 50)}]
    [:.contact {:padding [[0 (px 8)]]}
-    [h4 {:margin 0 :padding 0}]
-    [h5 {:margin 0 :padding 0}]]])
+    [h4 {:margin "8px 0 0 0" :padding 0 :font-size (px 18)}]
+    [h5 {:margin-top (px 8) :font-size (px 14)}]]])
 
 
 ;;; @media(min-width:576px){}
@@ -209,6 +211,8 @@
 
 (defstyles landscape-phones-&-portrait-tablets
   (at-media {:max-width (px 767)}
+            [:.resume {:flex-direction :column}
+             [:img {:margin 0}]]
             [jumbotron
              [h1 {:font-size (px 45)}]]
             [resizable
