@@ -1,13 +1,11 @@
 (ns huiyin.content)
 
-(defn main [state]
-  [:main
-   #_[:a {:name "home"}]
-   [:section.jumbotron
-    [:h1 "Huiyin Blockchain Venture"]]
+(defn jumbotron []
+  [:section.jumbotron
+   [:h1 "Huiyin Blockchain Venture"]])
 
-   #_[:a {:name "about"}]
-   [:main.container.space-between
+(defn content []
+  [:main.container.space-between
     [:article.column
      [:h2 "Introduction"]
      [:p "Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
@@ -25,7 +23,12 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
       [:li
        [:a {:href "https://www.yours.network"} "Yours network"]]
       [:li
-       [:a {:href "https://www.unocoin.com"} "Unocoin"]]]]]])
+       [:a {:href "https://www.unocoin.com"} "Unocoin"]]]]])
+
+(defn main [state]
+  [:main
+   (jumbotron)
+   (content)])
 
 (defn member []
   [:div.member "display member information here"])

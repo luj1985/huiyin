@@ -2,16 +2,26 @@
   (:require
    [clojure.string :refer [blank?]]
    [secretary.core :as secretary :refer-macros [defroute]]
-   [reagent.core :as reagent :refer [atom]]
+   [reagent.core :as r :refer [atom]]
    [goog.events :as events]
    [goog.history.EventType :refer [NAVIGATE]]
-   [goog.events.EventType :refer [SCROLL]]
+   [goog.events.EventType :refer [SCROLL RESIZE]]
    [goog.dom :as dom]
    [huiyin.content :refer [main]]
    [huiyin.master :refer [header footer]])
   (:import goog.history.Html5History))
 
-(def state (atom {:offset-y 0}))
+(defn- get-viewport-size []
+  (let [w (.-innerWidth js/window)
+        h (.-innerHeight js/window)]
+    {:width w :height h}))
+
+(defn- get-scroll-offset []
+  (let [offset (dom/getDocumentScroll)]
+    {:x (.-x offset) :y (.-y offset)}))
+
+(defonce state (atom {:offset (get-scroll-offset)
+                      :viewport (get-viewport-size)}))
 
 (secretary/set-config! :prefix "#")
 
@@ -30,15 +40,13 @@
    [footer state]])
 
 (defroute index "/" []
-  (reagent/render-component [home-page] (.getElementById js/document "app")))
+  (r/render [home-page] (.getElementById js/document "app")))
 
-(defn- update-scroll-state []
-  (let [offset (dom/getDocumentScroll)]
-    (swap! state assoc :offset-y (.-y offset))))
 
 (defonce initialize
   (do
-    (events/listen js/window SCROLL update-scroll-state)
+    (events/listen js/window SCROLL #(swap! state assoc :offset (get-scroll-offset)))
+    (events/listen js/window RESIZE #(swap! state assoc :viewport (get-viewport-size)))
     (doto (Html5History.)
       (events/listen NAVIGATE #(secretary/dispatch! (.-token %)))
       (.setEnabled true))))

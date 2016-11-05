@@ -3,7 +3,7 @@
 (defn header [state]
   [:header
    [:div.container.space-between
-    [:h1#logo (:offset-y @state)]
+    [:h1#logo (:y (:offset @state))]
     [:nav
      [:a {:href "#/home"} "Home"]
      [:a {:href "#/about"} "About"]
