@@ -1,13 +1,12 @@
 (ns huiyin.app
   (:require
-   [clojure.string :refer [blank?]]
-   [secretary.core :as secretary :refer-macros [defroute]]
    [reagent.core :as r :refer [atom]]
    [goog.events :as events]
    [goog.history.EventType :refer [NAVIGATE]]
    [goog.events.EventType :refer [SCROLL RESIZE]]
    [goog.dom :as dom]
-   [huiyin.content :refer [main]]
+   [secretary.core :as secretary :refer-macros [defroute]]
+   [huiyin.content :refer [main member]]
    [huiyin.master :refer [header footer]])
   (:import goog.history.Html5History))
 
@@ -25,22 +24,34 @@
 (defonce state (atom {:offset (scroll-offset)
                       :viewport (viewport-size)}))
 
+;;; XXX: React fragment API is still in developing, an empty div container is required
+;;; https://github.com/facebook/react/issues/2127
+(defn render-home-page []
+  [:div
+   [header state]
+   [main state]
+   [footer state]])
+
+(defn render-member-page [i]
+  [:div
+   [header state]
+   [member state i]
+   [footer state]])
+
 (defroute home "/home" []
   (js/console.log "home"))
 
 (defroute about "/about" []
   (js/console.log "scroll to speicifc position"))
 
-;;; XXX: React fragment API is still in developing, an empty div container is required
-;;; https://github.com/facebook/react/issues/2127
-(defn home-page []
-  [:div
-   [header state]
-   [main state]
-   [footer state]])
+(defroute show-member "/member/:id" [id]
+  (let [id (js/parseInt id)]
+    (js/console.log "show member for " id)
+    (r/render [render-member-page id]
+              (.getElementById js/document "app"))))
 
 (defroute index "/" []
-  (r/render [home-page] (.getElementById js/document "app")))
+  (r/render [render-home-page] (.getElementById js/document "app")))
 
 (defonce history
   (do
