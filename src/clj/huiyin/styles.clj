@@ -11,9 +11,6 @@
 (def white (rgba 255 255 255 0.7))
 (def black (rgba 0 0 0 0.7))
 
-(def base-bg-color "#0683c9")
-(def base-fg-color white)
-
 (def default-transition-time (ms 300))
 (def dimmer-color (rgba 0 0 0 0.9))
 
@@ -178,6 +175,16 @@
     [h4 {:margin 0 :padding 0}]
     [h5 {:margin 0 :padding 0}]]])
 
+
+
+(defstyles mobile-style
+  (at-media
+   {:max-width (px 767)}
+   [jumbotron
+    [h1 {:font-size (px 45)}]]
+   [:.container [:section {:padding 0}]]
+   [:.columns {:flex-direction :column}]))
+
 (defstyles screen
   reset-style
   container-style
@@ -189,4 +196,6 @@
   main-style
   member-style
   company-style
+
+  mobile-style
   )
