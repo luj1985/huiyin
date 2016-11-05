@@ -15,7 +15,11 @@
 (defn- hy-footer [state]
   [:footer
    [:div.container
-    [:ul
+    [:h2 "Links"]
+    [:a {:href "#" :style {:color "rgba(255,255,255,.95)"}}
+     [:i.fa.fa-linkedin-square]
+     "Place your Linkin URL"     ]
+    [:ul.copyright
      (doall
       (map-indexed
        (fn [i m]
@@ -98,11 +102,23 @@
     [display-companies]]])
 
 (defmethod hy-content :member [state]
-  (let [id (:id @state)
-        m (get members id)]
-    [:main
-     [jumbotron state]
-     [:div.member "display member information here"]]))
+  (let [id (get-in @state [:params :id])
+        {:keys [name title avatar attrs description] :as m} (get members id)]
+    [:main {:style {:min-height "100%"}}
+     [:section.jumbotron {:style {:height "300px"}}]
+     [:div.container.resume
+      [:img {:src avatar}]
+      [:div
+       [:h2 name]
+       [:h3 title]
+       [:dl
+        (doall
+         (map-indexed
+          (fn [i attr]
+            ^{:key i}
+            [display-attribute attr])
+          attrs))]
+       [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
 
 (defmethod hy-content :default [state]
   [:main.container

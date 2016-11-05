@@ -7,12 +7,12 @@
             [garden.selectors :refer :all :exclude [map meta time empty]]))
 
 (def text-color (rgb 101 107 111))
-
 (def white (rgba 255 255 255 0.7))
 (def black (rgba 0 0 0 0.7))
+(def dimmer-color (rgba 0 0 0 0.82))
 
 (def default-transition-time (ms 300))
-(def dimmer-color (rgba 0 0 0 0.9))
+
 
 (defselector app "#app")
 (defselector logo "#logo")
@@ -116,7 +116,7 @@
                 :justify-content :center
                 :background "url(/images/home.jpg) no-repeat center bottom fixed"
                 :background-size :center
-                :max-height (px 800)}
+                :max-height (px 1024)}
 
    [h1 {:color white
         :font-size (px 70)
@@ -126,8 +126,13 @@
 
 (defstyles footer-style
   [footer {:position :relative
-            :background-color :black
-            :color white}
+           :background-color :black
+           :color white}
+   [h2 {:color white
+        :font-size (px 24)
+        :padding-top (px 32)}]
+   [:.copyright {:margin-top (px 30)
+                 :color (rgba 255 255 255 0.4)}]
    [ul {:display :block
         :padding 0
         :margin 0}]
@@ -145,8 +150,10 @@
     [li {:line-height 1.3
          :list-style :none}]]]
 
-  [(> :.columns :*) {:flex 1
-                     :padding (px 16)}])
+  [".columns>*:nth-child(1)" {:flex 5}]
+  [".columns>*:nth-child(2)" {:flex 5}]
+  [".columns>*:nth-child(3)" {:flex 2}]
+  [(> :.columns :*) {:padding (px 16)}])
 
 (defstyles company-style
   [:ul.companies
@@ -159,12 +166,20 @@
        :align-items :center}]])
 
 (defstyles member-style
+  [:.resume {:display :flex
+             :flex-direction :row
+             :margin-top (px 40)}
+   [:img {:margin-right (px 32)}]
+   [:h2 :h3 {:color text-color}]
+   [:dt {:line-height 1.5}]]
+
   [:.member {:display :flex
              :flex-direction :row
              :margin [[(px 16) 0]]}
    [:.avatar {:display :inline-block
-              :width (px 60)
-              :height (px 60)
+              :flex-shrink 0
+              :width (px 90)
+              :height (px 90)
               :margin-right (px 16)
               :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
               :background-repeat :no-repeat
@@ -176,14 +191,40 @@
     [h5 {:margin 0 :padding 0}]]])
 
 
+;;; @media(min-width:576px){}
+;;; @media(min-width:768px){}
+;;; @media(min-width:992px){}
+;;; @media(min-width:1200px){}
 
-(defstyles mobile-style
-  (at-media
-   {:max-width (px 767)}
-   [jumbotron
-    [h1 {:font-size (px 45)}]]
-   [:.container [:section {:padding 0}]]
-   [:.columns {:flex-direction :column}]))
+(defstyles large-desktop-style
+  (at-media {:min-width (px 1200)}))
+
+(defstyles landscape-tablets-&-medium-desktop
+  (at-media {:min-width (px 992)
+             :max-width (px 1199)}))
+
+(defstyles portrait-tablets-and-small-desktop
+  (at-media {:min-width (px 768)
+             :max-width (px 991)}))
+
+(defstyles landscape-phones-&-portrait-tablets
+  (at-media {:max-width (px 767)}
+            [jumbotron
+             [h1 {:font-size (px 45)}]]
+            [resizable
+             [a {:font-size (px 20)}]]
+            [:.container [:section {:padding 0}]]
+            [:.columns {:flex-direction :column}]))
+
+(defstyles portrait-phones-&-smaller
+  (at-media {:max-width (px 480)}))
+
+(defstyles responsive-style
+  large-desktop-style
+  landscape-tablets-&-medium-desktop
+  portrait-tablets-and-small-desktop
+  landscape-phones-&-portrait-tablets
+  portrait-phones-&-smaller)
 
 (defstyles screen
   reset-style
@@ -197,5 +238,5 @@
   member-style
   company-style
 
-  mobile-style
+  responsive-style
   )

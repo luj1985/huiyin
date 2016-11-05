@@ -3,10 +3,14 @@
 ;;; These data can also be loaded from a web server
 ;;; TODO: use macro to read data from external file
 
+
+(def ^:const lorem "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+
 (def ^:const members
   [{:name "James Wo"
     :title "CEO, Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
+    :description lorem
     :attrs [{:email "woquan826@gmail.com"}
             {:email "woquan826@163.com"}
             {:email "woquan@huiyin.com"}
@@ -16,16 +20,19 @@
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
+    :description lorem
     :attrs [{:email "zhengbing@huiyin.com"}]}
 
    {:name "Shang Zhang"
     :title "Senior Associate, Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
+    :description lorem
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
    {:name "Andrew Lee"
-    :title "Board Advisor"
+    :title "CEO at Purse, Advisor at Huiyin Blockchain Venture"
     :avatar "/images/avatar2.jpg"
+    :description lorem
     :attrs [{:email "andrew@purse.io"}]}])
 
 (def ^:const companies
