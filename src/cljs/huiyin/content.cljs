@@ -1,5 +1,30 @@
 (ns huiyin.content)
 
+(def members
+  [{:name "James Wo"
+    :title "CEO, Huiyin Blockchain Venture"
+    :avator "/images/avatar.jpg"
+    :attrs [{:email "woquan826@gmail.com"}
+            {:email "woquan826@163.com"}
+            {:email "woquan@huiyin.com"}
+            {:twitter {:name "@woquan826" :value "https://twitter.com/woquan826"}}
+            {:linked-in {:name "james-wo-272904114" :value "https://www.linkedin.com/in/james-wo-272904114"}}]}
+
+   {:name "Freddy Zheng"
+    :title "Director, Management Huiyin Blockchain Venture"
+    :avatar ""
+    :attrs [{:email "zhengbing@huiyin.com"}]}
+
+   {:name "Shang Zhang"
+    :title "Senior Associate, Huiyin Blockchain Venture"
+    :avatar ""
+    :attrs [{:email "zhanghong@huiyin.com"}]}
+
+   {:name "Andrew Lee"
+    :title "Board Advisor"
+    :avatar "/images/avatar2.jpg"
+    :attrs [{:email "andrew@purse.io"}]}])
+
 (defn jumbotron []
   [:section.jumbotron
    [:h1 "Huiyin Blockchain Venture"]])

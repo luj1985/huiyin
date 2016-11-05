@@ -1,13 +1,20 @@
 (ns huiyin.master)
 
+(def ^:const company-url
+  "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0")
+
+(def ^:const links
+  [{:text "Home" :href "#/home"}
+   {:text "About" :href "#/about"}
+   {:text "Join Us" :target "_blank" :href company-url}])
+
 (defn header [state]
   [:header
    [:div.container.space-between
     [:h1#logo (:y (:offset @state))]
     [:nav
-     [:a {:href "#/home"} "Home"]
-     [:a {:href "#/about"} "About"]
-     [:a {:target "_blank" :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0"} "Join Us"]]]])
+     (for [{:keys [href text target]} links]
+       ^{:key href} [:a {:href href :target target} text])]]])
 
 (defn footer [state]
   [:footer

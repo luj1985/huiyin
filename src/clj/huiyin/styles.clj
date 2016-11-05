@@ -1,8 +1,8 @@
 (ns huiyin.styles
-  (:refer-clojure :exclude [> - + first not])
+  (:refer-clojure :exclude [> - + first not rem])
   (:require [garden.def :refer [defrule defstyles]]
             [garden.color :refer [rgb rgba]]
-            [garden.units :refer [px percent]]
+            [garden.units :refer [px percent rem]]
             [garden.stylesheet :refer [rule at-media]]
             [garden.selectors :refer :all :exclude [map meta time empty]]))
 
@@ -110,8 +110,7 @@
     [:a {:margin "0 20px"
          :font-size (px 22)}]]]
 
-  [:main {:margin-top (px 70)
-          :margin-bottom (px 40)}
+  [:main {:margin-bottom (px 40)}
    [:a {:color base-text-color}
     ["&:hover" {:color "#db4437"}]]]
 

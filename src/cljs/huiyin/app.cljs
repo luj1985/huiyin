@@ -13,19 +13,17 @@
 
 (enable-console-print!)
 
-(defn- get-viewport-size []
+(defn- viewport-size []
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)]
     {:width w :height h}))
 
-(defn- get-scroll-offset []
+(defn- scroll-offset []
   (let [offset (dom/getDocumentScroll)]
     {:x (.-x offset) :y (.-y offset)}))
 
-(defonce state (atom {:offset (get-scroll-offset)
-                      :viewport (get-viewport-size)}))
-
-(secretary/set-config! :prefix "#")
+(defonce state (atom {:offset (scroll-offset)
+                      :viewport (viewport-size)}))
 
 (defroute home "/home" []
   (js/console.log "home"))
@@ -33,22 +31,22 @@
 (defroute about "/about" []
   (js/console.log "scroll to speicifc position"))
 
-;;; XXX: React fragment API is still under development, container is required
+;;; XXX: React fragment API is still in developing, an empty div container is required
 ;;; https://github.com/facebook/react/issues/2127
 (defn home-page []
   [:div
-   (header state)
+   [header state]
    [main state]
    [footer state]])
 
 (defroute index "/" []
   (r/render [home-page] (.getElementById js/document "app")))
 
-
-(defonce initialize
+(defonce setup
   (do
-    (events/listen js/window SCROLL #(swap! state assoc :offset (get-scroll-offset)))
-    (events/listen js/window RESIZE #(swap! state assoc :viewport (get-viewport-size)))
+    (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
+    (events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))
+    (secretary/set-config! :prefix "#")
     (doto (Html5History.)
       (events/listen NAVIGATE #(secretary/dispatch! (.-token %)))
       (.setEnabled true))))
