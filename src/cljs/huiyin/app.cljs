@@ -6,7 +6,7 @@
    [goog.history.EventType :refer [NAVIGATE]]
    [goog.events.EventType :refer [SCROLL RESIZE]]
    [goog.dom :as dom]
-   [huiyin.components :refer [display-header display-footer display-content]])
+   [huiyin.components :refer [render-pages]])
   (:import goog.history.Html5History))
 
 (enable-console-print!)
@@ -46,14 +46,6 @@
   (do
     (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
     (events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))))
-
-;;; XXX: React fragment API is still in developing, an empty div container is required
-;;; https://github.com/facebook/react/issues/2127
-(defn- render-pages [state]
-  [:div
-   [display-header state]
-   [display-content state]
-   [display-footer state]])
 
 (defn init []
   ;;; Always render the full page
