@@ -117,9 +117,9 @@
   [jumbotron {:display :flex
                 :align-items :center
                 :justify-content :center
-                :background "url(/images/home.jpg) no-repeat center center fixed"
+                :background "url(/images/home.jpg) no-repeat center bottom fixed"
                 :background-size :center
-                :max-height (px 1024)}
+                :max-height (px 800)}
 
    [h1 {:color white
         :font-size (px 70)
@@ -151,6 +151,33 @@
   [(> :.columns :*) {:flex 1
                      :padding (px 16)}])
 
+(defstyles company-style
+  [:ul.companies
+   [:img {:height (px 50)
+          :width (px 50)
+          :margin (px 8)
+          :margin-left 0}]
+   [a {:display :flex
+       :flex-direction :row
+       :align-items :center}]])
+
+(defstyles member-style
+  [:.member {:display :flex
+             :flex-direction :row
+             :margin [[(px 16) 0]]}
+   [:.avatar {:display :inline-block
+              :width (px 60)
+              :height (px 60)
+              :margin-right (px 16)
+              :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
+              :background-repeat :no-repeat
+              :background-position "50% 50%"
+              :background-size "100% auto"
+              :border-radius (percent 50)}]
+   [:.contact {:padding [[0 (px 8)]]}
+    [h4 {:margin 0 :padding 0}]
+    [h5 {:margin 0 :padding 0}]]])
+
 (defstyles screen
   reset-style
   container-style
@@ -159,4 +186,7 @@
   resizable-header-style
   jumbotron-style
   footer-style
-  main-style)
+  main-style
+  member-style
+  company-style
+  )

@@ -28,20 +28,55 @@
     [:section.jumbotron {:style {:height height}}
      [:h1 "Huiyin Blockchain Venture"]]))
 
+(defn- display-attribute [{:keys [email twitter linked-in] :as attr}]
+  [:dt
+   (cond
+     email [:a {:href (str "mailto:" email)}
+            [:i.fa.fa-envelope]
+            email]
+     twitter [:a {:href (:value twitter)}
+              [:i.fa.fa-twitter]
+              (:name twitter)]
+     linked-in [:a {:href (:value linked-in)}
+                [:i.fa.fa-linkedin]
+                (:name linked-in)])])
+
+(defn- display-member [{:keys [index name title avatar attrs]} m]
+  [:li.member
+   [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
+   [:div.contact
+    [:h4
+     [:a {:href (str "#/member/" index)}
+      name]]
+    [:h5 title]
+    [:dl
+     (doall
+      (map-indexed
+       (fn [i attr]
+         ^{:key i}
+         [display-attribute attr])
+       attrs))]]
+   ])
+
 (defn- display-members []
   [:section
    [:h2 "Who we are"]
    [:ul
     (for [[m i] (zipmap members (range))]
-      ^{:key i} [:li [:a {:href (str "#/member/" i)} (:name m)]])]])
+      ^{:key i}
+      [display-member (assoc m :index i)])]])
 
 (defn- display-companies []
   [:section
    [:h2
     [:a {:href "https://angel.co/huiyin-blockchain-venture"} "Angel list"]]
-   [:ul
-    (for [{:keys [name url]} companies]
-      ^{:key url} [:li [:a {:href url} name]])]])
+   [:ul.companies
+    (for [{:keys [name url logo]} companies]
+      ^{:key url}
+      [:li
+       [:a {:href url :target "_blank"}
+        [:img {:src logo}]
+        name]])]])
 
 (defn- display-intro []
   [:section

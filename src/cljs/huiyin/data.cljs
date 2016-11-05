@@ -6,7 +6,7 @@
 (def ^:const members
   [{:name "James Wo"
     :title "CEO, Huiyin Blockchain Venture"
-    :avator "/images/avatar.jpg"
+    :avatar "/images/avatar.jpg"
     :attrs [{:email "woquan826@gmail.com"}
             {:email "woquan826@163.com"}
             {:email "woquan@huiyin.com"}
@@ -15,12 +15,12 @@
 
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
-    :avatar ""
+    :avatar "/images/avatar.jpg"
     :attrs [{:email "zhengbing@huiyin.com"}]}
 
    {:name "Shang Zhang"
     :title "Senior Associate, Huiyin Blockchain Venture"
-    :avatar ""
+    :avatar "/images/avatar.jpg"
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
    {:name "Andrew Lee"
@@ -29,9 +29,9 @@
     :attrs [{:email "andrew@purse.io"}]}])
 
 (def ^:const companies
-  [{:name "Purse.io" :url "https://purse.io"}
-   {:name "Yours network" :url "https://www.yours.network"}
-   {:name "Unocoin" :url "https://www.unocoin.com"}])
+  [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
+   {:name "Yours network" :url "https://www.yours.network" :logo "/images/logos/yours-network.png"}
+   {:name "Unocoin" :url "https://www.unocoin.com" :logo "/images/logos/unocoin.jpg"}])
 
 (def ^:const introductions
   ["Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
