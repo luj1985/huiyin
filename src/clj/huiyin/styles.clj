@@ -10,9 +10,9 @@
 
 (def white (rgba 255 255 255 0.7))
 (def black (rgba 0 0 0 0.7))
+
 (def base-bg-color "#0683c9")
 (def base-fg-color white)
-(def base-text-color text-color)
 
 (def default-transition-time (ms 300))
 (def dimmer-color (rgba 0 0 0 0.9))
@@ -22,6 +22,8 @@
 (defselector compact ".compact")
 (defselector container ".container")
 (defselector resizable ".resizable")
+(defselector jumbotron ".jumbotron")
+(defselector main "main")
 
 (defstyles container-style
   [container {:position :relative
@@ -29,8 +31,7 @@
               :padding-right (px 16)
               :max-width (px 1170)
               :margin-left :auto
-              :margin-right :auto}
-   [:.column {:width (percent 48)}]])
+              :margin-right :auto}])
 
 (defstyles reset-style
   [html {:-moz-osx-font-smoothing "grayscale"
@@ -44,20 +45,34 @@
          :margin 0
          :padding 0}]
 
+  [h2 {:font-size (px 30)
+       :color black}]
+
+  [h3 {:font-size (px 25)
+       :color white
+       :margin [[(px 20) 0]]}]
+
+  [p {:color text-color
+      :font-size (px 16)
+      :font-weight :normal
+      :line-height 1.3}]
+
   [app {:position :relative
         :margin 0
         :padding 0}])
 
 (defstyles hyper-link-style
-  [a {:color white
+  [a {:color text-color
       :text-decoration :none
       :font-weight 700
       :transition [[:all default-transition-time]]}
+   [(& hover) {:color "#db4437"}]
    [i {:padding-right (px 10)}]]
 
-  [:a.underline {:position :relative
+  [:a.underline {:color white
+                 :position :relative
                  :padding [[(px 4) 0]]}
-   [(& hover) {:color "white"}]
+   [(& hover) {:color :white}]
    [(& before) {:content "\"\""
                 :position :absolute
                 :width (percent 100)
@@ -99,7 +114,7 @@
    [logo {:width (px 250)}]])
 
 (defstyles jumbotron-style
-  [:.jumbotron {:display :flex
+  [jumbotron {:display :flex
                 :align-items :center
                 :justify-content :center
                 :background "url(/images/home.jpg) no-repeat center center fixed"
@@ -113,12 +128,28 @@
         :text-align :center}]])
 
 (defstyles footer-style
-  [:footer {:position :relative
+  [footer {:position :relative
             :background-color :black
             :color white}
-   [:ul {:margin 0}]
-   [:li {:display :inline-block
-         :padding [[(px 16) (px 16) (px 16) 0]]}]])
+   [ul {:display :block
+        :padding 0
+        :margin 0}]
+   [li {:display :inline-block
+        :list-style :none
+        :padding (px 16)}]])
+
+(defstyles main-style
+  [main {:margin-bottom (px 40)}]
+
+  [:.columns {:display :flex
+              :flex-direction :row}
+   [section
+    [ul {:padding 0}]
+    [li {:line-height 1.3
+         :list-style :none}]]]
+
+  [(> :.columns :*) {:flex 1
+                     :padding (px 16)}])
 
 (defstyles screen
   reset-style
@@ -128,23 +159,4 @@
   resizable-header-style
   jumbotron-style
   footer-style
-
-  [h2 {:font-size (px 30)
-       :color black}]
-  [h3 {:font-size (px 25)
-       :color white
-       :margin "20px 0"}]
-
-  [p {:color base-text-color
-      :font-size (px 16)
-      :font-weight :normal
-      :line-height 1.3}]
-
-  [ul {:padding 0}
-   [li {:list-style :none}]] [:.container.space-between {:display :flex
-                                                         :flex-direction :row
-                                                         :justify-content :space-between}]
-
-  [:main {:margin-bottom (px 40)}
-   [a {:color base-text-color}
-    [(& hover) {:color "#db4437"}]]])
+  main-style)

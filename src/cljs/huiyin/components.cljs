@@ -29,12 +29,14 @@
      [:h1 "Huiyin Blockchain Venture"]]))
 
 (defn- display-members []
-  [:ul.container
-   (for [[m i] (zipmap members (range))]
-     ^{:key i} [:li [:a {:href (str "#/member/" i)} (:name m)]])])
+  [:section
+   [:h2 "Who we are"]
+   [:ul
+    (for [[m i] (zipmap members (range))]
+      ^{:key i} [:li [:a {:href (str "#/member/" i)} (:name m)]])]])
 
 (defn- display-companies []
-  [:article.column
+  [:section
    [:h2
     [:a {:href "https://angel.co/huiyin-blockchain-venture"} "Angel list"]]
    [:ul
@@ -42,7 +44,7 @@
       ^{:key url} [:li [:a {:href url} name]])]])
 
 (defn- display-intro []
-  [:article.column
+  [:section
    [:h2 "Introduction"]
    (doall
     (map-indexed
@@ -55,10 +57,10 @@
 (defmethod hy-content :home [state]
   [:main
    [jumbotron state]
-   [:div.container.space-between
+   [:div.container.columns
     [display-intro]
-    [display-companies]]
-   [display-members state]])
+    [display-members state]
+    [display-companies]]])
 
 (defmethod hy-content :member [state]
   (let [id (:id @state)
