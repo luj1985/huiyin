@@ -5,6 +5,7 @@
                  [reagent "0.6.0"]
                  [secretary "1.2.3"]
                  [weasel "0.7.0"]
+                 [garden "1.3.2"]
                  [adzerk/boot-cljs "1.7.228-2" :scope "dev"]
                  [adzerk/boot-cljs-repl "0.3.0" :scope "dev"]
                  [adzerk/boot-reload "0.4.8" :scope "dev"]

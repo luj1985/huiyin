@@ -11,6 +11,8 @@
    [huiyin.master :refer [header footer]])
   (:import goog.history.Html5History))
 
+(enable-console-print!)
+
 (defn- get-viewport-size []
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)]
@@ -52,6 +54,6 @@
       (.setEnabled true))))
 
 (defn init []
-  (enable-console-print!))
+)
 
 

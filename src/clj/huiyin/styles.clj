@@ -1,22 +1,60 @@
 (ns huiyin.styles
+  (:refer-clojure :exclude [> - + first not])
   (:require [garden.def :refer [defrule defstyles]]
-            [garden.color :refer [rgba]]
+            [garden.color :refer [rgb rgba]]
             [garden.units :refer [px percent]]
-            [garden.stylesheet :refer [rule]]))
+            [garden.stylesheet :refer [rule at-media]]
+            [garden.selectors :refer :all :exclude [map meta time empty]]))
+
+
+(def text-color (rgb 101 107 111))
 
 (def white (rgba 255 255 255 0.7))
 (def black (rgba 0 0 0 0.7))
 (def base-bg-color "#0683c9")
 (def base-fg-color white)
-(def base-text-color "#656b6f")
+(def base-text-color text-color)
 (def resizable-header-height (px 140))
 (def resizable-header-height-small (px 75))
 (def logo-width (px 300))
 (def logo-width-small (px 250))
 
+(defstyles container-style
+  [:.container {:position :relative
+                :padding-left (px 16)
+                :padding-right (px 16)
+                :max-width (px 1170)
+                :margin-left :auto
+                :margin-right :auto}
+   [:.column {:width (percent 48)}]])
+
+(defstyles reset-style
+  [html {:-moz-osx-font-smoothing "grayscale"
+         :-webkit-font-smoothing "antialiased"
+         :margin 0
+         :padding 0}]
+
+  [body {:font-family ["Calibre" "Helvetica" "Arial" "sans-serif"] 
+         :font-size (px 16)
+         :line-height 1
+         :margin 0
+         :padding 0}]
+
+  [:#app {:position :relative
+          :margin 0
+          :padding 0}])
+
+(defstyles hyper-link-style
+  [a {:color white
+      :text-decoration :none
+      :font-weight 700
+      :transition "all 0.3s"}
+   [:&:hover {:color "white"}]
+   [:i {:padding-right (px 10)}]])
+
 (def a-style [:a {:position :relative
-                  :padding "4px 0"}
-              ["&:before" {:content ""
+                  :padding [[(px 4) 0]]}
+              [:&:before {:content ""
                            :position :absolute
                            :width (percent 100)
                            :height (px 2)
@@ -26,30 +64,14 @@
                            :visibility :hidden
                            :transform "scaleX(0)"
                            :transition "all 0.3s ease-in-out 0s"}]
-              ["&:hover:before" {:visibility :visible
-                                 :transform "scaleX(1)"}]])
+              [:&:hover:before {:visibility :visible
+                                :transform "scaleX(1)"}]])
+
+
 (defstyles screen
-  [:html {:-moz-osx-font-smoothing "grayscale"
-          :-webkit-font-smoothing "antialiased"
-          :margin 0
-          :padding 0}]
-
-  [:#app {:position :relative
-          :margin 0
-          :padding 0}]
-
-  [:body {:font-family "Calibre, Helvetica, Arial, sans-serif"
-          :font-size (px 16)
-          :line-height 1
-          :margin 0
-          :padding 0}]
-
-  [:a {:color white
-       :text-decoration :none
-       :font-weight 700
-       :transition "all 0.3s"}
-   ["&:hover" {:color "white"}]
-   [:i {:padding-right (px 10)}]]
+  reset-style
+  container-style
+  hyper-link-style
 
   [:header a-style]
   [:footer a-style]
@@ -94,13 +116,7 @@
     ["&:hover" {:color "#db4437"}]]]
 
 
-  [:.container {:position :relative
-                :padding-left (px 16)
-                :padding-right (px 16)
-                :max-width (px 1170)
-                :margin-left :auto
-                :margin-right :auto}
-   [:.column {:width (percent 48)}]]
+  
 
   [:header {:transition "all 0.3s"
             :background-color :transparent}
@@ -117,9 +133,7 @@
 
 
    ["&.smaller" {:height resizable-header-height-small
-                 :background-color (rgba 0 0 0 0.9)}]
-
-   ]
+                 :background-color (rgba 0 0 0 0.9)}]]
 
 
 
@@ -129,12 +143,9 @@
                 :background "url(/images/home.jpg) no-repeat center center fixed"
                 :background-size :center
                 :max-height (px 1024)}
-   [:h1 {:color white
-         :font-size (px 70)
-         :font-family "'A2 60 Display Regular', 'Arial Black', Arial, Helvetica, Verdana, sans-serif"
-         :transform "translateY(-50px)"
-         :text-align :center}]]
 
-
-
-  )
+   [h1 {:color white
+        :font-size (px 70)
+        :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
+        :transform "translateY(-50px)"
+        :text-align :center}]])
