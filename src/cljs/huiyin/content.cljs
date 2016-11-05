@@ -38,7 +38,6 @@ We are a trusted partner with the global expertise and network to make the most 
 Huiyin Group manages diversified investments in commerce, energy, medicine, agriculture, tourism, electronics, chemicals, commerce and food and beverages.
 Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more than 1,000 employees."])
 
-
 (defn jumbotron [state]
   (let [height (get-in @state [:viewport :height])]
     [:section.jumbotron {:style {:height height}}
@@ -60,8 +59,11 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 (defn- display-intro []
   [:article.column
    [:h2 "Introduction"]
-   (for [html introductions]
-     [:p {:dangerouslySetInnerHTML {:__html html}}])])
+   (doall
+    (map-indexed
+     (fn [i html]
+       ^{:key i} [:p {:dangerouslySetInnerHTML {:__html html}}])
+     introductions))])
 
 (defn content []
   [:div.container.space-between
@@ -74,8 +76,21 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
      [jumbotron state]
      [:div.member "display member information here"]]))
 
-(defn main [state]
+(defmulti display-content (fn [state] (:page @state)))
+
+(defmethod display-content :home [state]
   [:main
    [jumbotron state]
    [content state]
    [display-members state]])
+
+(defmethod display-content :member [state]
+  (let [id (:id @state)
+        m (get members id)]
+    [:main.container
+     [jumbotron state]
+     [:div.member "display member information here"]]))
+
+(defmethod display-content :default [state]
+  [:main.container
+   "Page not found"])

@@ -6,7 +6,6 @@
             [garden.stylesheet :refer [rule at-media]]
             [garden.selectors :refer :all :exclude [map meta time empty]]))
 
-
 (def text-color (rgb 101 107 111))
 
 (def white (rgba 255 255 255 0.7))
@@ -34,7 +33,7 @@
          :margin 0
          :padding 0}]
 
-  [body {:font-family ["Calibre" "Helvetica" "Arial" "sans-serif"] 
+  [body {:font-family ["Calibre" "Helvetica" "Arial" "sans-serif"]
          :font-size (px 16)
          :line-height 1
          :margin 0
@@ -55,15 +54,15 @@
 (def a-style [:a {:position :relative
                   :padding [[(px 4) 0]]}
               [:&:before {:content ""
-                           :position :absolute
-                           :width (percent 100)
-                           :height (px 2)
-                           :bottom 0
-                           :left 0
-                           :background-color :white
-                           :visibility :hidden
-                           :transform "scaleX(0)"
-                           :transition "all 0.3s ease-in-out 0s"}]
+                          :position :absolute
+                          :width (percent 100)
+                          :height (px 2)
+                          :bottom 0
+                          :left 0
+                          :background-color :white
+                          :visibility :hidden
+                          :transform "scaleX(0)"
+                          :transition "all 0.3s ease-in-out 0s"}]
               [:&:hover:before {:visibility :visible
                                 :transform "scaleX(1)"}]])
 
@@ -71,19 +70,13 @@
   [:.resizable {:transition "all 0.3s"
                 :background-color :transparent}
    [:#logo {:transition "all 0.3s"}]
-   [:nav [:a {:transition "all 0.3s"}]]
+   [:nav [:a {:transition "all 0.3s"}]] [:#logo {:height resizable-header-height
+                                                 :line-height resizable-header-height
+                                                 :width logo-width
+                                                 :background-size (str logo-width " auto")}]
 
-
-   [:#logo {:height resizable-header-height
-            :line-height resizable-header-height
-            :width logo-width
-            :background-size (str logo-width " auto")}]
-
-   [:nav [:a {:line-height resizable-header-height}]]
-
-
-   [:&.compact {:height resizable-header-height-small
-                :background-color (rgba 0 0 0 0.9)}]])
+   [:nav [:a {:line-height resizable-header-height}]] [:&.compact {:height resizable-header-height-small
+                                                                   :background-color (rgba 0 0 0 0.9)}]])
 
 (defstyles jumbotron-style
   [:.jumbotron {:display :flex
@@ -106,7 +99,7 @@
 
   resizable-header-style
   jumbotron-style
-  
+
   [:header a-style]
   [:footer a-style]
   [:h2 {:font-size (px 30)
@@ -121,12 +114,9 @@
        :line-height 1.3}]
 
   [:ul {:padding 0}
-   [:li {:list-style :none}]]
-
-
-  [:.container.space-between {:display :flex
-                              :flex-direction :row
-                              :justify-content :space-between}]
+   [:li {:list-style :none}]] [:.container.space-between {:display :flex
+                                                          :flex-direction :row
+                                                          :justify-content :space-between}]
 
   [:header {:position :fixed
             :width (percent 100)
@@ -146,10 +136,4 @@
 
   [:main {:margin-bottom (px 40)}
    [:a {:color base-text-color}
-    ["&:hover" {:color "#db4437"}]]]
-
-  
-
-
-
-  )
+    ["&:hover" {:color "#db4437"}]]])
