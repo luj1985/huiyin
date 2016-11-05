@@ -10,7 +10,7 @@
       [:nav
        #_offset-y
        (for [{:keys [href text target]} links]
-         ^{:key href} [:a {:href href :target target} text])]]]))
+         ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
 (defn- hy-footer [state]
   [:footer.container

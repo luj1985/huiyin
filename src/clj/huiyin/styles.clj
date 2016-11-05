@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [> - + first not rem])
   (:require [garden.def :refer [defrule defstyles]]
             [garden.color :refer [rgb rgba]]
-            [garden.units :refer [px percent rem]]
+            [garden.units :refer [px percent rem ms]]
             [garden.stylesheet :refer [rule at-media]]
             [garden.selectors :refer :all :exclude [map meta time empty]]))
 
@@ -14,13 +14,20 @@
 (def base-fg-color white)
 (def base-text-color text-color)
 
+(def default-transition-time (ms 300))
+
+(defselector app "#app")
+(defselector logo "#logo")
+(defselector compact ".compact")
+(defselector container ".container")
+
 (defstyles container-style
-  [:.container {:position :relative
-                :padding-left (px 16)
-                :padding-right (px 16)
-                :max-width (px 1170)
-                :margin-left :auto
-                :margin-right :auto}
+  [container {:position :relative
+              :padding-left (px 16)
+              :padding-right (px 16)
+              :max-width (px 1170)
+              :margin-left :auto
+              :margin-right :auto}
    [:.column {:width (percent 48)}]])
 
 (defstyles reset-style
@@ -35,32 +42,18 @@
          :margin 0
          :padding 0}]
 
-  [:#app {:position :relative
-          :margin 0
-          :padding 0}])
+  [app {:position :relative
+        :margin 0
+        :padding 0}])
 
 (defstyles hyper-link-style
   [a {:color white
       :text-decoration :none
       :font-weight 700
       :transition "all 0.3s"}
-   [:&:hover {:color "white"}]
-   [:i {:padding-right (px 10)}]])
+   [(& hover) {:color "white"}]
+   [i {:padding-right (px 10)}]])
 
-(def a-style [:a {:position :relative
-                  :padding [[(px 4) 0]]}
-              [:&:before {:content ""
-                          :position :absolute
-                          :width (percent 100)
-                          :height (px 2)
-                          :bottom 0
-                          :left 0
-                          :background-color :white
-                          :visibility :hidden
-                          :transform "scaleX(0)"
-                          :transition "all 0.3s ease-in-out 0s"}]
-              [:&:hover:before {:visibility :visible
-                                :transform "scaleX(1)"}]])
 
 (defstyles resizable-header-style
   (let [header-height (px 140)
@@ -71,23 +64,40 @@
                   :width (percent 100)
                   :height header-height
                   :z-index 1
-                  :transition "all 0.3s"
+                  :transition (map #(vector % default-transition-time)
+                                   [:height :background-color])
                   :background-color :transparent}
-     [:#logo {:transition "all 0.3s"
-              :width logo-width}]
+     [logo {:transition [[:width default-transition-time]]
+            :width logo-width}]
 
-     [(> :.container) {:display :flex
-                       :align-items :center
-                       :height (percent 100)}]
+     [(> container) {:display :flex
+                     :align-items :center
+                     :height (percent 100)}]
      [nav {:display :flex
            :flex-direction :row}
-      [a {:margin [[0 (px 16)]]
-          :padding (px 16)
+
+      [a {:margin [[0 (px 24)]]
           :font-size (px 22)}]]
 
-     [:&.compact {:height header-height'
-                  :background-color (rgba 0 0 0 0.9)}
-      [:#logo {:width logo-width'}]]]))
+     [(& compact) {:height header-height'
+                   :background-color (rgba 0 0 0 0.9)}
+      [logo {:width logo-width'}]]]))
+
+(defstyles underline-link
+  [:a.underline {:position :relative
+                 :padding [[(px 4) 0]]}
+   [(& before) {:content "\"\""
+                :position :absolute
+                :width (percent 100)
+                :height (px 2)
+                :bottom 0
+                :left 0
+                :background-color :white
+                :visibility :hidden
+                :transform "scaleX(0)"
+                :transition "all 0.3s ease-in-out 0s"}]
+   [(& hover before) {:visibility :visible
+                      :transform "scaleX(1)"}]])
 
 (defstyles jumbotron-style
   [:.jumbotron {:display :flex
@@ -107,12 +117,11 @@
   reset-style
   container-style
   hyper-link-style
+  underline-link
 
   resizable-header-style
   jumbotron-style
 
-  [:header a-style]
-  [:footer a-style]
   [:h2 {:font-size (px 30)
         :color black}]
   [:h3 {:font-size (px 25)
