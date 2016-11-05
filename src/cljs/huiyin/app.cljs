@@ -42,16 +42,27 @@
 (defroute index "/" []
   (r/render [home-page] (.getElementById js/document "app")))
 
-(defonce setup
+(defonce history
   (do
-    (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
-    (events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))
     (secretary/set-config! :prefix "#")
     (doto (Html5History.)
       (events/listen NAVIGATE #(secretary/dispatch! (.-token %)))
       (.setEnabled true))))
 
+(defonce events-setup
+  (do
+    (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
+    (events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))))
+
 (defn init []
-)
+  ;;; XXX: For reagent component change, it only refresh its definition
+  ;;; doesn't have router event, page still show old version
+  ;;; manually restart history to route pages
+  ;;; can be disabled in release version
+
+  ;;; TODO: setup debug profile
+  (doto history
+    (.setEnabled false)
+    (.setEnabled true)))
 
 

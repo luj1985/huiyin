@@ -31,7 +31,8 @@
      [:h1 "Huiyin Blockchain Venture"]]))
 
 (defn content []
-  [:main.container.space-between
+  [:div
+   [:main.container.space-between
     [:article.column
      [:h2 "Introduction"]
      [:p "Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
@@ -49,7 +50,38 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
       [:li
        [:a {:href "https://www.yours.network"} "Yours network"]]
       [:li
-       [:a {:href "https://www.unocoin.com"} "Unocoin"]]]]])
+       [:a {:href "https://www.unocoin.com"} "Unocoin"]]]]]
+
+   [:div.container
+    [:h3 "Leadership"]
+    [:div.wrapper
+     [:div.info
+      [:img.avatar {:src "images/avatar.jpg"}]
+      [:div.contact
+       [:h4 "James Wo"]
+       [:h5 "CEO, Huiyin Blockchain Venture"]
+       [:ul
+        [:li
+         [:a {:href "mailto:woquan826@gmail.com"}
+          [:i.fa.fa-envelope {:aria-hidden true} "woquan826@gmail.com"]]]
+        [:li
+         [:a {:href "mailto:woquan826@163.com"}
+          [:i.fa.fa-envelope {:aria-hidden true} "woquan826@163.com"]]]
+        [:li
+         [:a {:href "https://twitter.com/woquan826"}
+          [:i.fa.fa-twitter {:aria-hidden true} "@woquan826"]]]
+        [:li
+         [:a {:href "https://www.linkedin.com/in/james-wo-272904114"}
+          [:i.fa.fa-linkedin-square {:aria-hidden true} "james-wo-272904114"]]]]]]
+     [:div.info
+      [:img.avatar {:src "images/avatar2.jpg"}]
+      [:div.contact
+       [:h4 "Andrew Lee"]
+       [:h5 "CEO at Purse, Advisor at Huiyin Blockchain Venture"]
+       [:ul
+        [:li
+         [:a {:href "mailto:andrew@purse.io"}
+          [:i.fa.fa-envelope {:aria-hidden true} "andrew@purse.io"]]]]]]]]])
 
 (defn main [state]
   [:main
