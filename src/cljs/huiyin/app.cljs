@@ -6,8 +6,7 @@
    [goog.history.EventType :refer [NAVIGATE]]
    [goog.events.EventType :refer [SCROLL RESIZE]]
    [goog.dom :as dom]
-   [huiyin.master :refer [display-header display-footer]]
-   [huiyin.content :refer [display-content]])
+   [huiyin.components :refer [display-header display-footer display-content]])
   (:import goog.history.Html5History))
 
 (enable-console-print!)
