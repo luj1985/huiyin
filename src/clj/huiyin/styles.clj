@@ -67,12 +67,46 @@
               [:&:hover:before {:visibility :visible
                                 :transform "scaleX(1)"}]])
 
+(defstyles resizable-header-style
+  [:.resizable {:transition "all 0.3s"
+                :background-color :transparent}
+   [:#logo {:transition "all 0.3s"}]
+   [:nav [:a {:transition "all 0.3s"}]]
+
+
+   [:#logo {:height resizable-header-height
+            :line-height resizable-header-height
+            :width logo-width
+            :background-size (str logo-width " auto")}]
+
+   [:nav [:a {:line-height resizable-header-height}]]
+
+
+   [:&.compact {:height resizable-header-height-small
+                :background-color (rgba 0 0 0 0.9)}]])
+
+(defstyles jumbotron-style
+  [:.jumbotron {:display :flex
+                :align-items :center
+                :justify-content :center
+                :background "url(/images/home.jpg) no-repeat center center fixed"
+                :background-size :center
+                :max-height (px 1024)}
+
+   [h1 {:color white
+        :font-size (px 70)
+        :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
+        :transform "translateY(-50px)"
+        :text-align :center}]])
 
 (defstyles screen
   reset-style
   container-style
   hyper-link-style
 
+  resizable-header-style
+  jumbotron-style
+  
   [:header a-style]
   [:footer a-style]
   [:h2 {:font-size (px 30)
@@ -114,37 +148,8 @@
    [:a {:color base-text-color}
     ["&:hover" {:color "#db4437"}]]]
 
-
   
 
-  [:header {:transition "all 0.3s"
-            :background-color :transparent}
-   [:#logo {:transition "all 0.3s"}]
-   [:nav [:a {:transition "all 0.3s"}]]
 
 
-   [:#logo {:height resizable-header-height
-            :line-height resizable-header-height
-            :width logo-width
-            :background-size (str logo-width " auto")}]
-
-   [:nav [:a {:line-height resizable-header-height}]]
-
-
-   ["&.smaller" {:height resizable-header-height-small
-                 :background-color (rgba 0 0 0 0.9)}]]
-
-
-
-  [:.jumbotron {:display :flex
-                :align-items :center
-                :justify-content :center
-                :background "url(/images/home.jpg) no-repeat center center fixed"
-                :background-size :center
-                :max-height (px 1024)}
-
-   [h1 {:color white
-        :font-size (px 70)
-        :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
-        :transform "translateY(-50px)"
-        :text-align :center}]])
+  )

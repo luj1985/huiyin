@@ -25,9 +25,10 @@
     :avatar "/images/avatar2.jpg"
     :attrs [{:email "andrew@purse.io"}]}])
 
-(defn jumbotron []
-  [:section.jumbotron
-   [:h1 "Huiyin Blockchain Venture"]])
+(defn jumbotron [state]
+  (let [height (get-in @state [:viewport :height])]
+    [:section.jumbotron {:style {:height height}}
+     [:h1 "Huiyin Blockchain Venture"]]))
 
 (defn content []
   [:main.container.space-between
@@ -52,8 +53,8 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (defn main [state]
   [:main
-   (jumbotron)
-   (content)])
+   [jumbotron state]
+   [content]])
 
 (defn member []
   [:div.member "display member information here"])
