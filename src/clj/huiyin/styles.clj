@@ -4,24 +4,9 @@
             [garden.color :refer [rgb rgba]]
             [garden.units :refer [px percent rem ms]]
             [garden.stylesheet :refer [rule at-media]]
-            [garden.selectors :refer :all :exclude [map meta time empty]]))
-
-(def text-color (rgb 101 107 111))
-(def white (rgba 255 255 255 0.7))
-(def black (rgba 0 0 0 0.7))
-(def dimmer-color (rgba 0 0 0 0.82))
-
-(def default-transition-time (ms 300))
-
-
-(defselector app "#app")
-(defselector logo "#logo")
-(defselector compact ".compact")
-(defselector container ".container")
-(defselector resizable ".resizable")
-(defselector jumbotron ".jumbotron")
-(defselector main "main")
-
+            [garden.selectors :refer :all :exclude [map meta time empty]])
+  (:use [huiyin.selectors]
+        [huiyin.header]))
 (defstyles container-style
   [container {:position :relative
               :padding-left (px 16)
@@ -66,7 +51,7 @@
   [a {:color text-color
       :text-decoration :none
       :font-weight 700
-      :transition [[:all default-transition-time]]}
+      :transition [[:all transition-time]]}
    [(& hover) {:color "#db4437"}]
    [i {:padding-right (px 10)}]]
 
@@ -83,49 +68,11 @@
                 :background-color :white
                 :visibility :hidden
                 :transform "scaleX(0)"
-                :transition [[:all default-transition-time :ease-in-out (ms 0)]]}]
+                :transition [[:all transition-time :ease-in-out (ms 0)]]}]
    [(& hover before) {:visibility :visible
                       :transform "scaleX(1)"}]])
 
-(defstyles resizable-header-style
-  [resizable {:position :fixed
-              :width (percent 100)
-              :height (px 140)
-              :z-index 1
-              :transition (for [attr [:height :background-color]]
-                            [attr default-transition-time])
-              :background-color (rgba 0 0 0 0)}
 
-   [(> container) {:display :flex
-                   :align-items :center
-                   :justify-content :space-between
-                   :height (percent 100)}]
-
-   [logo {:display :flex
-          :flex-direction :row
-          :align-items :center}
-    [:svg {:transition "all 0.3s"
-           :margin-right (px 8)
-           :width (px 80)
-           :height (px 80)
-           :fill "#E00000"
-           :transform "scale(1)"}]
-    [:h1 {:transition "all 0.3s"
-          :font-size (px 20)
-          :white-space :nowrap
-          :color "#E00000"}]]
-
-   [nav {:display
-         :flex :flex-direction :row}]
-
-   [a {:margin [[0 (px 24)]]
-       :font-size (px 22)}]]
-
-  [(& resizable compact) {:height (px 77)
-                          :background-color dimmer-color}
-   [:#logo
-    [:svg {:transform "scale(0.6)"
-           :margin-right (px -8)}]]])
 
 (defstyles jumbotron-style
   [jumbotron {:display :flex
@@ -233,7 +180,7 @@
              [:img {:margin 0}]]
             [jumbotron
              [h1 {:font-size (px 45)}]]
-            [resizable
+            [:.resizable
              [a {:font-size (px 20)}]]
             [:.container [:section {:padding 0}]]
             [:.columns {:flex-direction :column}]))
