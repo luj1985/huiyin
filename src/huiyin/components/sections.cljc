@@ -129,11 +129,13 @@
              :text-align :center}]])
 
      (defstyles main-style
+
        [main {:display :block
               :margin-bottom (px 40)}]
 
        [:.columns {:display :flex
                    :flex-direction :row}
+
         [section
          [ul {:padding 0}]
          [li {:line-height 1.3
@@ -146,7 +148,7 @@
 
      (defstyles company-style
        [:ul.companies
-        [:img {:height (px 50)
+        [img {:height (px 50)
                :width (px 50)
                :margin (px 8)
                :margin-left 0}]
@@ -158,9 +160,9 @@
        [:.resume {:display :flex
                   :flex-direction :row
                   :margin-top (px 40)}
-        [:img {:margin-right (px 32)}]
-        [:h2 :h3 {:color text-color}]
-        [:dt {:line-height 1.5}]]
+        [img {:margin-right (px 32)}]
+        [h2 :h3 {:color text-color}]
+        [dt {:line-height 1.5}]]
 
        [:.member {:display :flex
                   :flex-direction :row
@@ -180,15 +182,19 @@
          [h4 {:margin "8px 0 0 0" :padding 0 :font-size (px 18)}]
          [h5 {:margin-top (px 8) :font-size (px 14)}]]])
 
-     (defstyles component-style
+     (defstyles mobile-main-style
        (at-media {:max-width (px 767)}
+                 [main
+                  [:.columns {:flex-direction :column}]]
                  [:.resume {:flex-direction :column}
-                  [:img {:margin 0}]]
+                  [img {:margin 0}]]
                  [jumbotron
                   [h1 {:font-size (px 45)}]]
-                 [:.container [:section {:padding 0}]]
-                 [:.columns {:flex-direction :column}])
+                 [container [:section {:padding 0}]]))
+
+     (defstyles component-style
        jumbotron-style
        main-style
        member-style
-       company-style)))
+       company-style
+       mobile-main-style)))
