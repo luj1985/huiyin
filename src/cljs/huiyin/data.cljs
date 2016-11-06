@@ -17,7 +17,7 @@
   [{:name "James Wo"
     :title "CEO, Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
-    :description lorem
+    :description "James Wo is the founder and the CEO of Huiyin Blockchain Venture. As a 2th entrepreneur, James inherits many merits from his father. Diligent, modest and forward-looking, James endeavors to make his own contributions in the Blockchain and Bitcoin areas. James founded HBV when he studied Applied Statistics at Columbia University. From then, he devoted himself to promoting the applications of Blockchain and Bitcoin worldwide. Now as a promising venture capital, HBV steadily stimulates the advancement of the Blockchain industry under the lead of James Wo."
     :attrs [{:email "woquan826@gmail.com"}
             {:email "woquan826@163.com"}
             {:email "woquan@huiyin.com"}

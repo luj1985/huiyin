@@ -82,7 +82,7 @@
               [:i.fa.fa-twitter]
               (:name twitter)]
      linked-in [:a {:href (:value linked-in)}
-                [:i.fa.fa-linkedin]
+                [:i.fa.fa-linkedin-square]
                 (:name linked-in)])])
 
 (defn- display-member [{:keys [index name title avatar attrs]} m]
