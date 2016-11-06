@@ -37,7 +37,7 @@
      [:div.container
       [:div#logo
        [:svg
-        [:path {:d (gen-logo 80 3)}]]
+        [:path {:d (gen-logo 70 3)}]]
        [:h1 (:title messages)]]
       [:nav
        (for [{:keys [href text target]} links]

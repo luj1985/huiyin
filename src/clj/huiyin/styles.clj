@@ -180,8 +180,6 @@
              [:img {:margin 0}]]
             [jumbotron
              [h1 {:font-size (px 45)}]]
-            [:.resizable
-             [a {:font-size (px 20)}]]
             [:.container [:section {:padding 0}]]
             [:.columns {:flex-direction :column}]))
 
