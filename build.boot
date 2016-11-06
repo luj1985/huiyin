@@ -1,5 +1,5 @@
 (set-env!
- :source-paths #{"src/cljs" "src/clj"}
+ :source-paths #{"src/clj"}
  :resource-paths #{"resources"}
  :dependencies '[[org.clojure/clojurescript "1.8.51"]
                  [reagent "0.6.0"]
@@ -53,23 +53,13 @@
   (cider))
 
 (deftask build []
-  (comp (speak)
-     (cljs)
-     (garden)
-     (autoprefixer)))
+  (comp (speak) (cljs) (garden) (autoprefixer)))
 
 (deftask run []
-  (comp (serve)
-     (watch)
-     (cljs-repl)
-     (reload)
-     (build)))
+  (comp (serve) (watch) (cljs-repl) (reload) (build)))
 
 (deftask dist []
-  (comp (production)
-     (build)
-     (target)))
+  (comp (production) (build) (target)))
 
 (deftask dev []
-  (comp (development)
-     (run)))
+  (comp (development) (run)))

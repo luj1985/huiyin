@@ -5,7 +5,8 @@
             [garden.units :refer [px percent rem ms]]
             [garden.stylesheet :refer [rule at-media]]
             [garden.selectors :refer :all :exclude [map meta time empty]])
-  (:use [huiyin.selectors]
+  (:use [huiyin.variables]
+        [huiyin.selectors]
         [huiyin.header]))
 
 (defstyles container-style

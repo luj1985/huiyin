@@ -2,12 +2,11 @@
   (:require
    [garden.def :refer [defstyles defrule defcssfn]]
    [garden.stylesheet :refer [at-media]]
-   [garden.selectors :refer [&]])
+   [garden.selectors :refer [&]]
+   [huiyin.variables :refer :all])
   (:use [huiyin.selectors]
         [garden.color :refer [rgb rgba]]
         [garden.units :refer [px percent]]))
-
-(def ^:const ^:private logo-size (px 70))
 
 (defstyles header-logo-style
   [:#logo {:display :flex
@@ -16,8 +15,8 @@
            :margin-left (px 8)}
 
    [:svg {:transition [[:all transition-time]]
-          :width logo-size
-          :height logo-size
+          :width (px logo-size)
+          :height (px logo-size)
           :fill logo-color
           :transform (scale 1)}]
 

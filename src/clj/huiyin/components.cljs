@@ -1,7 +1,9 @@
 (ns huiyin.components
   (:require
    [clojure.string :refer [join]]
-   [huiyin.data :refer [members companies introductions links infos messages]]))
+   [huiyin.data :refer [members companies introductions links infos messages]]
+   [huiyin.variables :refer [logo-size]]
+   ))
 
 (defrecord Point [x y]
   Object
