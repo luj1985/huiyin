@@ -13,7 +13,7 @@
       [huiyin.data :refer [links infos messages]])))
 
 #?(:clj
-   (defstyles footer-style
+   (defstyles component-style
      [footer {:position :relative
               :background-color :black
               :color white}

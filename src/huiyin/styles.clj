@@ -7,9 +7,9 @@
             [garden.selectors :refer :all :exclude [map meta time empty]]
             [huiyin.variables :refer :all]
             [huiyin.selectors :refer :all]
-            [huiyin.components.header :refer [header-style]]
-            [huiyin.components.footer :refer [footer-style]]
-            [huiyin.content :refer [content-style]]))
+            [huiyin.components.header :as h]
+            [huiyin.components.footer :as f]
+            [huiyin.components.sections :as c]))
 
 (defstyles reset-style
   [html {:-moz-osx-font-smoothing :grayscale
@@ -114,8 +114,8 @@
   container-style
   hyper-link-style
 
-  header-style
-  content-style
-  footer-style
+  h/component-style
+  f/component-style
+  c/component-style
 
   responsive-style)

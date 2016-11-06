@@ -143,7 +143,7 @@
         {:max-width (px 767)}
         mobile-header-logo-style))
 
-     (defstyles header-style
+     (defstyles component-style
        normal-header-style
        header-logo-style
        mobile-header-style)))
