@@ -55,7 +55,10 @@
             [:h1 (:title messages)]]
            [:nav
             (for [{:keys [href text target]} links]
-              ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))))
+              ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
+     
+     (defn render [state]
+       (hy-header state))))
 
 #?(:clj
    (do

@@ -72,43 +72,6 @@
    [(& hover before) {:visibility :visible
                       :transform (scaleX 1)}]])
 
-
-
-;;; @media(min-width:576px){}
-;;; @media(min-width:768px){}
-;;; @media(min-width:992px){}
-;;; @media(min-width:1200px){}
-
-(defstyles large-desktop-style
-  (at-media {:min-width (px 1200)}))
-
-(defstyles landscape-tablets-&-medium-desktop
-  (at-media {:min-width (px 992)
-             :max-width (px 1199)}))
-
-(defstyles portrait-tablets-and-small-desktop
-  (at-media {:min-width (px 768)
-             :max-width (px 991)}))
-
-(defstyles landscape-phones-&-portrait-tablets
-  (at-media {:max-width (px 767)}
-            [:.resume {:flex-direction :column}
-             [:img {:margin 0}]]
-            [jumbotron
-             [h1 {:font-size (px 45)}]]
-            [:.container [:section {:padding 0}]]
-            [:.columns {:flex-direction :column}]))
-
-(defstyles portrait-phones-&-smaller
-  (at-media {:max-width (px 480)}))
-
-(defstyles responsive-style
-  large-desktop-style
-  landscape-tablets-&-medium-desktop
-  portrait-tablets-and-small-desktop
-  landscape-phones-&-portrait-tablets
-  portrait-phones-&-smaller)
-
 (defstyles screen
   reset-style
   container-style
@@ -118,4 +81,4 @@
   f/component-style
   c/component-style
 
-  responsive-style)
+)

@@ -88,7 +88,27 @@
                  ^{:key i}
                  [display-attribute attr])
                attrs))]
-            [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))))
+            [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
+
+     (defmulti hy-content (fn [state] (:page @state)))
+
+     (defmethod hy-content :home [state]
+       [:main
+        [jumbotron state]
+        [:div.container.columns
+         [display-intro]
+         [display-members state]
+         [display-companies]]])
+
+     (defmethod hy-content :member [state]
+       (display-member-detail state))
+
+     (defmethod hy-content :default [state]
+       [:main.container
+        (:not-found messages)])
+
+     (defn render [state]
+       (hy-content state))))
 
 #?(:clj
    (do
@@ -162,6 +182,13 @@
          [h5 {:margin-top (px 8) :font-size (px 14)}]]])
 
      (defstyles component-style
+       (at-media {:max-width (px 767)}
+                 [:.resume {:flex-direction :column}
+                  [:img {:margin 0}]]
+                 [jumbotron
+                  [h1 {:font-size (px 45)}]]
+                 [:.container [:section {:padding 0}]]
+                 [:.columns {:flex-direction :column}])
        jumbotron-style
        main-style
        member-style
