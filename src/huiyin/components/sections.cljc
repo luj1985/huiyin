@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [> - + first not rem])
   #?(:cljs
      (:require
-      [huiyin.data :refer [members companies introductions links infos messages]]))
+      [huiyin.data :refer [members companies introductions messages]]))
   #?(:clj
      (:require
       [garden.def :refer [defstyles defrule defcssfn]]
@@ -15,12 +15,12 @@
 
 #?(:cljs
    (do
-     (defn jumbotron [state]
+     (defn- render-jumbotron [state]
        (let [height (get-in @state [:viewport :height])]
          [:section.jumbotron {:style {:height height}}
           [:h1 (:title messages)]]))
 
-     (defn display-intro []
+     (defn- render-intro []
        [:section
         [:h2 (get-in messages [:sections :intro])]
         (doall
@@ -29,37 +29,31 @@
             ^{:key i} [:p {:dangerouslySetInnerHTML {:__html html}}])
           introductions))])
 
-     (defn display-attribute [{:keys [email twitter linked-in] :as attr}]
+     (defn- render-attribute [{:keys [email twitter linked-in] :as attr}]
        [:dt
         (cond
           email [:a {:href (str "mailto:" email)}
-                 [:i.fa.fa-envelope]
-                 email]
+                 [:i.fa.fa-envelope] email]
           twitter [:a {:href (:value twitter)}
-                   [:i.fa.fa-twitter]
-                   (:name twitter)]
+                   [:i.fa.fa-twitter] (:name twitter)]
           linked-in [:a {:href (:value linked-in)}
-                     [:i.fa.fa-linkedin-square]
-                     (:name linked-in)])])
+                     [:i.fa.fa-linkedin-square] (:name linked-in)])])
 
-     (defn display-member [{:keys [index name title avatar attrs]} m]
-       [:li.member
-        [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
-        [:div.contact
-         [:h4
-          [:a {:href (str "#/member/" index)}
-           name]]
-         [:h5 title]]])
-
-     (defn display-members []
+     (defn- render-members []
        [:section
         [:h2 (get-in messages [:sections :who-we-are])]
         [:ul
-         (for [[m i] (zipmap members (range))]
+         (for [[{:keys [index name title avatar attrs]} i] (zipmap members (range))]
            ^{:key i}
-           [display-member (assoc m :index i)])]])
+           [:li.member
+            [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
+            [:div.contact
+             [:h4
+              [:a {:href (str "#/member/" i)}
+               name]]
+             [:h5 title]]])]])
 
-     (defn display-companies []
+     (defn- render-companies []
        [:section
         [:h2
          [:a {:href "https://angel.co/huiyin-blockchain-venture"} (get-in messages [:sections :angel])]]
@@ -71,7 +65,7 @@
              [:img {:src logo}]
              name]])]])
 
-     (defn display-member-detail [state]
+     (defn- render-detail [state]
        (let [id (get-in @state [:params :id])
              {:keys [name title avatar attrs description] :as m} (get members id)]
          [:main {:style {:min-height "100%"}}
@@ -86,33 +80,38 @@
               (map-indexed
                (fn [i attr]
                  ^{:key i}
-                 [display-attribute attr])
+                 [render-attribute attr])
                attrs))]
             [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
 
-     (defmulti hy-content (fn [state] (:page @state)))
+     (defmulti render (fn [state] (:page @state)))
 
-     (defmethod hy-content :home [state]
+     (defmethod render :home [state]
        [:main
-        [jumbotron state]
+        [render-jumbotron state]
         [:div.container.columns
-         [display-intro]
-         [display-members state]
-         [display-companies]]])
+         [render-intro]
+         [render-members state]
+         [render-companies]]])
 
-     (defmethod hy-content :member [state]
-       (display-member-detail state))
+     (defmethod render :about [state]
+       ;;; TODO: scroll to positon
+       [:main
+        [render-jumbotron state]
+        [:div.container.columns
+         [render-intro]
+         [render-members state]
+         [render-companies]]])
 
-     (defmethod hy-content :default [state]
+     (defmethod render :member [state]
+       (render-detail state))
+
+     (defmethod render :default [state]
        [:main.container
-        (:not-found messages)])
-
-     (defn render [state]
-       (hy-content state))))
+        (:not-found messages)])))
 
 #?(:clj
    (do
-
      (defstyles jumbotron-style
        [jumbotron {:display :flex
                    :padding [[0 (px 16)]]

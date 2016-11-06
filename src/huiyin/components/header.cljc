@@ -13,7 +13,7 @@
      :cljs
      (:require
       [clojure.string :refer [join]]
-      [huiyin.data :refer [members companies introductions links infos messages]]
+      [huiyin.data :refer [navigation messages]]
       [huiyin.variables :refer [logo-size logo-circle header-compact-threshold]])))
 
 #?(:cljs
@@ -23,7 +23,7 @@
        (toString [_]
          (join "," [x y])))
 
-     (defn- gen-logo [diameter border]
+     (defn- render-logo [diameter border]
        (let [radius (/ diameter 2)
              inner (- radius border)
              offset (/ inner (Math/sqrt 2))
@@ -44,21 +44,19 @@
            "M" p2 "A" c2 "0 0 0" p1 "Z"
            "M" p1 "A" c2 "0 0 0" p3 "Z"
            "M" p3 "A" c2 "0 0 0" p2 "L" p4 "Z"])))
-     (defn- hy-header [state]
+
+     (defn render [state]
        (let [offset-y (get-in @state [:offset :y])
              compact?  (> offset-y header-compact-threshold)]
          [:header.resizable {:class-name (if compact? :compact)}
           [:div.container
            [:div#logo
             [:svg
-             [:path {:d (gen-logo logo-size logo-circle)}]]
+             [:path {:d (render-logo logo-size logo-circle)}]]
             [:h1 (:title messages)]]
            [:nav
-            (for [{:keys [href text target]} links]
-              ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
-     
-     (defn render [state]
-       (hy-header state))))
+            (for [{:keys [href text target]} navigation]
+              ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))))
 
 #?(:clj
    (do

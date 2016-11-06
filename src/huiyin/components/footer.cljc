@@ -10,7 +10,7 @@
       [huiyin.selectors :refer :all])
      :cljs
      (:require
-      [huiyin.data :refer [links infos messages]])))
+      [huiyin.data :refer [infos messages]])))
 
 #?(:clj
    (defstyles component-style
@@ -30,22 +30,18 @@
            :padding (px 16)}]]))
 
 #?(:cljs
-   (do
-     (defn hy-footer [state]
-       [:footer
-        [:div.container
-         [:h2 (:links messages)]
-         [:a {:href "#" :style {:color "rgba(255,255,255,.95)"}}
-          [:i.fa.fa-linkedin-square] "Place your Linkin URL"     ]
-         [:ul.copyright
-          (doall
-           (map-indexed
-            (fn [i m]
-              ^{:key i}
-              [:li {:dangerouslySetInnerHTML {:__html m}}])
-            infos))]]])
-
-     (defn render [state]
-       (hy-footer state))))
+   (defn render [state]
+     [:footer
+      [:div.container
+       [:h2 (:links messages)]
+       [:a {:href "#" :style {:color "rgba(255,255,255,.95)"}}
+        [:i.fa.fa-linkedin-square] "Place your Linkin URL"     ]
+       [:ul.copyright
+        (doall
+         (map-indexed
+          (fn [i m]
+            ^{:key i}
+            [:li {:dangerouslySetInnerHTML {:__html m}}])
+          infos))]]]))
 
 

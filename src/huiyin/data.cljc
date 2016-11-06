@@ -60,7 +60,7 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 (def ^:private ^:const company-url
   "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0")
 
-(def ^:const links
+(def ^:const navigation
   [{:text "Home" :href "#/home"}
    {:text "About" :href "#/about"}
    {:text "Join Us" :target "_blank" :href company-url}])
