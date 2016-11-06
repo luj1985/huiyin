@@ -2,8 +2,7 @@
   (:require
    [clojure.string :refer [join]]
    [huiyin.data :refer [members companies introductions links infos messages]]
-   [huiyin.variables :refer [logo-size]]
-   ))
+   [huiyin.variables :refer [logo-size logo-circle header-compact-threshold]]))
 
 (defrecord Point [x y]
   Object
@@ -34,12 +33,12 @@
 
 (defn- hy-header [state]
   (let [offset-y (get-in @state [:offset :y])
-        compact?  (> offset-y 140)]
+        compact?  (> offset-y header-compact-threshold)]
     [:header.resizable {:class-name (if compact? :compact)}
      [:div.container
       [:div#logo
        [:svg
-        [:path {:d (gen-logo 70 3)}]]
+        [:path {:d (gen-logo logo-size logo-circle)}]]
        [:h1 (:title messages)]]
       [:nav
        (for [{:keys [href text target]} links]
