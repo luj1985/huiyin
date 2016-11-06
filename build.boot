@@ -1,5 +1,5 @@
 (set-env!
- :source-paths #{"src/clj"}
+ :source-paths #{"src"}
  :resource-paths #{"resources"}
  :dependencies '[[org.clojure/clojurescript "1.8.51"]
                  [reagent "0.6.0"]

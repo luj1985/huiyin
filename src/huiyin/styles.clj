@@ -7,8 +7,8 @@
             [garden.selectors :refer :all :exclude [map meta time empty]]
             [huiyin.variables :refer :all]
             [huiyin.selectors :refer :all]
-            [huiyin.header :refer [header-style]]
-            [huiyin.footer :refer [footer-style]]
+            [huiyin.components.header :refer [header-style]]
+            [huiyin.components.footer :refer [footer-style]]
             [huiyin.content :refer [content-style]]))
 
 (defstyles reset-style

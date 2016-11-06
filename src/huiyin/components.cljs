@@ -1,62 +1,10 @@
 (ns huiyin.components
   (:require
    [clojure.string :refer [join]]
+   [huiyin.components.footer :refer [hy-footer]]
+   [huiyin.components.header :refer [hy-header]]
    [huiyin.data :refer [members companies introductions links infos messages]]
    [huiyin.variables :refer [logo-size logo-circle header-compact-threshold]]))
-
-(defrecord Point [x y]
-  Object
-  (toString [_]
-    (join "," [x y])))
-
-(defn- gen-logo [diameter border]
-  (let [radius (/ diameter 2)
-        inner (- radius border)
-        offset (/ inner (Math/sqrt 2))
-
-        c1 (->Point radius radius)
-        c2 (->Point inner inner)
-
-        r1 (->Point radius 0)
-        r2 (->Point radius diameter)
-
-        p1 (->Point radius border)
-        p2 (->Point (+ radius offset) (+ radius offset))
-        p3 (->Point (- inner offset) (+ inner offset))
-        p4 (->Point radius (+ radius (/ offset 2)))]
-    (join
-     " "
-     ["M" r1 "A" c1 "0 0 1" r2 "A" c1 "0 0 1" r1 "Z"
-      "M" p2 "A" c2 "0 0 0" p1 "Z"
-      "M" p1 "A" c2 "0 0 0" p3 "Z"
-      "M" p3 "A" c2 "0 0 0" p2 "L" p4 "Z"])))
-
-(defn- hy-header [state]
-  (let [offset-y (get-in @state [:offset :y])
-        compact?  (> offset-y header-compact-threshold)]
-    [:header.resizable {:class-name (if compact? :compact)}
-     [:div.container
-      [:div#logo
-       [:svg
-        [:path {:d (gen-logo logo-size logo-circle)}]]
-       [:h1 (:title messages)]]
-      [:nav
-       (for [{:keys [href text target]} links]
-         ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
-
-(defn- hy-footer [state]
-  [:footer
-   [:div.container
-    [:h2 (:links messages)]
-    [:a {:href "#" :style {:color "rgba(255,255,255,.95)"}}
-     [:i.fa.fa-linkedin-square] "Place your Linkin URL"     ]
-    [:ul.copyright
-     (doall
-      (map-indexed
-       (fn [i m]
-         ^{:key i}
-         [:li {:dangerouslySetInnerHTML {:__html m}}])
-       infos))]]])
 
 (defn- jumbotron [state]
   (let [height (get-in @state [:viewport :height])]
