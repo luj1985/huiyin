@@ -7,10 +7,6 @@
         [garden.color :refer [rgb rgba]]
         [garden.units :refer [px percent]]))
 
-(defcssfn scale)
-(defcssfn translateX)
-(defcssfn translateY)
-
 (def ^:const ^:private logo-size (px 70))
 
 (defstyles header-logo-style
@@ -59,35 +55,35 @@
         :font-size (px 22)
         :white-space :nowrap}]])
 
-#_(defstyles mobile-header-logo-style
-    [:header
-     [:#logo
-      [:svg {:transform (scale 1)}]
-      [:h1 {:display :none}]]
-     [:a {:font-size (px 16)
-          :margin [[0 (px 12)]]}]]
-    [:.compact
-     [:#logo
-      [:svg {:transform [[(scale 0.78) (translateX (px -16))]]}]]])
-
 (defstyles mobile-header-logo-style
   [:header
-   [:>.container {:flex-direction :column
-                  :align-items :flex-start
-                  :justify-content :center}
-    [:nav {:opacity 0
-           :transition [[:all transition-time]]}]]
    [:#logo
-    [:h1 {:font-size (px 20)}]]
+    [:svg {:transform (scale 1)}]
+    [:h1 {:display :none}]]
    [:a {:font-size (px 16)
         :margin [[0 (px 12)]]}]]
-  [:header.compact {:height (px 90)}
-   [:>.container
-    [:nav {:opacity 1
-           :transform (translateY (px -8))}]]
+  [:.compact
    [:#logo
-    [:h1 {:transform (translateX (px -32))}]
-    [:svg {:transform [[(scale 0.5) (translateX (px -32))]]}]]])
+    [:svg {:transform [[(scale 0.78) (translateX (px -16))]]}]]])
+
+#_(defstyles mobile-header-logo-style
+    [:header
+     [:>.container {:flex-direction :column
+                    :align-items :flex-start
+                    :justify-content :center}
+      [:nav {:opacity 0
+             :transition [[:all transition-time]]}]]
+     [:#logo
+      [:h1 {:font-size (px 20)}]]
+     [:a {:font-size (px 16)
+          :margin [[0 (px 12)]]}]]
+    [:header.compact {:height (px 90)}
+     [:>.container
+      [:nav {:opacity 1
+             :transform (translateY (px -8))}]]
+     [:#logo
+      [:h1 {:transform (translateX (px -32))}]
+      [:svg {:transform [[(scale 0.5) (translateX (px -32))]]}]]])
 
 (defstyles mobile-header-style
   (at-media

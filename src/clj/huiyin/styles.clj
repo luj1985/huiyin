@@ -1,12 +1,13 @@
 (ns huiyin.styles
   (:refer-clojure :exclude [> - + first not rem])
-  (:require [garden.def :refer [defrule defstyles]]
+  (:require [garden.def :refer [defrule defstyles defcssfn]]
             [garden.color :refer [rgb rgba]]
             [garden.units :refer [px percent rem ms]]
             [garden.stylesheet :refer [rule at-media]]
             [garden.selectors :refer :all :exclude [map meta time empty]])
   (:use [huiyin.selectors]
         [huiyin.header]))
+
 (defstyles container-style
   [container {:position :relative
               :padding-left (px 16)
@@ -67,10 +68,10 @@
                 :left 0
                 :background-color :white
                 :visibility :hidden
-                :transform "scaleX(0)"
+                :transform (scaleX 0)
                 :transition [[:all transition-time :ease-in-out (ms 0)]]}]
    [(& hover before) {:visibility :visible
-                      :transform "scaleX(1)"}]])
+                      :transform (scaleX 1)}]])
 
 
 
@@ -78,10 +79,10 @@
   [jumbotron {:display :flex
               :align-items :center
               :justify-content :center
-              :background "url(/images/home.jpg) no-repeat center bottom fixed"
+              :background [[(url "/images/home.jpg") :no-repeat :center :bottom]]
               :background-size :center
               :max-height (px 1024)
-              :transition "all 0.2s"}
+              :transition [[:all transition-time]]}
 
    [h1 {:color white
         :font-size (px 70)
