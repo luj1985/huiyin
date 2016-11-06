@@ -4,22 +4,16 @@
             [garden.color :refer [rgb rgba]]
             [garden.units :refer [px percent rem ms]]
             [garden.stylesheet :refer [rule at-media]]
-            [garden.selectors :refer :all :exclude [map meta time empty]])
-  (:use [huiyin.variables]
-        [huiyin.selectors]
-        [huiyin.header]))
-
-(defstyles container-style
-  [container {:position :relative
-              :padding-left (px 16)
-              :padding-right (px 16)
-              :max-width (px 1170)
-              :margin-left :auto
-              :margin-right :auto}])
+            [garden.selectors :refer :all :exclude [map meta time empty]]
+            [huiyin.variables :refer :all]
+            [huiyin.selectors :refer :all]
+            [huiyin.header :refer [header-style]]
+            [huiyin.footer :refer [footer-style]]
+            [huiyin.content :refer [content-style]]))
 
 (defstyles reset-style
-  [html {:-moz-osx-font-smoothing "grayscale"
-         :-webkit-font-smoothing "antialiased"
+  [html {:-moz-osx-font-smoothing :grayscale
+         :-webkit-font-smoothing :antialiased
          :margin 0
          :padding 0}]
 
@@ -45,9 +39,13 @@
         :margin 0
         :padding 0}])
 
-(defrule util-styles
-  [:.vertical {:display :flex
-               :flex-direction :row}])
+(defstyles container-style
+  [container {:position :relative
+              :padding-left (px 16)
+              :padding-right (px 16)
+              :max-width (px 1170)
+              :margin-left :auto
+              :margin-right :auto}])
 
 (defstyles hyper-link-style
   [a {:color text-color
@@ -74,90 +72,6 @@
    [(& hover before) {:visibility :visible
                       :transform (scaleX 1)}]])
 
-
-
-(defstyles jumbotron-style
-  [jumbotron {:display :flex
-              :align-items :center
-              :justify-content :center
-              :background [[(url "/images/home.jpg") :no-repeat :center :bottom]]
-              :background-size :center
-              :max-height (px 1024)
-              :transition [[:all transition-time]]}
-
-   [h1 {:color white
-        :font-size (px 70)
-        :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
-        :transform "translateY(-50px)"
-        :text-align :center}]])
-
-(defstyles footer-style
-  [footer {:position :relative
-           :background-color :black
-           :color white}
-   [h2 {:color white
-        :font-size (px 24)
-        :padding-top (px 32)}]
-   [:.copyright {:margin-top (px 30)
-                 :color (rgba 255 255 255 0.4)}]
-   [ul {:display :block
-        :padding 0
-        :margin 0}]
-   [li {:display :inline-block
-        :list-style :none
-        :padding (px 16)}]])
-
-(defstyles main-style
-  [main {:display :block
-         :margin-bottom (px 40)}]
-
-  [:.columns {:display :flex
-              :flex-direction :row}
-   [section
-    [ul {:padding 0}]
-    [li {:line-height 1.3
-         :list-style :none}]]]
-
-  [".columns>*:nth-child(1)" {:flex 5}]
-  [".columns>*:nth-child(2)" {:flex 5}]
-  [".columns>*:nth-child(3)" {:flex 2}]
-  [(> :.columns :*) {:padding (px 16)}])
-
-(defstyles company-style
-  [:ul.companies
-   [:img {:height (px 50)
-          :width (px 50)
-          :margin (px 8)
-          :margin-left 0}]
-   [a {:display :flex
-       :flex-direction :row
-       :align-items :center}]])
-
-(defstyles member-style
-  [:.resume {:display :flex
-             :flex-direction :row
-             :margin-top (px 40)}
-   [:img {:margin-right (px 32)}]
-   [:h2 :h3 {:color text-color}]
-   [:dt {:line-height 1.5}]]
-
-  [:.member {:display :flex
-             :flex-direction :row
-             :margin [[(px 8) 0]]}
-
-   [:.avatar {:display :inline-block
-              :flex-shrink 0
-              :width (px 60)
-              :height (px 60)
-              :margin-right (px 16)
-              :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
-              :background-repeat :no-repeat
-              :background-position "50% 50%"
-              :background-size "100% auto"
-              :border-radius (percent 50)}]
-   [:.contact {:padding [[0 (px 8)]]}
-    [h4 {:margin "8px 0 0 0" :padding 0 :font-size (px 18)}]
-    [h5 {:margin-top (px 8) :font-size (px 14)}]]])
 
 
 ;;; @media(min-width:576px){}
@@ -200,12 +114,8 @@
   container-style
   hyper-link-style
 
-  resizable-header-style
-  jumbotron-style
+  header-style
+  content-style
   footer-style
-  main-style
-  member-style
-  company-style
 
-  responsive-style
-  )
+  responsive-style)
