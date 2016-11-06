@@ -58,6 +58,10 @@
         :margin 0
         :padding 0}])
 
+(defrule util-styles
+  [:.vertical {:display :flex
+               :flex-direction :row}])
+
 (defstyles hyper-link-style
   [a {:color text-color
       :text-decoration :none
@@ -97,8 +101,19 @@
                    :justify-content :space-between
                    :height (percent 100)}]
 
-   [logo {:transition [[:width default-transition-time]]
-          :width (px 300)}]
+   [logo {:display :flex
+          :flex-direction :row
+          :align-items :center}
+    [:svg {:transition "all 0.3s"
+           :margin-right (px 8)
+           :width (px 80)
+           :height (px 80)
+           :fill "#E00000"
+           :transform "scale(1)"}]
+    [:h1 {:transition "all 0.3s"
+          :font-size (px 20)
+          :white-space :nowrap
+          :color "#E00000"}]]
 
    [nav {:display
          :flex :flex-direction :row}]
@@ -108,7 +123,9 @@
 
   [(& resizable compact) {:height (px 77)
                           :background-color dimmer-color}
-   [logo {:width (px 250)}]])
+   [:#logo
+    [:svg {:transform "scale(0.6)"
+           :margin-right (px -8)}]]])
 
 (defstyles jumbotron-style
   [jumbotron {:display :flex
@@ -142,7 +159,8 @@
         :padding (px 16)}]])
 
 (defstyles main-style
-  [main {:margin-bottom (px 40)}]
+  [main {:display :block
+         :margin-bottom (px 40)}]
 
   [:.columns {:display :flex
               :flex-direction :row}

@@ -1,14 +1,45 @@
 (ns huiyin.components
-  (:require [huiyin.data :refer [members companies introductions links infos]]))
+  (:require
+   [clojure.string :refer [join]]
+   [huiyin.data :refer [members companies introductions links infos]]))
+
+(defrecord Point [x y]
+  Object
+  (toString [_]
+    (str x "," y)))
+
+(defn- generate-logo [diameter border]
+  (let [radius (/ diameter 2)
+        top (->Point radius 0)
+        bottom (->Point radius diameter)
+
+        inner (- radius border)
+        c1 (->Point radius radius)
+        c2 (->Point inner inner)
+
+        offset (/ inner (Math/sqrt 2))
+        p1 (->Point radius border)
+        p2 (->Point (+ radius offset) (+ radius offset))
+        p3 (->Point (- inner offset) (+ inner offset))
+        p4 (->Point radius (+ radius (/ offset 2)))]
+
+    (join
+     " "
+     ["M" top "A" c1 "0 0 1" bottom "A" c1 "0 0 1" top "Z"
+      "M" p2 "A" c2 "0 0 0" p1 "Z"
+      "M" p1 "A" c2 "0 0 0" p3 "Z"
+      "M" p3 "A" c2 "0 0 0" p2 "L" p4 "Z"])))
 
 (defn- hy-header [state]
   (let [offset-y (get-in @state [:offset :y])
-        style (if (> offset-y 140) :compact)]
-    [:header.resizable {:class-name style}
+        compact?  (> offset-y 140)]
+    [:header.resizable {:class-name (if compact? :compact)}
      [:div.container
-      [:img#logo {:src "/images/logo.png"}]
+      [:div#logo
+       [:svg
+        [:path {:d (generate-logo 80 3)}]]
+       [:h1 "Huiyin Blockchain Venture"]]
       [:nav
-       #_offset-y
        (for [{:keys [href text target]} links]
          ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
