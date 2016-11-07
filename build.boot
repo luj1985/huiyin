@@ -12,7 +12,6 @@
                  [pandeiro/boot-http "0.7.2" :scope "dev"]
                  [com.cemerick/piggieback "0.2.1" :scope "dev"]
                  [org.clojure/tools.nrepl "0.2.12" :scope "dev"]
-                 [org.martinklepsch/boot-garden "1.2.5-3" :scope "dev"]
                  [danielsz/boot-autoprefixer "0.0.8" :scope "dev"]])
 
 (require
@@ -24,11 +23,21 @@
  '[clojure.java.io :as io]
  '[boot.core :as boot]
  '[boot.pod :as pod]
- '[boot.util :as util]
- '[org.martinklepsch.boot-garden :as g])
+ '[boot.util :as util])
 
-;;; Garden styles are scattered in several cljc file, has to recompile them all
-(deftask garden'
+;;; XXX: Garden styles are scattered in several cljc file, has to recompile them all
+;;; below code is a variety of org.martinklepsch/boot-garden
+(defn add-dep [env dep]
+  (update-in env [:dependencies] (fnil conj []) dep))
+
+(defn ns-tracker-pod []
+  (pod/make-pod (assoc-in (boot/get-env) [:dependencies] '[[ns-tracker "0.2.2"]])))
+
+(defn garden-pool []
+  (pod/pod-pool (add-dep (boot/get-env) '[garden "1.3.2"])
+                :init (fn [pod] (pod/require-in pod 'garden.core))))
+
+(deftask garden
   [o output-to PATH      str   "The output css file path relative to docroot."
    s styles-var SYM      sym   "The var containing garden rules"
    p pretty-print        bool  "Pretty print compiled CSS"]
@@ -39,8 +48,8 @@
         tmp         (boot/tmp-dir!)
         out         (io/file tmp output-path)
         src-paths   (vec (boot/get-env :source-paths))
-        garden-pods (g/garden-pool)
-        ns-pod      (g/ns-tracker-pod)]
+        garden-pods (garden-pool)
+        ns-pod      (ns-tracker-pod)]
     (pod/with-eval-in ns-pod
       (require 'ns-tracker.core)
       (def cns (ns-tracker.core/ns-tracker ~src-paths)))
@@ -55,15 +64,15 @@
       (-> fileset (boot/add-resource tmp) boot/commit!))))
 
 (task-options! speak {:theme "woodblock"}
-               garden' {:styles-var 'huiyin.styles/screen
-                        :pretty-print true
-                        :output-to "css/style.css"}
+               garden {:styles-var 'huiyin.styles/screen
+                       :pretty-print true
+                       :output-to "css/style.css"}
                autoprefixer {:files ["style.css"]
                              :browsers "last 2 versions"})
 
 (deftask production []
   (task-options! cljs {:optimizations :advanced}
-                 garden' {:pretty-print false})
+                 garden {:pretty-print false})
   identity)
 
 (deftask cider []
@@ -84,7 +93,7 @@
   (cider))
 
 (deftask build []
-  (comp (speak) (cljs) (garden') (autoprefixer)))
+  (comp (speak) (cljs) (garden) (autoprefixer)))
 
 (deftask run []
   (comp (serve) (watch) (cljs-repl) (reload) (build)))
