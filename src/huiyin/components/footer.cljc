@@ -3,13 +3,13 @@
    [garden.color :refer [rgb rgba]]
    [garden.units :refer [px percent]]
    [huiyin.data :refer [infos messages]]
-   [huiyin.variables :refer [white]]))
+   [huiyin.variables :refer [headline-color-invert]]))
 
 (def css
   [[:footer {:position :relative
              :background-color :black
-             :color white}
-    [:h2 {:color white
+             :color headline-color-invert}
+    [:h2 {:color headline-color-invert
           :font-size (px 24)
           :padding-top (px 32)}]
     [:.copyright {:margin-top (px 30)

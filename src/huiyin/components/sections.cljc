@@ -1,6 +1,6 @@
 (ns huiyin.components.sections
   (:require
-   [huiyin.variables :refer [transition-time white]]
+   [huiyin.variables :refer [transition-time headline-color-invert]]
    [garden.stylesheet :refer [at-media]]
    [garden.units :refer [px percent]]
    [garden.color :refer [rgb rgba]]
@@ -83,8 +83,7 @@
                  :max-height (px 1024)
                  :transition [[:all transition-time]]}
 
-    [:h1 {:color white
-          :font-size (px 70)
+    [:h1 {:color headline-color-invert
           :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
           :transform "translateY(-50px)"
           :text-align :center}]]])
@@ -92,6 +91,22 @@
 (def ^:private main-style
   [[:main {:display :block
            :margin-bottom (px 40)}]
+
+   [:.member {:display :flex
+              :flex-direction :row
+              :margin [[(px 16) 0]]}
+
+    [:.avatar {:display :inline-block
+               :flex-shrink 0
+               :width (px 60)
+               :height (px 60)
+               :margin-right (px 16)
+               :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
+               :background-repeat :no-repeat
+               :background-position "50% 50%"
+               :background-size "100% auto"
+               :border-radius (percent 50)}]
+    [:.contact {:padding [[0 (px 8)]]}]]
 
    [:.columns {:display :flex
                :flex-direction :row}

@@ -1,54 +1,48 @@
 (ns huiyin.typography
+  (:refer-clojure :exclude [rem])
   (:require
-   [garden.color :refer [rgb rgba]]
-   [garden.units :refer [px percent ms]]
-   [garden.stylesheet :refer [rule at-media]]
-   [huiyin.variables :refer [white black text-color transition-time]]))
+   [garden.units :refer [px percent rem]]
+   [garden.stylesheet :refer [at-media]]
+   [huiyin.variables :refer [headline-color-invert
+                             headline-color
+                             text-color
+                             max-content-width
+                             transition-time]]))
+
+(def ^:prviate link-hover-color "#db4437")
 
 (def ^:private reset-style
   [[:html {:-moz-osx-font-smoothing :grayscale
-           :-webkit-font-smoothing :antialiased
-           :margin 0
-           :padding 0}]
+           :-webkit-font-smoothing :antialiased}]
+
+   [:html :body :#app {:margin 0 :padding 0}]
+
+   [:#app {:position :relative}]
 
    [:body {:font-family ["Calibre" "Helvetica" "Arial" "sans-serif"]
            :font-size (px 16)
            :line-height 1
-           :margin 0
-           :padding 0}]
+           :color headline-color}]
 
-   [:h2 {:font-size (px 30)
-         :color black}]
-
-   [:h3 {:font-size (px 25)
-         :color white
-         :margin [[(px 20) 0]]}]
+   [:h1 {:font-size (rem 4.5)}] ;;; jumbotron font
+   [:h2 {:font-size (rem 2)}  :margin [[(rem 1) 0]]]
+   [:h3 {:font-size (rem 1.5) :margin [[(rem 1) 0]]}]
+   [:h4 {:font-size (rem 1.1) :margin [[(px 8) 0 0 0]]}]
+   [:h5 {:font-size (rem 0.9) :margin [[(px 8) 0]]}]
 
    [:p {:color text-color
-        :font-size (px 16)
-        :font-weight :normal
-        :line-height 1.3}]
-
-   [:#app {:position :relative
-           :margin 0
-           :padding 0}]])
+        :line-height 1.4}]])
 
 (def ^:private container-style
   [[:.container {:position :relative
-                 :padding-left (px 16)
-                 :padding-right (px 16)
-                 :max-width (px 1170)
+                 :padding-left (rem 1)
+                 :padding-right (rem 1)
+                 :max-width (px max-content-width)
                  :margin-left :auto
                  :margin-right :auto}]])
 
-(def ^:private hyper-link-style
-  [[:a {:color text-color
-        :text-decoration :none
-        :font-weight 700
-        :transition [[:all transition-time]]}
-    [:&:hover {:color "#db4437"}]
-    [:i {:padding-right (px 10)}]]
-   [:a.underline {:color white
+(def ^:private link-with-underline-style
+  [[:a.underline {:color headline-color-invert
                   :position :relative
                   :padding [[(px 4) 0]]}
     [:&:hover {:color :white}]
@@ -61,11 +55,20 @@
                 :background-color :white
                 :visibility :hidden
                 :transform "scaleX(0)"
-                :transition [[:all transition-time :ease-in-out (ms 0)]]}]
+                :transition [[:all transition-time]]}]
     [:&:hover:before {:visibility :visible
                       :transform "scaleX(1)"}]]])
+
+(def ^:private link-style
+  [[:a {:color text-color
+        :text-decoration :none
+        :font-weight 700
+        :transition [[:all transition-time]]}
+    [:&:hover {:color link-hover-color}]
+    [:i {:padding-right (rem 0.5)}]]])
 
 (def css
   [reset-style
    container-style
-   hyper-link-style])
+   link-style
+   link-with-underline-style])
