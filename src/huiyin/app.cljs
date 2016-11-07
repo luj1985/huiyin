@@ -2,11 +2,13 @@
   (:require
    [secretary.core :as secretary :refer-macros [defroute]]
    [reagent.core :as r :refer [atom]]
-   [goog.events :as events]
-   [goog.history.EventType :refer [NAVIGATE]]
-   [goog.events.EventType :refer [SCROLL RESIZE]]
    [goog.dom :as dom]
-   [huiyin.components :refer [render-pages]])
+   [goog.events :as events]
+   [goog.events.EventType :refer [SCROLL RESIZE]]
+   [goog.history.EventType :refer [NAVIGATE]]
+   [huiyin.components.header :as h]
+   [huiyin.components.footer :as f]
+   [huiyin.components.sections :as s])
   (:import goog.history.Html5History))
 
 (enable-console-print!)
@@ -41,6 +43,14 @@
          (let [{:keys [page params]} (secretary/dispatch! (.-token event))]
            (swap! state assoc :page page :params params))))
       (.setEnabled true))))
+
+;;; XXX: React fragment API is still in developing, an empty div container is required
+;;; https://github.com/facebook/react/issues/2127
+(defn render-pages [state]
+  [:div
+   [h/render state]
+   [s/render state]
+   [f/render state]])
 
 (defonce events-setup
   (do

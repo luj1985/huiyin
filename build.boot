@@ -27,8 +27,7 @@
  '[boot.util :as util]
  '[org.martinklepsch.boot-garden :as g])
 
-
-;;; Garden CSS now are scatter in several cljc file, has to recompile them all
+;;; Garden styles are scattered in several cljc file, has to recompile them all
 (deftask garden'
   [o output-to PATH      str   "The output css file path relative to docroot."
    s styles-var SYM      sym   "The var containing garden rules"
