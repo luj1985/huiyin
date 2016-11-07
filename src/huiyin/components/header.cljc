@@ -111,5 +111,5 @@
             :margin-right (px -8)}]]]])
 
 (def css
-  [mobile-style
-   normal-style])
+  [normal-style
+   mobile-style])
