@@ -55,8 +55,6 @@ We are a trusted partner with the global expertise and network to make the most 
 Huiyin Group manages diversified investments in commerce, energy, medicine, agriculture, tourism, electronics, chemicals, commerce and food and beverages.
 Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more than 1,000 employees."])
 
-
-
 (def ^:private ^:const company-url
   "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0")
 

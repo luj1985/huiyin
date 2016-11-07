@@ -26,7 +26,7 @@
    [:div.container
     [:h2 (:links messages)]
     [:a {:href "#" :style {:color "rgba(255,255,255,.95)"}}
-     [:i.fa.fa-linkedin-square] "Place your Linkin URL"     ]
+     [:i.fa.fa-linkedin-square] "Place your Linkin URL"]
     [:ul.copyright
      (doall
       (map-indexed

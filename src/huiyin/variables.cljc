@@ -12,4 +12,3 @@
 (def ^:const text-color (rgb 101 107 111))
 (def ^:const dimmer-color (rgba 0 0 0 0.82))
 
-

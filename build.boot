@@ -12,7 +12,8 @@
                  [pandeiro/boot-http "0.7.2" :scope "dev"]
                  [com.cemerick/piggieback "0.2.1" :scope "dev"]
                  [org.clojure/tools.nrepl "0.2.12" :scope "dev"]
-                 [danielsz/boot-autoprefixer "0.0.8" :scope "dev"]])
+                 [danielsz/boot-autoprefixer "0.0.8" :scope "dev"]
+                 [tolitius/boot-check "0.1.3" :scope "dev"]])
 
 (require
  '[adzerk.boot-cljs :refer [cljs]]
@@ -20,6 +21,7 @@
  '[adzerk.boot-reload :refer [reload]]
  '[pandeiro.boot-http :refer [serve]]
  '[danielsz.autoprefixer :refer [autoprefixer]]
+ '[tolitius.boot-check :as check]
  '[clojure.java.io :as io]
  '[boot.core :as boot]
  '[boot.pod :as pod]
@@ -69,6 +71,12 @@
                        :output-to "css/style.css"}
                autoprefixer {:files ["style.css"]
                              :browsers "last 2 versions"})
+(deftask check-sources []
+  (comp
+   #_(check/with-yagni)
+   (check/with-eastwood)
+   (check/with-kibit)
+   (check/with-bikeshed)))
 
 (deftask production []
   (task-options! cljs {:optimizations :advanced}

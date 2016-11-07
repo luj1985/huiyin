@@ -2,7 +2,6 @@
   (:refer-clojure :exclude [rem])
   (:require
    [garden.units :refer [px percent rem]]
-   [garden.stylesheet :refer [at-media]]
    [huiyin.variables :refer [headline-color-invert
                              headline-color
                              text-color
