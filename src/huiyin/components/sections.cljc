@@ -1,8 +1,8 @@
 (ns huiyin.components.sections
   (:refer-clojure :exclude [> - + first not rem])
-  #?(:cljs
-     (:require
-      [huiyin.data :refer [members companies introductions messages]]))
+  (:require
+   [huiyin.data :refer [members companies introductions messages]]
+   [huiyin.components.member :as member])
   #?(:clj
      (:require
       [garden.def :refer [defstyles defrule defcssfn]]
@@ -29,16 +29,6 @@
             ^{:key i} [:p {:dangerouslySetInnerHTML {:__html html}}])
           introductions))])
 
-     (defn- render-attribute [{:keys [email twitter linked-in] :as attr}]
-       [:dt
-        (cond
-          email [:a {:href (str "mailto:" email)}
-                 [:i.fa.fa-envelope] email]
-          twitter [:a {:href (:value twitter)}
-                   [:i.fa.fa-twitter] (:name twitter)]
-          linked-in [:a {:href (:value linked-in)}
-                     [:i.fa.fa-linkedin-square] (:name linked-in)])])
-
      (defn- render-members []
        [:section
         [:h2 (get-in messages [:sections :who-we-are])]
@@ -57,32 +47,13 @@
        [:section
         [:h2
          [:a {:href "https://angel.co/huiyin-blockchain-venture"} (get-in messages [:sections :angel])]]
-        [:ul.companies
+        [:ul
          (for [{:keys [name url logo]} companies]
            ^{:key url}
-           [:li
+           [:li.company
             [:a {:href url :target "_blank"}
              [:img {:src logo}]
              name]])]])
-
-     (defn- render-detail [state]
-       (let [id (get-in @state [:params :id])
-             {:keys [name title avatar attrs description] :as m} (get members id)]
-         [:main {:style {:min-height "100%"}}
-          [:section.jumbotron {:style {:height "300px"}}]
-          [:div.container.resume
-           [:img {:src avatar}]
-           [:div
-            [:h2 name]
-            [:h3 title]
-            [:dl
-             (doall
-              (map-indexed
-               (fn [i attr]
-                 ^{:key i}
-                 [render-attribute attr])
-               attrs))]
-            [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
 
      (defmulti render (fn [state] (:page @state)))
 
@@ -104,7 +75,7 @@
          [render-companies]]])
 
      (defmethod render :member [state]
-       (render-detail state))
+       (member/render state))
 
      (defmethod render :default [state]
        [:main.container
@@ -147,7 +118,7 @@
        [(> :.columns :*) {:padding (px 16)}])
 
      (defstyles company-style
-       [:ul.companies
+       [:li.company
         [img {:height (px 50)
                :width (px 50)
                :margin (px 8)
@@ -156,31 +127,7 @@
             :flex-direction :row
             :align-items :center}]])
 
-     (defstyles member-style
-       [:.resume {:display :flex
-                  :flex-direction :row
-                  :margin-top (px 40)}
-        [img {:margin-right (px 32)}]
-        [h2 :h3 {:color text-color}]
-        [dt {:line-height 1.5}]]
 
-       [:.member {:display :flex
-                  :flex-direction :row
-                  :margin [[(px 8) 0]]}
-
-        [:.avatar {:display :inline-block
-                   :flex-shrink 0
-                   :width (px 60)
-                   :height (px 60)
-                   :margin-right (px 16)
-                   :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
-                   :background-repeat :no-repeat
-                   :background-position "50% 50%"
-                   :background-size "100% auto"
-                   :border-radius (percent 50)}]
-        [:.contact {:padding [[0 (px 8)]]}
-         [h4 {:margin "8px 0 0 0" :padding 0 :font-size (px 18)}]
-         [h5 {:margin-top (px 8) :font-size (px 14)}]]])
 
      (defstyles mobile-main-style
        (at-media {:max-width (px 767)}
@@ -195,6 +142,6 @@
      (defstyles component-style
        jumbotron-style
        main-style
-       member-style
+       member/component-style
        company-style
        mobile-main-style)))
