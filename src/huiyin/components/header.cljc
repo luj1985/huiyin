@@ -120,6 +120,7 @@
         [logo
          [svg {:transform [[(scale 0.78) (translateX (px -16))]]}]]])
 
+
      #_(defstyles mobile-header-logo-style
          [:header
           [:>.container {:flex-direction :column

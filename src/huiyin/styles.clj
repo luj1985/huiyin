@@ -79,6 +79,4 @@
 
   h/component-style
   f/component-style
-  c/component-style
-
-)
+  c/component-style)
