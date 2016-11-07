@@ -58,7 +58,7 @@
     [render-companies]]])
 
 (defmethod render :about [state]
-       ;;; TODO: scroll to positon
+  ;;; TODO: scroll to positon
   [:main
    [render-jumbotron state]
    [:div.container.columns
@@ -72,12 +72,9 @@
 (defmethod render :default [state]
   [:main.container
    (:not-found messages)])
-#?(:cljs
-   (do))
 
-(def jumbotron-style
-  (list
-   [:.jumbotron {:display :flex
+(def ^:private jumbotron-style
+  [[:.jumbotron {:display :flex
                  :padding [[0 (px 16)]]
                  :align-items :center
                  :justify-content :center
@@ -90,12 +87,10 @@
           :font-size (px 70)
           :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
           :transform "translateY(-50px)"
-          :text-align :center}]]))
+          :text-align :center}]]])
 
-(def main-style
-
-  (list
-   [:main {:display :block
+(def ^:private main-style
+  [[:main {:display :block
            :margin-bottom (px 40)}]
 
    [:.columns {:display :flex
@@ -109,34 +104,31 @@
    [".columns>*:nth-child(1)" {:flex 5}]
    [".columns>*:nth-child(2)" {:flex 5}]
    [".columns>*:nth-child(3)" {:flex 2}]
-   [".columns>*" {:padding (px 16)}]))
+   [".columns>*" {:padding (px 16)}]])
 
-(def company-style
-  (list
-   [:li.company
+(def ^:private company-style
+  [[:li.company
     [:img {:height (px 50)
            :width (px 50)
            :margin (px 8)
            :margin-left 0}]
     [:a {:display :flex
          :flex-direction :row
-         :align-items :center}]]))
+         :align-items :center}]]])
 
-(def mobile-main-style
-  (list
-   (at-media {:max-width (px 767)}
+(def ^:private mobile-main-style
+  [(at-media {:max-width (px 767)}
              [:main
               [:.columns {:flex-direction :column}]]
              [:.resume {:flex-direction :column}
               [:img {:margin 0}]]
              [:.jumbotron
               [:h1 {:font-size (px 45)}]]
-             [:.container [:section {:padding 0}]])))
+             [:.container [:section {:padding 0}]])])
 
-(def component-style
-  (list
-   jumbotron-style
+(def css
+  [jumbotron-style
    main-style
-   member/component-style
    company-style
-   mobile-main-style))
+   mobile-main-style
+   member/css])

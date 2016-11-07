@@ -5,22 +5,21 @@
    [huiyin.data :refer [infos messages]]
    [huiyin.variables :refer [white]]))
 
-(def component-style
-  (list
-   [:footer {:position :relative
-            :background-color :black
-            :color white}
+(def css
+  [[:footer {:position :relative
+             :background-color :black
+             :color white}
     [:h2 {:color white
-         :font-size (px 24)
-         :padding-top (px 32)}]
+          :font-size (px 24)
+          :padding-top (px 32)}]
     [:.copyright {:margin-top (px 30)
                   :color (rgba 255 255 255 0.4)}]
     [:ul {:display :block
-         :padding 0
-         :margin 0}]
+          :padding 0
+          :margin 0}]
     [:li {:display :inline-block
-         :list-style :none
-         :padding (px 16)}]]))
+          :list-style :none
+          :padding (px 16)}]]])
 
 (defn render [state]
   [:footer

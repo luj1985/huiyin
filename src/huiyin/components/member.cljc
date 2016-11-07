@@ -35,9 +35,8 @@
           attrs))]
        [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
 
-(def component-style
-  (list
-   [:.resume {:display :flex
+(def css
+  [[:.resume {:display :flex
               :flex-direction :row
               :margin-top (px 40)}
     [:img {:margin-right (px 32)}]
@@ -60,4 +59,4 @@
                :border-radius (percent 50)}]
     [:.contact {:padding [[0 (px 8)]]}
      [:h4 {:margin "8px 0 0 0" :padding 0 :font-size (px 18)}]
-     [:h5 {:margin-top (px 8) :font-size (px 14)}]]]))
+     [:h5 {:margin-top (px 8) :font-size (px 14)}]]]])

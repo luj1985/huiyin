@@ -48,9 +48,8 @@
        (for [{:keys [href text target]} navigation]
          ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
-(def header-logo-style
-  (list
-   [:#logo {:display :flex
+(def ^:private header-logo-style
+  [[:#logo {:display :flex
             :flex-direction :row
             :align-items :center
             :margin-left (px 8)}
@@ -70,11 +69,10 @@
                :background-color dimmer-color}
     [:#logo
      [:svg {:transform "scale(0.8)"
-            :margin-right (px -8)}]]]))
+            :margin-right (px -8)}]]]])
 
-(def normal-header-style
-  (list
-   [:header {:position :fixed
+(def ^:private normal-header-style
+  [[:header {:position :fixed
              :width (percent 100)
              :height (px 140)
              :z-index 100
@@ -93,11 +91,10 @@
 
     [:a {:margin [[0 (px 24)]]
          :font-size (px 22)
-         :white-space :nowrap}]]))
+         :white-space :nowrap}]]])
 
-(def mobile-header-logo-style
-  (list
-   [:header
+(def ^:private mobile-header-logo-style
+  [[:header
     [:#logo
      [:svg {:transform "scale(1)"}]
      [:h1 {:display :none}]]
@@ -105,35 +102,35 @@
          :margin [[0 (px 12)]]}]]
    [:.compact
     [:#logo
-     [:svg {:transform [["scale(0.78)" "translateX(-16px)"]]}]]]))
+     [:svg {:transform [["scale(0.78)" "translateX(-16px)"]]}]]]])
 
-(def mobile-header-style
-  (list
-   (at-media
+(def  ^:private mobile-header-style
+  [(at-media
     {:max-width (px 767)}
-    mobile-header-logo-style)))
+    mobile-header-logo-style)])
 
-(def component-style
-  (list
-   normal-header-style
+(def css
+  [normal-header-style
    header-logo-style
-   mobile-header-style))
+   mobile-header-style])
 
-#_(defstyles mobile-header-logo-style
-    [:header
-     [:>.container {:flex-direction :column
-                    :align-items :flex-start
-                    :justify-content :center}
-      [:nav {:opacity 0
-             :transition [[:all transition-time]]}]]
-     [:#logo
-      [:h1 {:font-size (px 20)}]]
-     [:a {:font-size (px 16)
-          :margin [[0 (px 12)]]}]]
-    [:header.compact {:height (px 90)}
-     [:>.container
-      [:nav {:opacity 1
-             :transform (translateY (px -8))}]]
-     [:#logo
-      [:h1 {:transform (translateX (px -32))}]
-      [:svg {:transform [[(scale 0.5) (translateX (px -32))]]}]]])
+
+
+#_(def mobile-header-logo-style
+    [[:header
+      [:>.container {:flex-direction :column
+                     :align-items :flex-start
+                     :justify-content :center}
+       [:nav {:opacity 0
+              :transition [[:all transition-time]]}]]
+      [:#logo
+       [:h1 {:font-size (px 20)}]]
+      [:a {:font-size (px 16)
+           :margin [[0 (px 12)]]}]]
+     [:header.compact {:height (px 90)}
+      [:>.container
+       [:nav {:opacity 1
+              :transform "translateY(-8px)"}]]
+      [:#logo
+       [:h1 {:transform "translateX(-32px)"}]
+       [:svg {:transform [["scale(0.5)" "translateX(-32px)"]]}]]]])
