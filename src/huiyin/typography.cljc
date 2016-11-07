@@ -18,7 +18,7 @@
 
    [:#app {:position :relative}]
 
-   [:body {:font-family ["Calibre" "Helvetica" "Arial" "sans-serif"]
+   [:body {:font-family ["Helvetica Neue" "Helvetica" "Arial" "sans-serif"]
            :font-size (px 16)
            :line-height 1
            :color headline-color}]
@@ -50,13 +50,10 @@
                 :width (percent 100)
                 :height (px 2)
                 :bottom 0
-                :left 0
                 :background-color :white
-                :visibility :hidden
                 :transform "scaleX(0)"
                 :transition [[:all transition-time]]}]
-    [:&:hover:before {:visibility :visible
-                      :transform "scaleX(1)"}]]])
+    [:&:hover:before {:transform "scaleX(1)"}]]])
 
 (def ^:private link-style
   [[:a {:color text-color
