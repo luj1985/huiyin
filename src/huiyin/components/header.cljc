@@ -4,9 +4,13 @@
    [garden.color :refer [rgb rgba]]
    [garden.units :refer [px percent]]
    [garden.stylesheet :refer [at-media]]
-   [huiyin.variables :refer [transition-time logo-color dimmer-color]]
-   [huiyin.data :refer [navigation messages]]
-   [huiyin.variables :refer [logo-size logo-circle header-compact-threshold]]))
+   [huiyin.variables :refer [transition-time dimmer-color]]
+   [huiyin.data :refer [navigation messages]]))
+
+(def ^:private ^:const logo-size 70)
+(def ^:private ^:const logo-circle 3)
+(def ^:private ^:const logo-color "#E00000")
+(def ^:private ^:const header-compact-threshold 140)
 
 (defrecord Point [x y]
   Object
@@ -38,7 +42,7 @@
 (defn render [state]
   (let [offset-y (get-in @state [:offset :y])
         compact?  (> offset-y header-compact-threshold)]
-    [:header.resizable {:class-name (if compact? :compact)}
+    [:header {:class-name (if compact? :compact)}
      [:div.container
       [:div#logo
        [:svg
@@ -48,30 +52,20 @@
        (for [{:keys [href text target]} navigation]
          ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
-(def ^:private header-logo-style
-  [[:#logo {:display :flex
-            :flex-direction :row
-            :align-items :center
-            :margin-left (px 8)}
+(def ^:private mobile-style
+  [(at-media
+    {:max-width (px 767)}
+    [[:header
+      [:#logo
+       [:svg {:transform "scale(1)"}]
+       [:h1 {:display :none}]]
+      [:a {:font-size (px 16)
+           :margin [[0 (px 12)]]}]]
+     [:.compact
+      [:#logo
+       [:svg {:transform [["scale(0.78)" "translateX(-16px)"]]}]]]])])
 
-    [:svg {:transition [[:all transition-time]]
-           :width (px logo-size)
-           :height (px logo-size)
-           :fill logo-color
-           :transform "scale(1)"}]
-
-    [:h1 {:font-size (px 20)
-          :transition [[:all transition-time]]
-          :margin [[0 0 0 (px 16)]]
-          :white-space :nowrap
-          :color logo-color}]]
-   [:.compact {:height (px 77)
-               :background-color dimmer-color}
-    [:#logo
-     [:svg {:transform "scale(0.8)"
-            :margin-right (px -8)}]]]])
-
-(def ^:private normal-header-style
+(def ^:private normal-style
   [[:header {:position :fixed
              :width (percent 100)
              :height (px 140)
@@ -91,46 +85,31 @@
 
     [:a {:margin [[0 (px 24)]]
          :font-size (px 22)
-         :white-space :nowrap}]]])
+         :white-space :nowrap}]]
 
-(def ^:private mobile-header-logo-style
-  [[:header
-    [:#logo
-     [:svg {:transform "scale(1)"}]
-     [:h1 {:display :none}]]
-    [:a {:font-size (px 16)
-         :margin [[0 (px 12)]]}]]
-   [:.compact
-    [:#logo
-     [:svg {:transform [["scale(0.78)" "translateX(-16px)"]]}]]]])
+   [:#logo {:display :flex
+            :flex-direction :row
+            :align-items :center
+            :margin-left (px 8)}
 
-(def  ^:private mobile-header-style
-  [(at-media
-    {:max-width (px 767)}
-    mobile-header-logo-style)])
+    [:svg {:transition [[:all transition-time]]
+           :width (px logo-size)
+           :height (px logo-size)
+           :fill logo-color
+           :transform "scale(1)"}]
+
+    [:h1 {:font-size (px 20)
+          :transition [[:all transition-time]]
+          :margin [[0 0 0 (px 16)]]
+          :white-space :nowrap
+          :color logo-color}]]
+
+   [:.compact {:height (px 77)
+               :background-color dimmer-color}
+    [:#logo
+     [:svg {:transform "scale(0.8)"
+            :margin-right (px -8)}]]]])
 
 (def css
-  [normal-header-style
-   header-logo-style
-   mobile-header-style])
-
-
-
-#_(def mobile-header-logo-style
-    [[:header
-      [:>.container {:flex-direction :column
-                     :align-items :flex-start
-                     :justify-content :center}
-       [:nav {:opacity 0
-              :transition [[:all transition-time]]}]]
-      [:#logo
-       [:h1 {:font-size (px 20)}]]
-      [:a {:font-size (px 16)
-           :margin [[0 (px 12)]]}]]
-     [:header.compact {:height (px 90)}
-      [:>.container
-       [:nav {:opacity 1
-              :transform "translateY(-8px)"}]]
-      [:#logo
-       [:h1 {:transform "translateX(-32px)"}]
-       [:svg {:transform [["scale(0.5)" "translateX(-32px)"]]}]]]])
+  [mobile-style
+   normal-style])
