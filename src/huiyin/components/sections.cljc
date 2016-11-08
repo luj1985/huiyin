@@ -1,8 +1,9 @@
 (ns huiyin.components.sections
+  (:refer-clojure :exclude [rem])
   (:require
    [huiyin.variables :refer [transition-time headline-color-invert]]
    [garden.stylesheet :refer [at-media]]
-   [garden.units :refer [px percent]]
+   [garden.units :refer [px percent rem]]
    [garden.color :refer [rgb rgba]]
    [huiyin.data :refer [members companies introductions messages]]
    [huiyin.components.member :as member]))
@@ -120,7 +121,7 @@
    [".columns>*:nth-child(1)" {:flex 5}]
    [".columns>*:nth-child(2)" {:flex 5}]
    [".columns>*:nth-child(3)" {:flex 2}]
-   [".columns>*" {:padding (px 16)}]])
+   [".columns>*" {:padding (rem 1)}]])
 
 (def ^:private company-style
   [[:li.company
@@ -139,8 +140,7 @@
              [:.resume {:flex-direction :column}
               [:img {:margin 0}]]
              [:.jumbotron
-              [:h1 {:font-size (px 45)}]]
-             [:.container [:section {:padding 0}]])])
+              [:h1 {:font-size (px 45)}]])])
 
 (def css
   [jumbotron-style

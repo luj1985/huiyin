@@ -10,5 +10,4 @@
 (def ^:const headline-color-invert (rgba 255 255 255 0.7))
 
 (def ^:const text-color (rgb 101 107 111))
-(def ^:const dimmer-color (rgba 0 0 0 0.82))
 

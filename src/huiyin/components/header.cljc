@@ -1,15 +1,17 @@
 (ns huiyin.components.header
+  (:refer-clojure :exclude [rem])
   (:require
    [clojure.string :refer [join]]
    [garden.color :refer [rgb rgba]]
-   [garden.units :refer [px percent]]
+   [garden.units :refer [px percent rem]]
    [garden.stylesheet :refer [at-media]]
-   [huiyin.variables :refer [transition-time dimmer-color]]
+   [huiyin.variables :refer [transition-time]]
    [huiyin.data :refer [navigation messages]]))
 
-(def ^:private ^:const logo-size 70)
+(def ^:private ^:const logo-size 64)
 (def ^:private ^:const logo-circle 3)
 (def ^:private ^:const logo-color "#E00000")
+(def ^:private ^:const dimmer-color (rgba 0 0 0 0.82))
 (def ^:private ^:const header-compact-threshold 140)
 
 (defrecord Point [x y]
@@ -52,18 +54,28 @@
        (for [{:keys [href text target]} navigation]
          ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
 
-(def ^:private mobile-style
+(def ^:private tiny-device-style
   [(at-media
-    {:max-width (px 767)}
+    {:max-width (px 480)}
     [[:header
-      [:#logo
-       [:svg {:transform "scale(1)"}]
-       [:h1 {:display :none}]]
-      [:a {:font-size (px 16)
-           :margin [[0 (px 12)]]}]]
+      [:a {:font-size (px 16)}]]
      [:.compact
       [:#logo
        [:svg {:transform [["scale(0.78)" "translateX(-16px)"]]}]]]])])
+
+(def ^:private small-device-style
+  [(at-media
+    {:max-width (px 735)}
+    [[:header
+      [:h1 {:display :none}]]])])
+
+
+(def ^:private large-device-style
+  [(at-media
+    {:min-width (px 736)}
+    [:header
+     [:a {:font-size (rem 1.1)
+          :margin-right (rem 2.5)}]])])
 
 (def ^:private normal-style
   [[:header {:position :fixed
@@ -71,45 +83,42 @@
              :height (px 140)
              :z-index 100
              :transition (for [attr [:height :background-color]]
-                           [attr transition-time])
-             :background-color (rgba 0 0 0 0)}
+                           [attr transition-time])}
 
     [:.container {:display :flex
                   :align-items :center
                   :justify-content :space-between
                   :height (percent 100)
-                  :padding 0}]
+                  :padding [[0 0 0 (rem 1)]]}]
 
-    [:nav {:display :flex
-           :flex-direction :row}]
+    [:nav :#logo {:display :flex
+           :flex-direction :row
+           :align-items :center}]
 
-    [:a {:margin [[0 (px 24)]]
-         :font-size (px 22)
+    [:a {:margin-right (rem 1.25)
          :white-space :nowrap}]]
 
-   [:#logo {:display :flex
-            :flex-direction :row
-            :align-items :center
-            :margin-left (px 8)}
-
+   [:#logo
     [:svg {:transition [[:all transition-time]]
            :width (px logo-size)
            :height (px logo-size)
            :fill logo-color
            :transform "scale(1)"}]
 
-    [:h1 {:font-size (px 20)
+    [:h1 {:font-size (rem 1.25)
           :transition [[:all transition-time]]
           :margin [[0 0 0 (px 16)]]
           :white-space :nowrap
           :color logo-color}]]
 
-   [:.compact {:height (px 77)
+   [:.compact {:height (rem 4)
                :background-color dimmer-color}
     [:#logo
-     [:svg {:transform "scale(0.8)"
-            :margin-right (px -8)}]]]])
+     [:svg {:transform "scale(0.8) translateX(-8px)"}]
+     [:h1 {:transform "translateX(-16px)"}]]]])
 
 (def css
   [normal-style
-   mobile-style])
+   tiny-device-style
+   small-device-style
+   large-device-style])

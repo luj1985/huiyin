@@ -1,10 +1,11 @@
 (ns huiyin.components.footer
   (:refer-clojure :exclude [rem])
   (:require
-   [garden.color :refer [rgb rgba]]
-   [garden.units :refer [px percent rem]]
-   [huiyin.data :refer [infos messages footer-links]]
-   [huiyin.variables :refer [headline-color-invert]]))
+   [garden.color :refer [rgba]]
+   [garden.units :refer [px rem]]
+   [garden.stylesheet :refer [at-media]]
+   [huiyin.variables :refer [headline-color-invert]]
+   [huiyin.data :refer [infos messages footer-links]]))
 
 (defn- render-links []
   [:ul.links
@@ -47,4 +48,8 @@
                   :margin-top (rem 0.5)
                   :color (rgba 255 255 255 0.4)}
      [:li {:display :inline-block
-           :margin-right (rem 1.5)}]]]])
+           :font-size (rem 0.85)
+           :margin [[(rem 1) (rem 1) 0 0]]}]
+     (at-media
+      {:max-width (px 735)}
+      [:li {:display :block}])]]])
