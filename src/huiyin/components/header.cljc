@@ -78,7 +78,7 @@
                   :align-items :center
                   :justify-content :space-between
                   :height (percent 100)
-                  :padding [[0 (px 8)]]}]
+                  :padding 0}]
 
     [:nav {:display :flex
            :flex-direction :row}]

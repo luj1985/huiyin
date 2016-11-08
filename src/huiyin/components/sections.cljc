@@ -109,7 +109,8 @@
     [:.contact {:padding [[0 (px 8)]]}]]
 
    [:.columns {:display :flex
-               :flex-direction :row}
+               :flex-direction :row
+               :padding 0}
 
     [:section
      [:ul {:padding 0}]
