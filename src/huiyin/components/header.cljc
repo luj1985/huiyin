@@ -30,7 +30,7 @@
 
         p1 (->Point radius border)
         p2 (->Point (+ radius offset) (+ radius offset))
-        p3 (->Point (- inner offset) (+ inner offset))
+        p3 (->Point (- radius offset) (+ radius offset))
         p4 (->Point radius (+ radius (/ offset 2)))]
     (join
      " "

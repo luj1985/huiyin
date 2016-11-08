@@ -47,7 +47,7 @@
         [:img {:src logo}]
         name]])]])
 
-(defmulti render (fn [state] (:page @state)))
+(defmulti render (fn [state] (:path @state)))
 
 (defmethod render :home [state]
   [:main

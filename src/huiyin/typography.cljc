@@ -30,7 +30,9 @@
    [:h5 {:font-size (rem 0.9) :margin [[(px 8) 0]]}]
 
    [:p {:color text-color
-        :line-height 1.4}]])
+        :line-height 1.4}]
+   [:ul {:padding 0 :margin 0}]
+   [:li {:list-style :none}]])
 
 (def ^:private container-style
   [[:.container {:position :relative
