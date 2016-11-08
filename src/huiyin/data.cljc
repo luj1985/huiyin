@@ -69,3 +69,7 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
   ["&copy; Copyright Huiyin Group 2016"
    "沪ICP备15051469号"
    "沪公网安备 31010602000185号"])
+
+(def ^:const footer-links
+  [{:name (:title messages) :href company-url :icon "linkedin-square"}
+   {:name "Contact Us" :href "mailto:woquan826@gmail.com" :icon "envelope"}])

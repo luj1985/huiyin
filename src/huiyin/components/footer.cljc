@@ -3,43 +3,48 @@
   (:require
    [garden.color :refer [rgb rgba]]
    [garden.units :refer [px percent rem]]
-   [huiyin.data :refer [infos messages]]
+   [huiyin.data :refer [infos messages footer-links]]
    [huiyin.variables :refer [headline-color-invert]]))
+
+(defn- render-links []
+  [:ul.links
+   (doall
+    (map-indexed
+     (fn [i {:keys [name href icon]}]
+       ^{:key i} [:li
+                  [:a.underline {:href href}
+                   [:i.fa {:class-name (str "fa-" icon)}]
+                   name]])
+     footer-links))])
+
+(defn- render-copyright []
+  [:ul.copyright
+   (doall
+    (map-indexed
+     (fn [i html]
+       ^{:key i} [:li {:dangerouslySetInnerHTML {:__html html}}])
+     infos))])
 
 (defn render [state]
   [:footer
    [:div.container
     [:h2 (:links messages)]
-    [:ul.links
-     [:li
-      [:a.underline {:target "_blank"
-           :href "https://www.linkedin.com/company/10970209?trk=tyah&trkInfo=clickedVertical%3Acompany%2CentityType%3AentityHistoryName%2CclickedEntityId%3Acompany_company_company_10970209%2Cidx%3A0" }
-       [:i.fa.fa-linkedin-square] (:title messages)]]
-     [:li
-      [:a.underline {:target "_blank" :href "mailto:woquan826@gmail.com"}
-       [:i.fa.fa-envelope] "Contact Us"]]]
-
-    [:ul.copyright
-     (doall
-      (map-indexed
-       (fn [i m]
-         ^{:key i} [:li {:dangerouslySetInnerHTML {:__html m}}])
-       infos))]]])
+    [render-links]
+    [render-copyright]]])
 
 (def css
   [[:footer {:background-color :black
              :color headline-color-invert}
     [:.container {:display :flex
                   :flex-direction :column}]
-    [:a {:color (rgba 255 255 255 0.95)}]
+    [:a {:color (rgba 255 255 255 0.95)
+         :line-height (rem 1.8)}]
     [:h2 {:color headline-color-invert
-          :font-size (rem 1.5)
+          :font-size (rem 1.75)
           :margin-top (rem 1.5)
           :line-height (rem 2)}]
-
-    [:.links [:li {:margin [[(rem 0.75) 0]]}]]
-    [:.copyright {:margin-top (rem 1)
+    [:.copyright {:padding [[(rem 1) 0]]
+                  :margin-top (rem 0.5)
                   :color (rgba 255 255 255 0.4)}
      [:li {:display :inline-block
-           :padding [[0 (rem 1) (rem 1) 0]]}]]]])
-
+           :margin-right (rem 1.5)}]]]])
