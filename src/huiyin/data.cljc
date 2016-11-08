@@ -39,7 +39,9 @@
    {:name "Andrew Lee"
     :title "CEO at Purse, Advisor at Huiyin Blockchain Venture"
     :avatar "/images/avatar2.jpg"
-    :description lorem
+    :description "Andrew is CEO of  Purse , the world’s largest marketplace for Bitcoin. Purse’s mission is to make Bitcoin and blockchain technology useful. Purse is also the developer of b  coin,  an open source fullnode bitcoin implementation.
+Previously, Andrew covered emerging payments at Bank of America Merrill Lynch and founded a payment processor that was acquired by Sage Payments. He is a proud Georgia Tech and University of Florida alumni.
+Andrew is an advisor at HBV to help find and evaluate promising startups."
     :attrs [{:email "andrew@purse.io"}]}])
 
 (def ^:const companies
