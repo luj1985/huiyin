@@ -77,7 +77,7 @@
 
 (def ^:private jumbotron-style
   [[:.jumbotron {:display :flex
-                 :padding [[0 (px 16)]]
+                 :padding [[0 (rem 1)]]
                  :align-items :center
                  :justify-content :center
                  :background [["url(/images/home.jpg)" :no-repeat :center :bottom]]
@@ -142,8 +142,8 @@
 
 (def ^:private company-style
   [[:li.company
-    [:img {:height (px 50)
-           :width (px 50)
+    [:img {:height (rem 3)
+           :width (rem 3)
            :margin-right (rem 1)}]
     [:a {:display :flex
          :flex-direction :row
@@ -157,7 +157,7 @@
     [:.resume {:flex-direction :column}
      [:img {:margin 0}]]
     [:.jumbotron
-     [:h1 {:font-size (px 45)}]])])
+     [:h1 {:font-size (rem 2.75)}]])])
 
 (def css
   [jumbotron-style
