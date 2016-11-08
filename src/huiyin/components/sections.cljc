@@ -30,14 +30,14 @@
       ^{:key i}
       [:li.member
        [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
-       [:div.contact
+       [:div.desc
         [:h4
          [:a {:href (str "#/member/" i)}
           name]]
         [:h5 title]]])]])
 
 (defn- render-companies []
-  [:section
+  [:aside
    [:h2
     [:a {:href "https://angel.co/huiyin-blockchain-venture"} (get-in messages [:sections :angel])]]
    [:ul
@@ -54,8 +54,9 @@
   [:main
    [render-jumbotron state]
    [:div.container.columns
-    [render-intro]
-    [render-members state]
+    [:div.content
+     [render-intro]
+     [render-members state]]
     [render-companies]]])
 
 (defmethod render :about [state]
@@ -89,62 +90,80 @@
           :transform "translateY(-50px)"
           :text-align :center}]]])
 
-(def ^:private main-style
-  [[:main {:display :block
-           :margin-bottom (px 40)}]
+(def ^:private member-card
+  [:.member {:display :flex
+             :flex-direction :row
+             :margin [[(rem 1.5) 0]]}
 
-   [:.member {:display :flex
-              :flex-direction :row
-              :margin [[(px 16) 0]]}
+   [:.avatar {:display :inline-block
+              :flex-shrink 0
+              :width (rem 4)
+              :height (rem 4)
+              :box-shadow [[0 0 (px 4) (rgba 0 0 0 0.8)]]
+              :background-repeat :no-repeat
+              :background-position [[(percent 50) (percent 50)]]
+              :background-size [[(percent 100) :auto]]
+              :border-radius (percent 50)}]
+   [:.desc {:padding [[0 (rem 1)]]}]])
 
-    [:.avatar {:display :inline-block
-               :flex-shrink 0
-               :width (px 60)
-               :height (px 60)
-               :margin-right (px 16)
-               :box-shadow "0 0 4px rgba(0, 0, 0, .8)"
-               :background-repeat :no-repeat
-               :background-position "50% 50%"
-               :background-size "100% auto"
-               :border-radius (percent 50)}]
-    [:.contact {:padding [[0 (px 8)]]}]]
-
-   [:.columns {:display :flex
+(def ^:private section-layout
+  [[:.columns {:display :flex
                :flex-direction :row
                :padding 0}
-
-    [:section
+    [:aside {:flex-shrink 0
+             :padding (rem 1)}]
+    [:section {:padding (rem 1)}
      [:ul {:padding 0}]
      [:li {:line-height 1.3
            :list-style :none}]]]
 
-   [".columns>*:nth-child(1)" {:flex 5}]
-   [".columns>*:nth-child(2)" {:flex 5}]
-   [".columns>*:nth-child(3)" {:flex 2}]
-   [".columns>*" {:padding (rem 1)}]])
+   (at-media
+    {:max-width (px 736)}
+    [:.company {:margin [[(rem 1) 0]]}]
+    [:.content {:display :flex
+                :flex-direction :column}])
+   (at-media
+    {:min-width (px 737)}
+    [:.company {:margin [[(rem 1) 0]]}]
+    [:.content {:display :flex
+                :flex-direction :row}
+     [:section {:flex 1}]])
+
+   (at-media
+    {:min-width (px 736)
+     :max-width (px 1023)}
+    [:.columns {:flex-direction :column}]
+    [:.company {:display :inline-block
+                :margin-right (rem 3)}])])
+
+(def ^:private main-style
+  [[:main {:display :block
+           :margin-bottom (rem 2)}]])
 
 (def ^:private company-style
   [[:li.company
     [:img {:height (px 50)
            :width (px 50)
-           :margin (px 8)
-           :margin-left 0}]
+           :margin-right (rem 1)}]
     [:a {:display :flex
          :flex-direction :row
          :align-items :center}]]])
 
 (def ^:private mobile-main-style
-  [(at-media {:max-width (px 767)}
-             [:main
-              [:.columns {:flex-direction :column}]]
-             [:.resume {:flex-direction :column}
-              [:img {:margin 0}]]
-             [:.jumbotron
-              [:h1 {:font-size (px 45)}]])])
+  [(at-media
+    {:max-width (px 767)}
+    [:main
+     [:.columns {:flex-direction :column}]]
+    [:.resume {:flex-direction :column}
+     [:img {:margin 0}]]
+    [:.jumbotron
+     [:h1 {:font-size (px 45)}]])])
 
 (def css
   [jumbotron-style
    main-style
    company-style
    mobile-main-style
+   member-card
+   section-layout
    member/css])
