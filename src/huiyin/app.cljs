@@ -33,9 +33,7 @@
 
 (defonce state
   (atom {:path "/"
-         :offset (scroll-offset)
-         :doc-size (document-size)
-         :viewport (viewport-size)}))
+         :offset (scroll-offset)}))
 
 (defroute index "/" [] {:path :home})
 (defroute home "/home" []  {:path :home})
@@ -63,16 +61,20 @@
    [s/render state]
    [f/render state]])
 
+;;; XXX: for iOS device, the viewport size can change when scroll up/down
 (defn caculate-sizes! []
-  (swap! state assoc
-         :doc-size (document-size)
-         :footer-size (footer-size)))
+  (let [old-viewport-size (get @state :viewport-size)
+        viewport-size (viewport-size)
+        resized? (not= (:width viewport-size) (:width old-viewport-size))]
+    (swap! state assoc
+           :jumbotron-height (:height (if resized? viewport-size old-viewport-size))
+           :footer-size (footer-size)
+           :document-size (document-size)
+           :viewport-size viewport-size)))
 
 (defonce events-setup
   (do
     (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
-  ;;; XXX: for iOS, the screen size can change when scroll up, disable it
-    #_(events/listen js/window RESIZE #(swap! state assoc :viewport (viewport-size)))
     (events/listen js/window RESIZE caculate-sizes!)))
 
 (defn init []

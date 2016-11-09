@@ -1,17 +1,12 @@
 (ns huiyin.components.sections
   (:refer-clojure :exclude [rem])
   (:require
-   [huiyin.variables :refer [transition-time headline-color-invert]]
    [garden.stylesheet :refer [at-media]]
    [garden.units :refer [px percent rem]]
    [garden.color :refer [rgb rgba]]
    [huiyin.data :refer [members companies introductions messages]]
+   [huiyin.components.jumbotron :as jumbotron]
    [huiyin.components.member :as member]))
-
-(defn- render-jumbotron [state]
-  (let [height (get-in @state [:viewport :height])]
-    [:section.jumbotron {:style {:height height}}
-     [:h1 (:title messages)]]))
 
 (defn- render-intro []
   [:section
@@ -52,17 +47,17 @@
 
 (defmethod render :home [state]
   [:main
-   [render-jumbotron state]
+   [jumbotron/render state]
    [:div.container.columns
     [:div.content
      [render-intro]
      [render-members state]]
     [render-companies]]])
 
+;;; TODO: scroll to positon
 (defmethod render :about [state]
-  ;;; TODO: scroll to positon
   [:main
-   [render-jumbotron state]
+   [jumbotron/render state]
    [:div.container.columns
     [render-intro]
     [render-members state]
@@ -75,20 +70,6 @@
   [:main.container
    (:not-found messages)])
 
-(def ^:private jumbotron-style
-  [[:.jumbotron {:display :flex
-                 :padding [[0 (rem 1)]]
-                 :align-items :center
-                 :justify-content :center
-                 :background [["url(/images/home.jpg)" :no-repeat :center :bottom]]
-                 :background-size :center
-                 :max-height (px 1024)
-                 :transition [[:all transition-time]]}
-
-    [:h1 {:color headline-color-invert
-          :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
-          :transform "translateY(-50px)"
-          :text-align :center}]]])
 
 (def ^:private member-card
   [:.member {:display :flex
@@ -160,10 +141,10 @@
      [:h1 {:font-size (rem 2.75)}]])])
 
 (def css
-  [jumbotron-style
-   main-style
+  [main-style
    company-style
    mobile-main-style
    member-card
    section-layout
+   jumbotron/css
    member/css])
