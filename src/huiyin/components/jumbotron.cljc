@@ -6,7 +6,7 @@
    [huiyin.data :refer [messages]]))
 
 (defn render [state]
-  (let [height (get @state :jumbotron-height)]
+  (let [height (get-in @state [:viewport-size :height])]
     [:section.jumbotron {:style {:height height}}
      [:h1 (:title messages)]]))
 

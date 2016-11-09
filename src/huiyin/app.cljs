@@ -13,27 +13,27 @@
 
 (enable-console-print!)
 
-(defn- document-size []
+(defn- get-document-size []
   (let [h (dom/getDocumentHeight)]
     {:height h}))
 
-(defn- viewport-size []
+(defn- get-viewport-size []
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)]
     {:width w :height h}))
 
-(defn- scroll-offset []
+(defn- get-scroll-offset []
   (let [offset (dom/getDocumentScroll)]
     {:x (.-x offset) :y (.-y offset)}))
 
-(defn- footer-size []
+(defn- get-footer-size []
   (let [footer (.querySelector js/document "footer")]
     {:width (.-clientWidth footer)
      :height (.-clientHeight footer)}))
 
 (defonce state
   (atom {:path "/"
-         :offset (scroll-offset)}))
+         :offset (get-scroll-offset)}))
 
 (defroute index "/" [] {:path :home})
 (defroute home "/home" []  {:path :home})
@@ -61,20 +61,21 @@
    [s/render state]
    [f/render state]])
 
-;;; XXX: for iOS device, the viewport size can change when scroll up/down
 (defn caculate-sizes! []
-  (let [old-viewport-size (get @state :viewport-size)
-        viewport-size (viewport-size)
-        resized? (not= (:width viewport-size) (:width old-viewport-size))]
-    (swap! state assoc
-           :jumbotron-height (:height (if resized? viewport-size old-viewport-size))
-           :footer-size (footer-size)
-           :document-size (document-size)
-           :viewport-size viewport-size)))
+  ;;; XXX: for iOS device, the viewport size can change when scroll up/down
+  ;;; cannot count this resize on, otherwise page can have some trembling
+  (swap! state
+         (fn [{:keys [viewport-size] :as state}]
+           (let [new-viewport-size (get-viewport-size)
+                 resized? (not= (:width viewport-size) (:width new-viewport-size))]
+             (assoc state :viewport-size (if resized? new-viewport-size viewport-size)))))
+  (swap! state assoc
+         :footer-size (get-footer-size)
+         :document-size (get-document-size)))
 
 (defonce events-setup
   (do
-    (events/listen js/window SCROLL #(swap! state assoc :offset (scroll-offset)))
+    (events/listen js/window SCROLL #(swap! state assoc :offset (get-scroll-offset)))
     (events/listen js/window RESIZE caculate-sizes!)))
 
 (defn init []
