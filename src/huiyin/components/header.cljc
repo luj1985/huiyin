@@ -52,7 +52,7 @@
        [:h1 (:title messages)]]
       [:nav
        (for [{:keys [href text target]} navigation]
-         ^{:key href} [:a {:class-name :underline :href href :target target} text])]]]))
+         ^{:key href} [:a.underline {:href href :target target} text])]]]))
 
 (def ^:private tiny-device-style
   [(at-media

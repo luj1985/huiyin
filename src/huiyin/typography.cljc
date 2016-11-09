@@ -14,9 +14,10 @@
   [[:html {:-moz-osx-font-smoothing :grayscale
            :-webkit-font-smoothing :antialiased}]
 
-   [:html :body :#app {:margin 0 :padding 0}]
+   [:html :body :#app {:margin 0
+                 :padding 0
+                 :height (percent 100)}]
 
-   [:#app {:position :relative}]
 
    [:body {:font-family ["Helvetica Neue" "Helvetica" "Arial" "sans-serif"]
            :font-size (px 16)
@@ -32,7 +33,16 @@
    [:p {:color text-color
         :line-height 1.4}]
    [:ul {:padding 0 :margin 0}]
-   [:li {:list-style :none}]])
+   [:li {:list-style :none}]
+
+
+   [:#app>div {:display :flex
+               :flex-direction :column
+               :min-height (percent 100)}]
+
+   [:main {:display :block
+           :margin-bottom (rem 2)
+           :flex 1}]])
 
 (def ^:private container-style
   [[:.container {:position :relative

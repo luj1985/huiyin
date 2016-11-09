@@ -67,8 +67,10 @@
   (member/render state))
 
 (defmethod render :default [state]
-  [:main.container
-   (:not-found messages)])
+  [:main {:style {:min-height "100%"}}
+   [:section.jumbotron {:style {:height "300px"}}]
+   [:div.container.resume
+    [:h2 (:not-found messages)]]])
 
 
 (def ^:private member-card
@@ -117,10 +119,6 @@
     [:.company {:display :inline-block
                 :margin-right (rem 3)}])])
 
-(def ^:private main-style
-  [[:main {:display :block
-           :margin-bottom (rem 2)}]])
-
 (def ^:private company-style
   [[:li.company
     [:img {:height (rem 3)
@@ -141,8 +139,7 @@
      [:h1 {:font-size (rem 2.75)}]])])
 
 (def css
-  [main-style
-   company-style
+  [company-style
    mobile-main-style
    member-card
    section-layout
