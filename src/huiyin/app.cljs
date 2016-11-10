@@ -13,10 +13,6 @@
 
 (enable-console-print!)
 
-(defn- get-document-size []
-  (let [h (dom/getDocumentHeight)]
-    {:height h}))
-
 (defn- get-viewport-size []
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)]
@@ -25,11 +21,6 @@
 (defn- get-scroll-offset []
   (let [offset (dom/getDocumentScroll)]
     {:x (.-x offset) :y (.-y offset)}))
-
-(defn- get-footer-size []
-  (let [footer (.querySelector js/document "footer")]
-    {:width (.-clientWidth footer)
-     :height (.-clientHeight footer)}))
 
 (defonce state
   (atom {:path "/"
@@ -68,10 +59,7 @@
          (fn [{:keys [viewport-size] :as state}]
            (let [new-viewport-size (get-viewport-size)
                  resized? (not= (:width viewport-size) (:width new-viewport-size))]
-             (assoc state :viewport-size (if resized? new-viewport-size viewport-size)))))
-  (swap! state assoc
-         :footer-size (get-footer-size)
-         :document-size (get-document-size)))
+             (assoc state :viewport-size (if resized? new-viewport-size viewport-size))))))
 
 (defonce events-setup
   (do

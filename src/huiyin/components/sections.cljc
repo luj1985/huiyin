@@ -59,8 +59,9 @@
   [:main
    [jumbotron/render state]
    [:div.container.columns
-    [render-intro]
-    [render-members state]
+    [:div.content
+     [render-intro]
+     [render-members state]]
     [render-companies]]])
 
 (defmethod render :member [state]
