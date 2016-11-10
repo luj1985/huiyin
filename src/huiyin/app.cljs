@@ -2,9 +2,8 @@
   (:require
    [secretary.core :as secretary :refer-macros [defroute]]
    [reagent.core :as r :refer [atom]]
-   [goog.dom :as dom]
    [goog.events :as events]
-   [goog.events.EventType :refer [SCROLL RESIZE]]
+   [goog.events.EventType :refer [RESIZE]]
    [goog.history.EventType :refer [NAVIGATE]]
    [huiyin.components.header :as h]
    [huiyin.components.footer :as f]
@@ -18,13 +17,8 @@
         h (.-innerHeight js/window)]
     {:width w :height h}))
 
-(defn- get-scroll-offset []
-  (let [offset (dom/getDocumentScroll)]
-    {:x (.-x offset) :y (.-y offset)}))
-
 (defonce state
-  (atom {:path "/"
-         :offset (get-scroll-offset)}))
+  (atom {:path "/"}))
 
 (defroute index "/" [] {:path :home})
 (defroute home "/home" []  {:path :home})
@@ -62,14 +56,18 @@
              (assoc state :viewport-size (if resized? new-viewport-size viewport-size))))))
 
 (defonce events-setup
-  (do
-    (events/listen js/window SCROLL #(swap! state assoc :offset (get-scroll-offset)))
-    (events/listen js/window RESIZE caculate-sizes!)))
+  (events/listen js/window RESIZE caculate-sizes!))
 
 (defn init []
   ;;; Always render the full page
   ;;; because of the virtual DOM, most of the render work can be skipped
   ;;; only apply delta when `state` changed
+
+  ;;; but cannot put all variables in a single state
+  ;;; but render has scroll function involved, in `sections.clj`
+  ;;; everytime scroll postion updated, it re-render pages, and render
+  ;;; function trigger another scroll ...
+  ;;; so put scroll state into another atom defined in `heaer.clj`
   (r/render [render-pages state]
             (.getElementById js/document "app"))
 

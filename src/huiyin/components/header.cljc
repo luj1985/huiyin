@@ -1,6 +1,10 @@
 (ns huiyin.components.header
   (:refer-clojure :exclude [rem])
   (:require
+   #?(:cljs [goog.events :as events])
+   #?(:cljs [goog.dom :as dom])
+   #?(:cljs [reagent.core :as r :refer [atom]])
+   #?(:cljs [goog.events.EventType :refer [SCROLL]])
    [clojure.string :refer [join]]
    [garden.color :refer [rgb rgba]]
    [garden.units :refer [px percent rem]]
@@ -41,8 +45,20 @@
       "M" p1 "A" c2 "0 0 0" p3 "Z"
       "M" p3 "A" c2 "0 0 0" p2 "L" p4 "Z"])))
 
+
+#?(:cljs
+   (do
+     (defn- get-scroll-offset []
+       (let [offset (dom/getDocumentScroll)]
+         {:x (.-x offset) :y (.-y offset)}))
+
+     (def scroll-state (atom {:offset (get-scroll-offset)}))
+
+     (events/listen js/window SCROLL #(swap! scroll-state assoc :offset (get-scroll-offset)))))
+
 (defn render [state]
-  (let [offset-y (get-in @state [:offset :y])
+  (let [offset-y #?(:clj 140
+                    :cljs (get-in @scroll-state [:offset :y])) 
         compact?  (> offset-y header-compact-threshold)]
     [:header {:class-name (if compact? :compact)}
      [:div.container

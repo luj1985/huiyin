@@ -43,9 +43,19 @@
         [:img {:src logo}]
         name]])]])
 
+#?(:cljs
+   (defn- scroll-to-element [selector & [offset]]
+     (let [offset (or offset 0)
+           el (.querySelector js/document selector)
+           el-rect (.getBoundingClientRect el)
+           will-scroll-to (+ (.-scrollY js/window) (.-top el-rect))]
+       ;;; TODO: animate scroll to
+       (.scrollTo js/window 0 (+ will-scroll-to offset)))))
+
 (defmulti render (fn [state] (:path @state)))
 
 (defmethod render :home [state]
+  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element "main")))
   [:main
    [jumbotron/render state]
    [:div.container.columns
@@ -54,8 +64,9 @@
      [render-members state]]
     [render-companies]]])
 
-;;; TODO: scroll to positon
 (defmethod render :about [state]
+  ;;; there is 70 px header, has to add some offset
+  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element ".content" -70)))
   [:main
    [jumbotron/render state]
    [:div.container.columns
@@ -72,7 +83,6 @@
    [:section.jumbotron {:style {:height "300px"}}]
    [:div.container.resume
     [:h2 (:not-found messages)]]])
-
 
 (def ^:private member-card
   [:.member {:display :flex
