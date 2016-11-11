@@ -49,7 +49,7 @@
            el-rect (.getBoundingClientRect el)
            will-scroll-to (+ (.-scrollY js/window) (.-top el-rect))]
        ;;; TODO: animate scroll to
-       #_(.scrollTo js/window 0 (+ will-scroll-to offset)))))
+       (.scrollTo js/window 0 (+ will-scroll-to offset)))))
 
 (defmulti render (fn [state] (:path @state)))
 

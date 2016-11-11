@@ -30,8 +30,7 @@
         (doall
          (map-indexed
           (fn [i attr]
-            ^{:key i}
-            [render-attribute attr])
+            ^{:key i} [render-attribute attr])
           attrs))]
        [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
 
@@ -44,6 +43,13 @@
     [:dt {:line-height 1.5}]]
 
    (at-media
-    {:min-width (px 767)}
+    {:max-width (px 766)}
     [:.resume {:flex-direction :column}
-     [:img {:margin 0}]])])
+     [:img {:width (px 210)
+            :height (px 280)}]])
+
+   (at-media
+    {:min-width (px 767)}
+    [:.resume {:flex-direction :row}
+     [:img {:max-width (px 300)
+            :height (px 400)}]])])
