@@ -5,6 +5,7 @@
    [garden.units :refer [px percent rem]]
    [garden.color :refer [rgb rgba]]
    [huiyin.data :refer [members companies introductions messages]]
+   #?(:cljs [huiyin.utils :refer [scroll-to-element]])
    [huiyin.components.jumbotron :as jumbotron]
    [huiyin.components.member :as member]))
 
@@ -41,15 +42,6 @@
       [:li.company
        [:a {:href url :target "_blank"}
         [:img {:src logo}] name]])]])
-
-#?(:cljs
-   (defn- scroll-to-element [selector & [offset]]
-     (let [offset (or offset 0)
-           el (.querySelector js/document selector)
-           el-rect (.getBoundingClientRect el)
-           will-scroll-to (+ (.-scrollY js/window) (.-top el-rect))]
-       ;;; TODO: animate scroll to
-       (.scrollTo js/window 0 (+ will-scroll-to offset)))))
 
 (defmulti render (fn [state] (:path @state)))
 

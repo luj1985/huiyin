@@ -4,6 +4,7 @@
    [garden.units :refer [px percent]]
    [garden.stylesheet :refer [at-media]]
    [huiyin.variables :refer [text-color]]
+   #?(:cljs [huiyin.utils :refer [scroll-to-element]])
    [huiyin.data :refer [members]]))
 
 (defn- render-attribute [{:keys [email twitter linked-in] :as attr}]
@@ -17,6 +18,7 @@
                 [:i.fa.fa-linkedin-square] (:name linked-in)])])
 
 (defn render [state]
+  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element ".resume" -100)))
   (let [id (get-in @state [:params :id])
         {:keys [name title avatar attrs description] :as m} (get members id)]
     [:main {:style {:min-height "100%"}}
