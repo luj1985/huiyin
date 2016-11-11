@@ -41,4 +41,9 @@
               :margin-top (px 40)}
     [:img {:margin-right (px 32)}]
     [:h2 :h3 {:color text-color}]
-    [:dt {:line-height 1.5}]]])
+    [:dt {:line-height 1.5}]]
+
+   (at-media
+    {:min-width (px 767)}
+    [:.resume {:flex-direction :column}
+     [:img {:margin 0}]])])

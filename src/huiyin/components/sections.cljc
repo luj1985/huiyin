@@ -21,7 +21,7 @@
   [:section
    [:h2 (get-in messages [:sections :who-we-are])]
    [:ul
-    (for [[{:keys [index name title avatar attrs]} i] (zipmap members (range))]
+    (for [[{:keys [name title avatar]} i] (zipmap members (range))]
       ^{:key i}
       [:li.member
        [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
@@ -40,8 +40,7 @@
       ^{:key url}
       [:li.company
        [:a {:href url :target "_blank"}
-        [:img {:src logo}]
-        name]])]])
+        [:img {:src logo}] name]])]])
 
 #?(:cljs
    (defn- scroll-to-element [selector & [offset]]
@@ -50,7 +49,7 @@
            el-rect (.getBoundingClientRect el)
            will-scroll-to (+ (.-scrollY js/window) (.-top el-rect))]
        ;;; TODO: animate scroll to
-       (.scrollTo js/window 0 (+ will-scroll-to offset)))))
+       #_(.scrollTo js/window 0 (+ will-scroll-to offset)))))
 
 (defmulti render (fn [state] (:path @state)))
 
@@ -88,50 +87,19 @@
   [:.member {:display :flex
              :flex-direction :row
              :margin [[(rem 1.5) 0]]}
-
-   [:.avatar {:display :inline-block
-              :flex-shrink 0
+   [:.avatar {:flex-shrink 0
               :width (rem 4)
               :height (rem 4)
               :box-shadow [[0 0 (px 4) (rgba 0 0 0 0.8)]]
+              :border-radius (percent 50)
               :background-repeat :no-repeat
               :background-position [[(percent 50) (percent 50)]]
-              :background-size [[(percent 100) :auto]]
-              :border-radius (percent 50)}]
+              :background-size [[(percent 100) :auto]]}]
    [:.desc {:padding [[0 (rem 1)]]}]])
 
-(def ^:private section-layout
-  [[:.columns {:display :flex
-               :flex-direction :row
-               :padding 0}
-    [:aside {:flex-shrink 0
-             :padding (rem 1)}]
-    [:section {:padding (rem 1)}
-     [:ul {:padding 0}]
-     [:li {:line-height 1.3
-           :list-style :none}]]]
-
-   (at-media
-    {:max-width (px 736)}
-    [:.company {:margin [[(rem 1) 0]]}]
-    [:.content {:display :flex
-                :flex-direction :column}])
-   (at-media
-    {:min-width (px 737)}
-    [:.company {:margin [[(rem 1) 0]]}]
-    [:.content {:display :flex
-                :flex-direction :row}
-     [:section {:flex 1}]])
-
-   (at-media
-    {:min-width (px 736)
-     :max-width (px 1023)}
-    [:.columns {:flex-direction :column}]
-    [:.company {:display :inline-block
-                :margin-right (rem 3)}])])
-
 (def ^:private company-style
-  [[:li.company
+  [[:li.company {:display :inline-block
+                 :margin [[(rem 1) (rem 3) (rem 1) 0]]}
     [:img {:height (rem 3)
            :width (rem 3)
            :margin-right (rem 1)}]
@@ -139,19 +107,32 @@
          :flex-direction :row
          :align-items :center}]]])
 
-(def ^:private mobile-main-style
-  [(at-media
+(def ^:private section-layout
+  [[:.columns {:display :flex
+               :flex-direction :row
+               :padding 0}
+    [:aside {:padding (rem 1)}]
+    [:section {:padding (rem 1)}
+     [:ul {:padding 0}]
+     [:li {:line-height 1.3
+           :list-style :none}]]]
+
+   (at-media
     {:max-width (px 767)}
-    [:main
-     [:.columns {:flex-direction :column}]]
-    [:.resume {:flex-direction :column}
-     [:img {:margin 0}]]
     [:.jumbotron
-     [:h1 {:font-size (rem 2.75)}]])])
+     [:h1 {:font-size (rem 2.75)}]])
+
+   (at-media
+    {:max-width (px 1023)}
+    [:.columns {:flex-direction :column}])
+
+   (at-media
+    {:min-width (px 737)}
+    [:.content {:display :flex :flex-direction :row}
+     [:section {:flex 1}]])])
 
 (def css
   [company-style
-   mobile-main-style
    member-card
    section-layout
    jumbotron/css
