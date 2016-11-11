@@ -18,7 +18,7 @@
                 [:i.fa.fa-linkedin-square] (:name linked-in)])])
 
 (defn render [state]
-  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element ".resume" -100)))
+  #?(:cljs (scroll-to-element ".resume" -100))
   (let [id (get-in @state [:params :id])
         {:keys [name title avatar attrs description] :as m} (get members id)]
     [:main {:style {:min-height "100%"}}

@@ -46,7 +46,7 @@
 (defmulti render (fn [state] (:path @state)))
 
 (defmethod render :home [state]
-  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element "main")))
+  #?(:cljs (scroll-to-element "main"))
   [:main
    [jumbotron/render state]
    [:div.container.columns
@@ -57,7 +57,7 @@
 
 (defmethod render :about [state]
   ;;; there is 70 px header, has to add some offset
-  #?(:cljs (.requestAnimationFrame js/window #(scroll-to-element ".content" -70)))
+  #?(:cljs (scroll-to-element ".content" -70))
   [:main
    [jumbotron/render state]
    [:div.container.columns
