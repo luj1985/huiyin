@@ -1,3 +1,0 @@
-{:require  [huiyin.app]
- :init-fns [huiyin.app/init]
- :compiler-options {:asset-path "js/app.out"}}
