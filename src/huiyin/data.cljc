@@ -14,7 +14,7 @@
 (def ^:const members
   [{:name "James Wo"
     :title "CEO, Huiyin Blockchain Venture"
-    :avatar "/images/avatar.jpg"
+    :avatar "/images/avatars/James_Wo.jpg"
     :description "James Wo is the founder and the CEO of Huiyin Blockchain Venture. As a 2th entrepreneur, James inherits many merits from his father. Diligent, modest and forward-looking, James endeavors to make his own contributions in the Blockchain and Bitcoin areas. James founded HBV when he studied Applied Statistics at Columbia University. From then, he devoted himself to promoting the applications of Blockchain and Bitcoin worldwide. Now as a promising venture capital, HBV steadily stimulates the advancement of the Blockchain industry under the lead of James Wo."
     :attrs [{:email "woquan826@gmail.com"}
             {:email "woquan826@163.com"}
@@ -24,19 +24,19 @@
 
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
-    :avatar "/images/avatar.jpg"
+    :avatar  "/images/avatars/James_Wo.jpg"
     :description "Zheng Bing as a financial advisor to Huiyin Blockchain Venture team, assist James Wo to carry out the venture project of financial due diligence and financial management in greater China region. As a graduate of Shanghai University of Finance and Economics, and a non-practicing member of the Chinese Institute of certified public accountants, efforts in the financial field to do a good job of value analysis and risk control."
     :attrs [{:email "zhengbing@huiyin.com"}]}
 
    {:name "Shang Zhang"
     :title "Senior Associate, Huiyin Blockchain Venture"
-    :avatar "/images/avatar.jpg"
+    :avatar  "/images/avatars/Shang_Zhang.jpg"
     :description "Shang Zhang is the senior advisor of Huiyin Blockchain Venture. Originated in decentralized cryptocurrency - bitcoin, blockchain technologies face many interesting and challenging problems when applied in finance, the Internet of things, and other enterprise environments.The Blockchain research team at HBV Research - China is dedicated to exploratory research and continuous innovations. We are committed to solve practical problems with enterprise-grade solutions and to push extensive adoption of blockchain technologies across areas of finance and the Internet of things."
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
    {:name "Andrew Lee"
     :title "CEO at Purse, Advisor at Huiyin Blockchain Venture"
-    :avatar "/images/avatar2.jpg"
+    :avatar  "/images/avatars/Andrew_Lee.jpg"
     :description "Andrew is CEO of  Purse , the world’s largest marketplace for Bitcoin. Purse’s mission is to make Bitcoin and blockchain technology useful. Purse is also the developer of b  coin,  an open source fullnode bitcoin implementation.
 Previously, Andrew covered emerging payments at Bank of America Merrill Lynch and founded a payment processor that was acquired by Sage Payments. He is a proud Georgia Tech and University of Florida alumni.
 Andrew is an advisor at HBV to help find and evaluate promising startups."
