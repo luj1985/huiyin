@@ -16,7 +16,6 @@
 (def ^:private ^:const logo-circle 3)
 (def ^:private ^:const logo-color "#E00000")
 (def ^:private ^:const dimmer-color (rgba 0 0 0 0.82))
-(def ^:private ^:const header-compact-threshold 140)
 
 (defrecord Point [x y]
   Object
@@ -59,7 +58,7 @@
 (defn render [state]
   (let [offset-y #?(:clj 140
                     :cljs (get-in @scroll-state [:offset :y]))
-        compact?  (> offset-y header-compact-threshold)]
+        compact?  (> offset-y 64)]
     [:header {:class-name (if compact? :compact)}
      [:div.container
       [:div#logo

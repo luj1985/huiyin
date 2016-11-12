@@ -6,9 +6,11 @@
    [huiyin.data :refer [messages]]))
 
 (defn render [state]
-  (let [height (get-in @state [:viewport-size :height])]
+  (let [height (get-in @state [:viewport-size :height])
+        offset (if (< height 400) 0 -50)]
     [:section.jumbotron {:style {:height height}}
-     [:h1 (:title messages)]]))
+     [:h1 {:style {:transform (str "translateY(" offset "px)")}}
+      (:title messages)]]))
 
 (def ^:private jumbotron-style
   [[:.jumbotron {:display :flex
@@ -22,7 +24,6 @@
 
     [:h1 {:color headline-color-invert
           :font-family ["\"A2 60 Display Regular\"" "\"Arial Black\"" "Arial" "Helvetica" "Verdana" "sans-serif"]
-          :transform "translateY(-50px)"
           :text-align :center}]]])
 (def css
   [jumbotron-style])

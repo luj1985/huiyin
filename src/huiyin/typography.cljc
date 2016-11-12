@@ -12,6 +12,7 @@
 
 (def ^:private reset-style
   [[:html {:-moz-osx-font-smoothing :grayscale
+           :-webkit-text-size-adjust (percent 100)
            :-webkit-font-smoothing :antialiased}]
 
    [:html :body :#app {:margin 0
