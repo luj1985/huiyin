@@ -90,7 +90,7 @@
    [:.desc {:padding [[0 (rem 1)]]}]])
 
 (def ^:private company-style
-  [[:li.company {:display :inline-block
+  [[:li.company {:display :block
                  :margin [[(rem 1) (rem 3) (rem 1) 0]]}
     [:img {:height (rem 3)
            :width (rem 3)
@@ -103,6 +103,8 @@
   [[:.columns {:display :flex
                :flex-direction :row
                :padding 0}
+    [:.content {:flex-grow 9}]
+    [:aside {:flex-grow 0}]
     [:aside {:padding (rem 1)}]
     [:section {:padding (rem 1)}
      [:ul {:padding 0}]
@@ -117,6 +119,12 @@
    (at-media
     {:max-width (px 1023)}
     [:.columns {:flex-direction :column}])
+
+   (at-media
+    {:min-width (px 736)
+     :max-width (px 1023)}
+    [:aside
+     [:li.company {:display :inline-block}]])
 
    (at-media
     {:min-width (px 737)}
