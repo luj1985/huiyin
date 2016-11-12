@@ -35,14 +35,8 @@
    [:ul {:padding 0 :margin 0}]
    [:li {:list-style :none}]
 
-
-   [:#app>div {:display :flex
-               :flex-direction :column
-               :min-height (percent 100)}]
-
    [:main {:display :block
-           :margin-bottom (rem 2)
-           :flex 1}]])
+           :margin-bottom (rem 2)}]])
 
 (def ^:private container-style
   [[:.container {:position :relative

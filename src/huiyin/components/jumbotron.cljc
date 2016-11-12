@@ -16,7 +16,7 @@
                  :align-items :center
                  :justify-content :center
                  :background [["url(/images/home.jpg)" :no-repeat :center :bottom]]
-                 :background-size :center
+                 :background-size :cover
                  :max-height (px 1024)
                  :transition [[:all transition-time]]}
 
