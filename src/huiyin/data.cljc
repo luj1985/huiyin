@@ -11,8 +11,6 @@
               :who-we-are "Who we are"
               :angel "Angel list"}})
 
-(def ^:const lorem "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-
 (def ^:const members
   [{:name "James Wo"
     :title "CEO, Huiyin Blockchain Venture"
@@ -27,13 +25,13 @@
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
-    :description lorem
+    :description "Zheng Bing as a financial advisor to Huiyin Blockchain Venture team, assist James Wo to carry out the venture project of financial due diligence and financial management in greater China region. As a graduate of Shanghai University of Finance and Economics, and a non-practicing member of the Chinese Institute of certified public accountants, efforts in the financial field to do a good job of value analysis and risk control."
     :attrs [{:email "zhengbing@huiyin.com"}]}
 
    {:name "Shang Zhang"
     :title "Senior Associate, Huiyin Blockchain Venture"
     :avatar "/images/avatar.jpg"
-    :description lorem
+    :description "Shang Zhang is the senior advisor of Huiyin Blockchain Venture. Originated in decentralized cryptocurrency - bitcoin, blockchain technologies face many interesting and challenging problems when applied in finance, the Internet of things, and other enterprise environments.The Blockchain research team at HBV Research - China is dedicated to exploratory research and continuous innovations. We are committed to solve practical problems with enterprise-grade solutions and to push extensive adoption of blockchain technologies across areas of finance and the Internet of things."
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
    {:name "Andrew Lee"
