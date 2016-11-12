@@ -4,3 +4,4 @@
 /dist
 *~
 .packages/
+deploy.sh
