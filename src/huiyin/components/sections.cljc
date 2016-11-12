@@ -91,7 +91,7 @@
 
 (def ^:private company-style
   [[:li.company {:display :block
-                 :margin [[(rem 1) (rem 3) (rem 1) 0]]}
+                 :margin [[(rem 1) (rem 1) (rem 1) 0]]}
     [:img {:height (rem 3)
            :width (rem 3)
            :margin-right (rem 1)}]
@@ -124,7 +124,8 @@
     {:min-width (px 736)
      :max-width (px 1023)}
     [:aside
-     [:li.company {:display :inline-block}]])
+     [:li.company {:display :inline-block
+                   :margin-right (rem 3)}]])
 
    (at-media
     {:min-width (px 737)}

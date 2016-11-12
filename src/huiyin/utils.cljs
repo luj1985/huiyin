@@ -1,4 +1,5 @@
-(ns huiyin.utils)
+(ns huiyin.utils
+  (:require [goog.dom :as dom]))
 
 (defn scroll-to-element [selector & [offset]]
   (.setTimeout
@@ -7,6 +8,7 @@
      (let [offset (or offset 0)
            el (.querySelector js/document selector)
            el-rect (.getBoundingClientRect el)
-           will-scroll-to (+ (.-scrollY js/window) (.-top el-rect))]
+           scroll-y (.-y (dom/getDocumentScroll))
+           will-scroll-to (+ scroll-y (.-top el-rect))]
        ;;; TODO: animate scroll to
-       (.scrollTo js/window 0 (+ will-scroll-to offset))))) 0)
+       (.scrollTo js/window 0 (+ will-scroll-to offset))))) 100)
