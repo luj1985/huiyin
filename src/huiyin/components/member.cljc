@@ -49,7 +49,8 @@
    (at-media
     {:max-width (px 766)}
     [:.resume {:flex-direction :column}
-     [:img {:max-width (px 220)}]])
+     [:img {:width (px 220)
+            :height :auto}]])
 
    (at-media
     {:min-width (px 767)}
