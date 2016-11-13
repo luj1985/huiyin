@@ -22,10 +22,10 @@
   [:section
    [:h2 (get-in messages [:sections :who-we-are])]
    [:ul
-    (for [[{:keys [name title avatar]} i] (zipmap members (range))]
+    (for [[{:keys [name thumb title avatar]} i] (zipmap members (range))]
       ^{:key i}
       [:li.member
-       [:div.avatar {:style {:background-image (str "url(" avatar ")")}}]
+       [:img.avatar {:src thumb}]
        [:div.desc
         [:h4
          [:a {:href (str "#/member/" i)}
@@ -83,10 +83,7 @@
               :width (rem 4)
               :height (rem 4)
               :box-shadow [[0 0 (px 4) (rgba 0 0 0 0.8)]]
-              :border-radius (percent 50)
-              :background-repeat :no-repeat
-              :background-position [[(percent 50) (percent 50)]]
-              :background-size [[(percent 100) :auto]]}]
+              :border-radius (percent 50)}]
    [:.desc {:padding [[0 (rem 1)]]}]])
 
 (def ^:private company-style

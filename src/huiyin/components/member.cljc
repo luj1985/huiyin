@@ -1,7 +1,7 @@
 (ns huiyin.components.member
   (:require
    [garden.color :refer [rgb rgba]]
-   [garden.units :refer [px percent]]
+   [garden.units :refer [px percent rem]]
    [garden.stylesheet :refer [at-media]]
    [huiyin.variables :refer [text-color]]
    #?(:cljs [huiyin.utils :refer [scroll-to-element]])
@@ -21,7 +21,7 @@
   #?(:cljs (scroll-to-element ".resume" -100))
   (let [id (get-in @state [:params :id])
         {:keys [name title avatar attrs description] :as m} (get members id)]
-    [:main {:style {:min-height "100%"}}
+    [:main
      [:section.jumbotron {:style {:height "300px"}}]
      [:div.container.resume
       [:img {:src avatar}]
@@ -33,25 +33,26 @@
          (map-indexed
           (fn [i attr]
             ^{:key i} [render-attribute attr])
-          attrs))]
-       [:p {:dangerouslySetInnerHTML {:__html description}}]]]]))
+          attrs))]]]
+     [:div.container {:style {:min-height "190px"}}
+      [:p {:dangerouslySetInnerHTML {:__html description}}]]]))
 
 (def css
   [[:.resume {:display :flex
               :flex-direction :row
-              :margin-top (px 40)}
-    [:img {:margin-right (px 32)}]
+              :margin-top (rem 1)}
+    [:img {:margin-right (rem 2)}]
     [:h2 :h3 {:color text-color}]
     [:dt {:line-height 1.5}]]
 
    (at-media
     {:max-width (px 766)}
     [:.resume {:flex-direction :column}
-     [:img {:width (px 210)
-            :height (px 280)}]])
+     [:img {:max-width (px 220)}]])
 
    (at-media
     {:min-width (px 767)}
     [:.resume {:flex-direction :row}
-     [:img {:max-width (px 300)
-            :height (px 400)}]])])
+     [:img {:margin-top (rem 2)
+            :height (rem 13)
+            :max-width (px 300)}]])])

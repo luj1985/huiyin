@@ -46,8 +46,7 @@
                  :max-width (px max-content-width)
                  :margin-left :auto
                  :margin-right :auto
-                 :box-sizing :border-box}]
-   [:.resume {:min-height (px 520)}]])
+                 :box-sizing :border-box}]])
 
 (def ^:private link-with-underline-style
   [[:a.underline {:color headline-color-invert
