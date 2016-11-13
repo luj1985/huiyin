@@ -1,4 +1,5 @@
 (ns huiyin.components.member
+  (:refer-clojure :exclude [rem])
   (:require
    [garden.color :refer [rgb rgba]]
    [garden.units :refer [px percent rem]]
