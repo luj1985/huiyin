@@ -25,8 +25,8 @@
 
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
-    :thumb "/images/thumbs/Anonymous.jpg"
-    :avatar  "/images/avatars/Anonymous.jpg"
+    :thumb "/images/thumbs/Freddy_Zhang.jpg"
+    :avatar  "/images/avatars/Freddy_Zhang.jpg"
     :description "Zheng Bing as a financial advisor to Huiyin Blockchain Venture team, assist James Wo to carry out the venture project of financial due diligence and financial management in greater China region. As a graduate of Shanghai University of Finance and Economics, and a non-practicing member of the Chinese Institute of certified public accountants, efforts in the financial field to do a good job of value analysis and risk control."
     :attrs [{:email "zhengbing@huiyin.com"}]}
 
