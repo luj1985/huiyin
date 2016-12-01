@@ -44,7 +44,13 @@
     :description "Andrew is CEO of  Purse , the world’s largest marketplace for Bitcoin. Purse’s mission is to make Bitcoin and blockchain technology useful. Purse is also the developer of b  coin,  an open source fullnode bitcoin implementation.
 Previously, Andrew covered emerging payments at Bank of America Merrill Lynch and founded a payment processor that was acquired by Sage Payments. He is a proud Georgia Tech and University of Florida alumni.
 Andrew is an advisor at HBV to help find and evaluate promising startups."
-    :attrs [{:email "andrew@purse.io"}]}])
+    :attrs [{:email "andrew@purse.io"}]}
+
+   {:name "Amy Zhu"
+    :title "Human Resource manager"
+    :thumb "/images/thumbs/Amy_Zhu.jpg"
+    :avatar "/images/avatars/Amy_Zhu.jpg"
+    :description "Zhu Xiaojie as a Human Resource manager to Huiyin Blockchain Venture team, assist James Wo to carry out the Human Resource Strategic planning and management in greater China region. As a graduate of Southern Cross University with the major of Supply Chain Management, have years of foreign company management work experiences in HR field. Amy devoted her professional experiences to the HBV future HR management."}])
 
 (def ^:const companies
   [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
