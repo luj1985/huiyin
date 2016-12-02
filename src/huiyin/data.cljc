@@ -2,7 +2,6 @@
 
 ;;; These data can also be loaded from a web server
 ;;; TODO: use macro to read data from external file
-
 (def ^:const messages
   {:title "Huiyin Blockchain Venture"
    :links "Links"
@@ -37,6 +36,14 @@
     :description "Shang Zhang is the senior advisor of Huiyin Blockchain Venture. Originated in decentralized cryptocurrency - bitcoin, blockchain technologies face many interesting and challenging problems when applied in finance, the Internet of things, and other enterprise environments.The Blockchain research team at HBV Research - China is dedicated to exploratory research and continuous innovations. We are committed to solve practical problems with enterprise-grade solutions and to push extensive adoption of blockchain technologies across areas of finance and the Internet of things."
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
+   {:name "Amy Zhu"
+    :title "HR, Huiyin Blockchain Venture"
+    :thumb "/images/thumbs/Amy_Zhu.jpg"
+    :avatar "/images/avatars/Amy_Zhu.jpg"
+    :description "Zhu Xiaojie as a Human Resource manager to Huiyin Blockchain Venture team, assist James Wo to carry out the Human Resource Strategic planning and management in greater China region. As a graduate of Southern Cross University with the major of Supply Chain Management, have years of foreign company management work experiences in HR field. Amy devoted her professional experiences to the HBV future HR management."
+    :attrs [{:email "zhuxiaojie@huiyin.com"}
+            {:linked-in {:name "amy-zhu-800a65129" :value "https://www.linkedin.com/in/amy-zhu-800a65129"}}]}
+
    {:name "Andrew Lee"
     :title "CEO at Purse, Advisor at Huiyin Blockchain Venture"
     :thumb "/images/thumbs/Andrew_Lee.jpg"
@@ -44,15 +51,7 @@
     :description "Andrew is CEO of  Purse , the world’s largest marketplace for Bitcoin. Purse’s mission is to make Bitcoin and blockchain technology useful. Purse is also the developer of b  coin,  an open source fullnode bitcoin implementation.
 Previously, Andrew covered emerging payments at Bank of America Merrill Lynch and founded a payment processor that was acquired by Sage Payments. He is a proud Georgia Tech and University of Florida alumni.
 Andrew is an advisor at HBV to help find and evaluate promising startups."
-    :attrs [{:email "andrew@purse.io"}]}
-
-   {:name "Amy Zhu"
-    :title "Human Resource manager"
-    :thumb "/images/thumbs/Amy_Zhu.jpg"
-    :avatar "/images/avatars/Amy_Zhu.jpg"
-    :description "Zhu Xiaojie as a Human Resource manager to Huiyin Blockchain Venture team, assist James Wo to carry out the Human Resource Strategic planning and management in greater China region. As a graduate of Southern Cross University with the major of Supply Chain Management, have years of foreign company management work experiences in HR field. Amy devoted her professional experiences to the HBV future HR management."
-    :attrs [{:email "zhuxiaojie@huiyin.com"}
-            {:linked-in {:name "amy-zhu-800a65129" :value "https://www.linkedin.com/in/amy-zhu-800a65129"}}]}])
+    :attrs [{:email "andrew@purse.io"}]}])
 
 (def ^:const companies
   [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
