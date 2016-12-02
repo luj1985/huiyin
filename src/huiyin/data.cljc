@@ -50,7 +50,9 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
     :title "Human Resource manager"
     :thumb "/images/thumbs/Amy_Zhu.jpg"
     :avatar "/images/avatars/Amy_Zhu.jpg"
-    :description "Zhu Xiaojie as a Human Resource manager to Huiyin Blockchain Venture team, assist James Wo to carry out the Human Resource Strategic planning and management in greater China region. As a graduate of Southern Cross University with the major of Supply Chain Management, have years of foreign company management work experiences in HR field. Amy devoted her professional experiences to the HBV future HR management."}])
+    :description "Zhu Xiaojie as a Human Resource manager to Huiyin Blockchain Venture team, assist James Wo to carry out the Human Resource Strategic planning and management in greater China region. As a graduate of Southern Cross University with the major of Supply Chain Management, have years of foreign company management work experiences in HR field. Amy devoted her professional experiences to the HBV future HR management."
+    :attrs [{:email "zhuxiaojie@huiyin.com"}
+            {:linked-in {:name "amy-zhu-800a65129" :value "https://www.linkedin.com/in/amy-zhu-800a65129"}}]}])
 
 (def ^:const companies
   [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
