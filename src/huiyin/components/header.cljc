@@ -59,15 +59,25 @@
   (let [offset-y #?(:clj 140
                     :cljs (get-in @scroll-state [:offset :y]))
         compact?  (> offset-y 64)]
+
     [:header {:class-name (if compact? :compact)}
      [:div.container
       [:div#logo
        [:svg
         [:path {:d (render-logo logo-size logo-circle)}]]
        [:h1 (:title messages)]]
-      [:nav
-       (for [{:keys [href text target]} navigation]
-         ^{:key href} [:a.underline {:href href :target target} text])]]]))
+      (into [:nav]
+            (for [{:keys [href text target children]} navigation]
+              ^{:key text}
+              [:a.underline.lmenu {:href href :target target :class (if (:menu-actived @state) "active")
+                                   :on-click (fn []
+                                               (if children
+                                                 (swap! state update-in [:menu-actived] not)))} text
+               (if children
+                 [:ul.submenu
+                  (for [{:keys [href text target]} children]
+                    ^{:key href} [:li
+                                  [:a {:href href :target target} text]])])]))]]))
 
 (def ^:private tiny-device-style
   [(at-media
@@ -93,12 +103,28 @@
           :margin-right (rem 2.5)}]])])
 
 (def ^:private normal-style
-  [[:header {:position :fixed
+  [[:.submenu {:position :absolute
+               :z-index 10
+               :margin-top (rem 1)
+               :padding-left (rem 1)
+               :padding-right (rem 1)
+               :transform "translateX(1rem)"
+               :right 0
+               :background-color :black
+               :display :none}
+    [:a {:margin 0
+         :color (rgba 255 255 255 0.85)}]
+    [:li {:line-height (rem 3)}]]
+
+   [:header {:position :fixed
              :width (percent 100)
              :height (px 140)
              :z-index 100
              :transition (for [attr [:height :background-color]]
                            [attr transition-time])}
+
+    [:a.active
+     [:.submenu {:display :block}]]
 
     [:.container {:display :flex
                   :align-items :center

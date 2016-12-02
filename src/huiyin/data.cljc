@@ -71,8 +71,9 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (def ^:const navigation
   [{:text "Home" :href "#/home"}
-   {:text "About" :href "#/about"}
-   {:text "Join Us" :target "_blank" :href company-url}])
+   {:text "Join Us" :target "_blank" :href company-url}
+   {:text "Links" :children [{:text "Company" :href company-url :target "_blank"}
+                             {:text "Press" :href "#/press"}]}])
 
 (def ^:const infos
   ["&copy; Copyright Huiyin Group 2016"
@@ -81,4 +82,26 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (def ^:const footer-links
   [{:name (:title messages) :href company-url :icon "linkedin-square"}
-   {:name "Contact Us" :href "mailto:woquan826@gmail.com" :icon "envelope"}])
+   {:name "Contact Us" :href "mailto:woquan826@gmail.com" :icon "envelope"}
+   {:name "Press" :href "#/press" :icon "external-link-square"}])
+
+
+(def ^:const presses
+  {:en {:title "Press"
+        :links [{:title "China's Huiyin Group Launches $20 Million Bitcoin Fund"
+                 :from "/images/logos/yours.png"
+                 :date "DEC 1, 2016 "
+                 :href "http://www.coindesk.com/chinas-huiyin-group-bitcoin-blockchain-venture-fund-20-million/"}
+                {:title "Yours Raises Angel Round to Fix Reddit with Bitcoin"
+                 :from "/images/logos/coindesk.png"
+                 :date "NOV 15, 2016"
+                 :href "https://stories.yours.network/yours-raises-angel-round-to-fix-reddit-with-bitcoin-ffdd8b90f192#.jf55mhuzp"}]}
+   :zh {:title "新闻"
+        :links [{:title "汇银集团推出2000万美元比特币基金，专注投资比特币区块链"
+                 :from "/images/logos/8btc.svg"
+                 :date "2016-12-02"
+                 :href "http://www.8btc.com/huiyin-group-bitcoin-blockchain-venture"}
+                {:title "Yours网络获天使轮融资，有望明年初面世"
+                 :from "/images/logos/8btc.svg"
+                 :date "2016-11-17"
+                 :href "http://www.8btc.com/yours-raises-angel-round"}]}})

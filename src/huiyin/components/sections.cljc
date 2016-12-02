@@ -4,8 +4,7 @@
    [garden.stylesheet :refer [at-media]]
    [garden.units :refer [px percent rem]]
    [garden.color :refer [rgb rgba]]
-   [huiyin.data :refer [members companies introductions messages]]
-   #?(:cljs [huiyin.utils :refer [scroll-to-element]])
+   [huiyin.data :refer [members companies introductions messages presses]]
    [huiyin.components.jumbotron :as jumbotron]
    [huiyin.components.member :as member]))
 
@@ -46,7 +45,6 @@
 (defmulti render (fn [state] (:path @state)))
 
 (defmethod render :home [state]
-  #?(:cljs (scroll-to-element "main"))
   [:main
    [jumbotron/render state]
    [:div.container.columns
@@ -56,8 +54,6 @@
     [render-companies]]])
 
 (defmethod render :about [state]
-  ;;; there is 70 px header, has to add some offset
-  #?(:cljs (scroll-to-element ".content" -70))
   [:main
    [jumbotron/render state]
    [:div.container.columns
@@ -65,6 +61,25 @@
      [render-intro]
      [render-members state]]
     [render-companies]]])
+
+(defn render-press [{:keys [title links]}]
+  [:div.column
+   [:h3 title]
+   [:ul
+    (for [{:keys [title from href date]} links]
+      ^{:key href}
+      [:li
+       [:div.from
+        [:img {:src from}]
+        [:span.date date]]
+       [:a {:href href :target "_blank"} title]])]])
+
+(defmethod render :press [state]
+  [:main
+   [:section.jumbotron {:style {:height "300px"}}]
+   [:div.container.presses
+    [render-press (:en presses)]
+    [render-press (:zh presses)]]])
 
 (defmethod render :member [state]
   (member/render state))
@@ -129,9 +144,31 @@
     [:.content {:display :flex :flex-direction :row}
      [:section {:flex 1}]])])
 
+(def ^:private presses-layout
+  [[:.presses {:display :flex
+               :margin-bottom (rem 10)}
+    [:h3 {:margin-top (rem 3)}]
+    [:.column {:flex-grow 5}]
+    [:.from {:display :flex
+             :align-items :center
+             :margin [[(rem 2) 0 (rem 1) 0]]
+             :flex-direction :row}
+     [:img {:height (rem 1.5)
+            :margin-right (rem 3)}]]
+    [:a {:line-height (rem 1.75)}]]
+
+   (at-media
+    {:max-width (px 736)}
+    [:.presses {:flex-direction :column}])
+
+   (at-media
+    {:min-width (px 737)}
+    [:.presses {:flex-direction :row}])])
+
 (def css
   [company-style
    member-card
    section-layout
+   presses-layout
    jumbotron/css
    member/css])

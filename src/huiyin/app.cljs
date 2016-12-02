@@ -23,6 +23,7 @@
 (defroute index "/" [] {:path :home})
 (defroute home "/home" []  {:path :home})
 (defroute about "/about" [] {:path :about})
+(defroute press "/press" [] {:path :press})
 (defroute member "/member/:id" [id]
   (let [id (js/parseInt id)]
     {:path :member :params {:id id}}))
@@ -41,7 +42,11 @@
 ;;; XXX: React fragment API is still in developing, an empty div container is required
 ;;; https://github.com/facebook/react/issues/2127
 (defn render-pages [state]
-  [:div
+  [:div {:on-click (fn [e]
+                     (let [cls (.-className (.-target e))]
+                       (if (= (.indexOf cls "lmenu") -1)
+                         (swap! state assoc-in [:menu-actived] false))))}
+
    [h/render state]
    [s/render state]
    [f/render state]])
@@ -70,5 +75,4 @@
   ;;; so put scroll state into another atom defined in `heaer.clj`
   (r/render [render-pages state]
             (.getElementById js/document "app"))
-
   (caculate-sizes!))
