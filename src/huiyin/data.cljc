@@ -88,12 +88,17 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (def ^:const presses
   {:en {:title "Press"
-        :links [{:title "China's Huiyin Group Launches $20 Million Bitcoin Fund"
-　　　　　　　　　　:from "/images/logos/coindesk.png"
+        :links [{:title "$20 Million Bitcoin Fund Launched by Chinese Investor Huiyin Group"
+                 :from "/images/logos/fintechranking.png"
+                 :date "DEC 13, 2016"
+                 :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"
+                 }
+                {:title "China's Huiyin Group Launches $20 Million Bitcoin Fund"
+                 :from "/images/logos/coindesk.png"
                  :date "DEC 1, 2016 "
                  :href "http://www.coindesk.com/chinas-huiyin-group-bitcoin-blockchain-venture-fund-20-million/"}
                 {:title "Yours Raises Angel Round to Fix Reddit with Bitcoin"
-                　:from "/images/logos/yours.png"
+                 :from "/images/logos/yours.png"
                  :date "NOV 15, 2016"
                  :href "https://stories.yours.network/yours-raises-angel-round-to-fix-reddit-with-bitcoin-ffdd8b90f192#.jf55mhuzp"}]}
    :zh {:title "新闻"
