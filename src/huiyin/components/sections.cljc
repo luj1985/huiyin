@@ -70,7 +70,7 @@
       ^{:key href}
       [:li
        [:div.from
-        [:img {:src from}]
+        [:div.logo {:style {:background-image (str "url(" from ")")}}]
         [:span.date date]]
        [:a {:href href :target "_blank"} title]])]])
 
@@ -153,8 +153,11 @@
              :align-items :center
              :margin [[(rem 2) 0 (rem 1) 0]]
              :flex-direction :row}
-     [:img {:height (rem 1.5)
-            :margin-right (rem 3)}]]
+     [:.logo  {:height (rem 1.5)
+               :width (rem 7)
+               :background-repeat :no-repeat
+               :background-size "auto 100%"
+               :margin-right (rem 1)}]]
     [:a {:line-height (rem 1.75)}]]
 
    (at-media
