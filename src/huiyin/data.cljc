@@ -86,10 +86,13 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
    {:name "Contact Us" :href "mailto:woquan826@gmail.com" :icon "envelope"}
    {:name "Press" :href "#/press" :icon "external-link-square"}])
 
-
 (def ^:const presses
   {:en {:title "Press"
-        :links [{:title "$20 Million Bitcoin Fund Launched by Chinese Investor Huiyin Group"
+        :links [{:title "BitPagos, now Ripio, lands $1.9M to promote financial inclusion in South America using bitcoin"
+                 :from "/images/logos/techcrunch.svg"
+                 :date "JAN 3, 2017"
+                 :href "https://techcrunch.com/2017/01/03/bitpagos-ripio-series-a/"}
+                {:title "$20 Million Bitcoin Fund Launched by Chinese Investor Huiyin Group"
                  :from "/images/logos/fintechranking.png"
                  :date "DEC 13, 2016"
                  :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}
@@ -106,7 +109,11 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
                  :date "DEC 13, 2016"
                  :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}]}
    :zh {:title "新闻"
-        :links [{:title "汇银集团推出2000万美元比特币基金，专注投资比特币区块链"
+        :links [{:title "比特币公司RIPIO获190万美元融资，汇银集团领投"
+                 :from "/images/logos/bitkan.png"
+                 :date "2017-01-04"
+                 :href "http://bitkan.com/news/topic/27501"}
+                {:title "汇银集团推出2000万美元比特币基金，专注投资比特币区块链"
                  :from "/images/logos/8btc.svg"
                  :date "2016-12-02"
                  :href "http://www.8btc.com/huiyin-group-bitcoin-blockchain-venture"}
