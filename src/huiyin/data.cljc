@@ -83,7 +83,7 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (def ^:const footer-links
   [{:name (:title messages) :href company-url :icon "linkedin-square"}
-   {:name "Contact Us" :href "mailto:woquan826@gmail.com" :icon "envelope"}
+   {:name "Contact Us" :href "mailto:gaohuimin@huiyin.com" :icon "envelope"}
    {:name "Press" :href "#/press" :icon "external-link-square"}])
 
 (def ^:const presses
