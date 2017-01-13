@@ -57,7 +57,8 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
   [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
    {:name "Yours network" :url "https://www.yours.network" :logo "/images/logos/yours-network.png"}
    {:name "Unocoin" :url "https://www.unocoin.com" :logo "/images/logos/unocoin.jpg"}
-   {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}])
+   {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}
+   {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}])
 
 (def ^:const introductions
   ["Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
