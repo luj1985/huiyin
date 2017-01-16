@@ -76,7 +76,7 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
 
 (def ^:const companies
   [{:name "Purse.io" :url "https://purse.io" :logo "/images/logos/purse.jpg"}
-   {:name "Yours network" :url "https://www.yours.network" :logo "/images/logos/yours-network.png"}
+   {:name "Yours network" :url "https://www.yours.network" :logo "/images/logos/yours.jpg"}
    {:name "Unocoin" :url "https://www.unocoin.com" :logo "/images/logos/unocoin.jpg"}
    {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}
    {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}])
