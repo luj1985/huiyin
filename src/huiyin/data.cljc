@@ -11,14 +11,7 @@
               :angel "Angel list"}})
 
 (def ^:const members
-  [{:name "David Hou"
-    :title "CEO, Huiyin Blockchain Venture"
-    :thumb "/images/thumbs/David_Hou.jpg"
-    :avatar "/images/avatars/David_Hou.jpg"
-    :description "David Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing . David has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
-    :attrs [{:email "houtuanzhang@huiyin.com"}]}
-
-   {:name "James Wo"
+  [{:name "James Wo"
     :title "President, Huiyin Blockchain Venture"
     :thumb "/images/thumbs/James_Wo.jpg"
     :avatar "/images/avatars/James_Wo.jpg"
@@ -29,19 +22,19 @@
             {:twitter {:name "@woquan826" :value "https://twitter.com/woquan826"}}
             {:linked-in {:name "james-wo-272904114" :value "https://www.linkedin.com/in/james-wo-272904114"}}]}
 
+   {:name "David Hou"
+    :title "CEO, Huiyin Blockchain Venture"
+    :thumb "/images/thumbs/David_Hou.jpg"
+    :avatar "/images/avatars/David_Hou.jpg"
+    :description "David Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing . David has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
+    :attrs [{:email "houtuanzhang@huiyin.com"}]}
+
    {:name "Freddy Zheng"
     :title "Director, Management Huiyin Blockchain Venture"
     :thumb "/images/thumbs/Freddy_Zhang.jpg"
     :avatar  "/images/avatars/Freddy_Zhang.jpg"
     :description "Freddy's responsibilities mainly focuses on post investment management, he also helps financial due diligence. As a graduate of Shanghai University of Finance and Economics, and a non-practicing member of the Chinese Institute of certified public accountants, efforts in the financial field to do a good job of value analysis and risk control."
     :attrs [{:email "zhengbing@huiyin.com"}]}
-
-   {:name "Daphne Zhang"
-    :title "Senior associate, Huiyin Blockchain Venture"
-    :thumb "/images/thumbs/Daphne_Zhang.jpg"
-    :avatar "/images/avatars/Daphne_Zhang.jpg"
-    :description "Daphne is a senior associate at Huiyin Blockchain Venture, playing a role in analysis of pre-money and financial management after investment at Huiyin venture team. With many years of financial working experience in multinational companies, daphne has made a great achievement in related financial area."
-    :attrs [{:email "zhangxiaolian@huiyin.com"}]}
 
    {:name "Shang Zhang"
     :title "Senior Associate, Huiyin Blockchain Venture"
@@ -50,6 +43,12 @@
     :description "Shang Zhang is the senior advisor of Huiyin Blockchain Venture. Originated in decentralized cryptocurrency - bitcoin, blockchain technologies face many interesting and challenging problems when applied in finance, the Internet of things, and other enterprise environments.The Blockchain research team at HBV Research - China is dedicated to exploratory research and continuous innovations. We are committed to solve practical problems with enterprise-grade solutions and to push extensive adoption of blockchain technologies across areas of finance and the Internet of things."
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
+   {:name "Daphne Zhang"
+    :title "Senior associate, Huiyin Blockchain Venture"
+    :thumb "/images/thumbs/Daphne_Zhang.jpg"
+    :avatar "/images/avatars/Daphne_Zhang.jpg"
+    :description "Daphne is a senior associate at Huiyin Blockchain Venture, playing a role in analysis of pre-money and financial management after investment at Huiyin venture team. With many years of financial working experience in multinational companies, daphne has made a great achievement in related financial area."
+    :attrs [{:email "zhangxiaolian@huiyin.com"}]}
    {:name "Rose Gao"
     :title "Associate, Huiyin Blockchain Venture"
     :thumb "/images/thumbs/Rose_Gao.jpg"
