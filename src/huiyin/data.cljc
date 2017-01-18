@@ -30,7 +30,7 @@
     :attrs [{:email "houtuanzhang@huiyin.com"}]}
 
    {:name "Freddy Zheng"
-    :title "Director, Management Huiyin Blockchain Venture"
+    :title "VP, Management Huiyin Blockchain Venture"
     :thumb "/images/thumbs/Freddy_Zhang.jpg"
     :avatar  "/images/avatars/Freddy_Zhang.jpg"
     :description "Freddy's responsibilities mainly focuses on post investment management, he also helps financial due diligence. As a graduate of Shanghai University of Finance and Economics, and a non-practicing member of the Chinese Institute of certified public accountants, efforts in the financial field to do a good job of value analysis and risk control."
