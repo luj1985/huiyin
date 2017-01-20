@@ -22,11 +22,11 @@
             {:twitter {:name "@woquan826" :value "https://twitter.com/woquan826"}}
             {:linked-in {:name "james-wo-272904114" :value "https://www.linkedin.com/in/james-wo-272904114"}}]}
 
-   {:name "David Hou"
+   {:name "Kevin Hou"
     :title "CEO, Huiyin Blockchain Venture"
-    :thumb "/images/thumbs/David_Hou.jpg"
-    :avatar "/images/avatars/David_Hou.jpg"
-    :description "David Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing . David has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
+    :thumb "/images/thumbs/Kevin_Hou.jpg"
+    :avatar "/images/avatars/Kevin_Hou.jpg"
+    :description "Kevin Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing . Kevin has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
     :attrs [{:email "houtuanzhang@huiyin.com"}]}
 
    {:name "Freddy Zheng"
@@ -44,7 +44,7 @@
     :attrs [{:email "zhanghong@huiyin.com"}]}
 
    {:name "Daphne Zhang"
-    :title "Senior associate, Huiyin Blockchain Venture"
+    :title "Senior Associate, Huiyin Blockchain Venture"
     :thumb "/images/thumbs/Daphne_Zhang.jpg"
     :avatar "/images/avatars/Daphne_Zhang.jpg"
     :description "Daphne is a senior associate at Huiyin Blockchain Venture, playing a role in analysis of pre-money and financial management after investment at Huiyin venture team. With many years of financial working experience in multinational companies, daphne has made a great achievement in related financial area."
