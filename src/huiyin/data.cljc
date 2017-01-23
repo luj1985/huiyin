@@ -22,11 +22,11 @@
             {:twitter {:name "@woquan826" :value "https://twitter.com/woquan826"}}
             {:linked-in {:name "james-wo-272904114" :value "https://www.linkedin.com/in/james-wo-272904114"}}]}
 
-   {:name "Kevin Hou"
+   {:name "William Hou"
     :title "CEO, Huiyin Blockchain Venture"
-    :thumb "/images/thumbs/Kevin_Hou.jpg"
-    :avatar "/images/avatars/Kevin_Hou.jpg"
-    :description "Kevin Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing . Kevin has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
+    :thumb "/images/thumbs/William_Hou.jpg"
+    :avatar "/images/avatars/William_Hou.jpg"
+    :description "William Hou, as the CEO of Huiyin Blockchain Venture, is responsible for the due diligence and program executing. William has worked as a senior manager in financial institutions for years, gaining him sufficient experience in the aspects of investment and risk control."
     :attrs [{:email "houtuanzhang@huiyin.com"}]}
 
    {:name "Freddy Zheng"
@@ -78,7 +78,8 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
    {:name "Yours network" :url "https://www.yours.network" :logo "/images/logos/yours.jpg"}
    {:name "Unocoin" :url "https://www.unocoin.com" :logo "/images/logos/unocoin.jpg"}
    {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}
-   {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}])
+   {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}
+   {:name "Bitso", :url "https://bitso.com/" :logo "/images/logos/bitso.png"}])
 
 (def ^:const introductions
   ["Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
