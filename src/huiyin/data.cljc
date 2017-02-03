@@ -79,7 +79,8 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
    {:name "Unocoin" :url "https://www.unocoin.com" :logo "/images/logos/unocoin.jpg"}
    {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}
    {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}
-   {:name "Bitso", :url "https://bitso.com/" :logo "/images/logos/bitso.png"}])
+   {:name "Bitso", :url "https://bitso.com/" :logo "/images/logos/bitso.png"}
+   {:name "SatoshiPay" :url "https://satoshipay.io" :logo "/images/logos/satoshipay.png"}])
 
 (def ^:const introductions
   ["Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
@@ -129,7 +130,11 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
                 {:title "$20 Million Bitcoin Fund Launched by Chinese Investor Huiyin Group"
                  :from "/images/logos/fintechranking.png",
                  :date "DEC 13, 2016"
-                 :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}]}
+                 :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}
+                {:title "SatoshiPay just raised €1m to bring nanopayments to the mainstream"
+                 :from "/images/logos/medium.png"
+                 :date "FEB 2, 2017"
+                 :href "https://medium.com/@meinhard/satoshipay-just-raised-1m-to-bring-nanopayments-to-the-mainstream-597fd0e388f5#.z3bk95c6c"}]}
    :zh {:title "新闻"
         :links [{:title "比特币公司RIPIO获190万美元融资，汇银集团领投"
                  :from "/images/logos/bitkan.png"
