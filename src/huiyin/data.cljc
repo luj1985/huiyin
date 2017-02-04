@@ -111,7 +111,11 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
 
 (def ^:const presses
   {:en {:title "Press"
-        :links [{:title "BitPagos, now Ripio, lands $1.9M to promote financial inclusion in South America using bitcoin"
+        :links [{:title "SatoshiPay just raised €1m to bring nanopayments to the mainstream"
+                 :from "/images/logos/medium.png"
+                 :date "FEB 2, 2017"
+                 :href "https://medium.com/@meinhard/satoshipay-just-raised-1m-to-bring-nanopayments-to-the-mainstream-597fd0e388f5#.z3bk95c6c"}
+                {:title "BitPagos, now Ripio, lands $1.9M to promote financial inclusion in South America using bitcoin"
                  :from "/images/logos/techcrunch.svg"
                  :date "JAN 3, 2017"
                  :href "https://techcrunch.com/2017/01/03/bitpagos-ripio-series-a/"}
@@ -130,11 +134,7 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
                 {:title "$20 Million Bitcoin Fund Launched by Chinese Investor Huiyin Group"
                  :from "/images/logos/fintechranking.png",
                  :date "DEC 13, 2016"
-                 :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}
-                {:title "SatoshiPay just raised €1m to bring nanopayments to the mainstream"
-                 :from "/images/logos/medium.png"
-                 :date "FEB 2, 2017"
-                 :href "https://medium.com/@meinhard/satoshipay-just-raised-1m-to-bring-nanopayments-to-the-mainstream-597fd0e388f5#.z3bk95c6c"}]}
+                 :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}]}
    :zh {:title "新闻"
         :links [{:title "比特币公司RIPIO获190万美元融资，汇银集团领投"
                  :from "/images/logos/bitkan.png"
