@@ -80,7 +80,8 @@ Andrew is an advisor at HBV to help find and evaluate promising startups."
    {:name "BitPagos" :url "https://www.bitpagos.com/" :logo "/images/logos/bitpagos.png"}
    {:name "PopChest" :url "https://popchest.com/" :logo "/images/logos/popchest.png"}
    {:name "Bitso", :url "https://bitso.com/" :logo "/images/logos/bitso.png"}
-   {:name "SatoshiPay" :url "https://satoshipay.io" :logo "/images/logos/satoshipay.png"}])
+   {:name "SatoshiPay" :url "https://satoshipay.io" :logo "/images/logos/satoshipay.png"}
+   {:name "Brave" :url "https://www.brave.com/" :logo "/images/logos/brave.png"}])
 
 (def ^:const introductions
   ["Huiyin Blockchain Venture is a premier firm that partners with innovative start-ups and entrepreneurs to help them grow and define the future of the blockchain economy.
@@ -136,7 +137,11 @@ Huiyin Group has more than 20 subsidiaries, assets of over $2 billion and more t
                  :date "DEC 13, 2016"
                  :href "http://fintechranking.com/2016/12/13/20-million-bitcoin-fund-launched-by-chinese-investor-huiyin-group/"}]}
    :zh {:title "新闻"
-        :links [{:title "比特币公司RIPIO获190万美元融资，汇银集团领投"
+        :links [{:title "继2000万美元比特币投资基金之后，汇银集团再增加6000万美元"
+                 :from "/images/logos/bitkan.png"
+                 :date "2017-02-19"
+                 :href "http://bitkan.com/news/topic/28588"}
+                {:title "比特币公司RIPIO获190万美元融资，汇银集团领投"
                  :from "/images/logos/bitkan.png"
                  :date "2017-01-04"
                  :href "http://bitkan.com/news/topic/27501"}
